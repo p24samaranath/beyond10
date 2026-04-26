@@ -1,0 +1,170 @@
+---
+import Base from '../../layouts/Base.astro';
+import { exams, careerById, collegeById, familyById } from '../../lib/data';
+
+export function getStaticPaths() {
+  return exams.map((e) => ({ params: { id: e.id }, props: { exam: e } }));
+}
+
+const { exam } = Astro.props;
+const fam = familyById(exam.family);
+
+const careerObjs = (exam.careers_unlocked ?? []).map(careerById).filter(Boolean) as NonNullable<ReturnType<typeof careerById>>[];
+const collegeObjs = (exam.top_colleges_unlocked ?? []).map(collegeById).filter(Boolean) as NonNullable<ReturnType<typeof collegeById>>[];
+
+const dates = exam.next_dates_2026 as Record<string, string> | undefined;
+const reg = exam.registration_window_2026;
+---
+<Base title={`${exam.name} 2026 — Beyond10`} description={exam.full_name ?? ''}>
+  <article class="container-page py-12 sm:py-16" data-family={exam.family}>
+    <nav class="text-xs text-slate-500 mb-4">
+      <a href="/exams" class="hover:text-slate-700">All exams</a>
+    </nav>
+
+    <header class="mb-10 max-w-3xl">
+      {fam && <span class="pill fam-tag font-medium">{fam.name}</span>}
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">{exam.name}</h1>
+      <p class="mt-2 text-lg text-slate-600">{exam.full_name}</p>
+    </header>
+
+    <!-- Quick facts -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+      {[
+        ['Conducting body', exam.conducting_body],
+        ['Mode', exam.mode],
+        ['Frequency', exam.frequency],
+        ['Difficulty', `${exam.difficulty_1_to_5 ?? '—'}/5`],
+      ].map(([k, v]) => (
+        <div class="card p-4">
+          <p class="text-[10px] uppercase tracking-wider text-slate-500">{k}</p>
+          <p class="mt-1 text-sm font-semibold text-slate-900">{v}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-10">
+        <!-- Dates -->
+        {dates && (
+          <section>
+            <h2 class="text-xl font-semibold text-slate-900 mb-4">2026 dates</h2>
+            <div class="grid sm:grid-cols-2 gap-3">
+              {Object.entries(dates).map(([k, v]) => (
+                <div class="card p-4">
+                  <p class="text-xs uppercase tracking-wider text-slate-500">{k.replace(/_/g, ' ')}</p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">{v}</p>
+                </div>
+              ))}
+              {reg && (
+                <div class="card p-4 sm:col-span-2 bg-blue-50 border-blue-100">
+                  <p class="text-xs uppercase tracking-wider text-blue-600 font-semibold">Registration window</p>
+                  <p class="mt-1 text-sm font-semibold text-slate-900">{reg}</p>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        <!-- Eligibility -->
+        <section>
+          <h2 class="text-xl font-semibold text-slate-900 mb-3">Eligibility</h2>
+          <p class="text-slate-700 leading-relaxed">{exam.eligibility}</p>
+          {exam.stream_required && exam.stream_required.length > 0 && (
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              {exam.stream_required.map((s) => <span class="pill bg-stone-100 text-slate-700 text-xs">{s}</span>)}
+            </div>
+          )}
+        </section>
+
+        <!-- Pattern -->
+        {exam.pattern && (
+          <section>
+            <h2 class="text-xl font-semibold text-slate-900 mb-3">Exam pattern</h2>
+            <p class="text-slate-700 leading-relaxed">{exam.pattern}</p>
+          </section>
+        )}
+
+        <!-- Fees / aspirants / prep -->
+        <div class="grid sm:grid-cols-3 gap-3">
+          {exam.application_fee_inr && (
+            <div class="card p-4">
+              <p class="text-xs text-slate-500">Application fee</p>
+              <p class="mt-1 text-sm font-semibold">{exam.application_fee_inr}</p>
+            </div>
+          )}
+          {exam.annual_aspirants_lakhs && (
+            <div class="card p-4">
+              <p class="text-xs text-slate-500">Annual aspirants</p>
+              <p class="mt-1 text-sm font-semibold">{exam.annual_aspirants_lakhs} lakh+</p>
+            </div>
+          )}
+          {exam.typical_prep_months && (
+            <div class="card p-4">
+              <p class="text-xs text-slate-500">Typical prep</p>
+              <p class="mt-1 text-sm font-semibold">{exam.typical_prep_months}</p>
+            </div>
+          )}
+        </div>
+
+        {exam.best_books && exam.best_books.length > 0 && (
+          <section>
+            <h3 class="font-semibold text-slate-900 mb-2">Recommended books</h3>
+            <ul class="text-sm text-slate-700 space-y-1">
+              {exam.best_books.map((b) => <li class="flex gap-2"><span class="text-blue-600">›</span>{b}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {exam.ap_specific_notes && (
+          <aside class="card p-5 bg-emerald-50 border-emerald-100">
+            <p class="text-xs font-semibold uppercase tracking-wider text-emerald-700">For AP students</p>
+            <p class="mt-1.5 text-sm text-slate-800 leading-relaxed">{exam.ap_specific_notes}</p>
+          </aside>
+        )}
+      </div>
+
+      <aside class="space-y-6">
+        {exam.official_url && (
+          <a
+            href={exam.official_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block card p-5 hover:border-blue-200 hover:bg-blue-50 transition-colors"
+          >
+            <p class="text-xs uppercase tracking-wider text-slate-500">Official site</p>
+            <p class="mt-1 text-sm font-semibold text-blue-700 truncate">{exam.official_url.replace(/^https?:\/\//, '')}</p>
+          </a>
+        )}
+
+        {careerObjs.length > 0 && (
+          <section class="card p-5">
+            <h3 class="font-semibold text-slate-900">Careers this unlocks</h3>
+            <ul class="mt-3 space-y-1.5 text-sm">
+              {careerObjs.map((c) => (
+                <li><a href={`/careers/${c.id}`} class="text-slate-700 hover:text-blue-600">{c.name} <span class="text-slate-400">›</span></a></li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {collegeObjs.length > 0 && (
+          <section class="card p-5">
+            <h3 class="font-semibold text-slate-900">Top colleges</h3>
+            <ul class="mt-3 space-y-1.5 text-sm">
+              {collegeObjs.map((c) => (
+                <li>
+                  <p class="font-medium text-slate-800">{c.name}</p>
+                  <p class="text-xs text-slate-500">{c.city}, {c.state}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {exam.source && (
+          <p class="text-xs text-slate-400 px-2">Source: {exam.source}</p>
+        )}
+      </aside>
+    </div>
+  </article>
+</Base>

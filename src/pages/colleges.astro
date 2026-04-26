@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { colleges } from '../lib/data';
+
+// Group by type
+const types = ['IIT', 'NIT', 'IIIT', 'IIM', 'NLU', 'AIIMS', 'IISER', 'State University', 'Private', 'Institute of National Importance', 'Medical Institute', 'Private Medical', 'Central Institute', 'Private Liberal Arts', 'Institute of National Importance (Design)', 'Institute of National Importance (Fashion)'];
+
+const grouped = types.map((t) => ({
+  type: t,
+  items: colleges.filter((c) => c.type === t),
+})).filter((g) => g.items.length > 0);
+
+const apColleges = colleges.filter((c) => c.state === 'Andhra Pradesh');
+---
+<Base
+  title="Top colleges — Beyond10"
+  description={`${colleges.length} top colleges in India per NIRF 2025 — IITs, NITs, IIITs, AIIMS, NLUs, IIMs, IISERs and more, with AP-specific options highlighted.`}
+>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow={`${colleges.length} colleges · NIRF 2025`}
+      title="Top colleges across India"
+      description="Engineering, medical, law, management, design, science, and liberal arts. AP-located colleges are highlighted because they qualify for Jagananna Vidya Deevena fee reimbursement."
+    />
+
+    <!-- AP highlight -->
+    {apColleges.length > 0 && (
+      <section class="mb-10 rounded-2xl bg-gradient-to-br from-emerald-50 to-blue-50 border border-emerald-100 p-6">
+        <div class="flex items-baseline justify-between gap-3 mb-4">
+          <h2 class="text-lg font-semibold text-emerald-900">In Andhra Pradesh ({apColleges.length})</h2>
+          <span class="text-xs text-emerald-700">JVD-eligible</span>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {apColleges.map((c) => (
+            <div class="card p-4">
+              <h3 class="font-semibold text-slate-900 leading-snug text-sm">{c.name}</h3>
+              <p class="text-xs text-slate-500 mt-0.5">{c.city} · {c.type}</p>
+              {c.ap_specific && <p class="mt-2 text-xs text-slate-700 leading-relaxed">{c.ap_specific}</p>}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {grouped.map((g) => (
+      <section class="mb-10">
+        <h2 class="text-lg font-semibold text-slate-900 mb-4">{g.type} ({g.items.length})</h2>
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {g.items.map((c) => (
+            <article class="card p-5">
+              <div class="flex items-start justify-between gap-2">
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-semibold text-slate-900 leading-snug">{c.name}</h3>
+                  <p class="text-xs text-slate-500 mt-0.5">{c.city}, {c.state}</p>
+                </div>
+                {c.nirf_2025 && typeof Object.values(c.nirf_2025)[0] === 'number' && (
+                  <span class="pill bg-amber-50 text-amber-700 font-bold tabular-nums">
+                    NIRF #{Object.values(c.nirf_2025)[0]}
+                  </span>
+                )}
+              </div>
+
+              <dl class="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
+                {c.entrance_exams && c.entrance_exams[0] && (
+                  <>
+                    <dt class="text-slate-500">Entry via</dt>
+                    <dd class="text-slate-800 truncate">{c.entrance_exams.join(', ')}</dd>
+                  </>
+                )}
+                {c.annual_tuition_inr !== undefined && (
+                  <>
+                    <dt class="text-slate-500">Tuition/yr</dt>
+                    <dd class="text-slate-800">₹{c.annual_tuition_inr.toLocaleString('en-IN')}</dd>
+                  </>
+                )}
+                {c.avg_placement_lpa && (
+                  <>
+                    <dt class="text-slate-500">Avg placement</dt>
+                    <dd class="text-emerald-700 font-semibold">₹{c.avg_placement_lpa} LPA</dd>
+                  </>
+                )}
+              </dl>
+
+              {c.ap_specific && (
+                <p class="mt-3 text-xs text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded-md leading-relaxed">
+                  {c.ap_specific}
+                </p>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </section>
+</Base>

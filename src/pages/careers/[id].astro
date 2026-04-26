@@ -1,0 +1,236 @@
+---
+import Base from '../../layouts/Base.astro';
+import { careers, examById, scholarshipById, familyById, collegeById } from '../../lib/data';
+
+export function getStaticPaths() {
+  return careers.map((c) => ({ params: { id: c.id }, props: { career: c } }));
+}
+
+const { career } = Astro.props;
+const fam = familyById(career.family);
+
+const examObjs = (career.entrance_exams ?? []).map(examById).filter(Boolean) as NonNullable<ReturnType<typeof examById>>[];
+const collegeObjs = (career.top_colleges ?? []).map(collegeById).filter(Boolean) as NonNullable<ReturnType<typeof collegeById>>[];
+const schObjs = (career.scholarships ?? []).map(scholarshipById).filter(Boolean) as NonNullable<ReturnType<typeof scholarshipById>>[];
+
+const ai = career.ai_impact as
+  | { rating?: number; reasoning?: string; durable_skills?: string[]; at_risk_tasks?: string[] }
+  | undefined;
+
+const salary = career.salary_inr as Record<string, unknown> | undefined;
+const pathway = career.pathway as Record<string, string> | undefined;
+
+type SalaryRow = { key: string; isString: boolean; value: string; subEntries: [string, string][] };
+const salaryRows: SalaryRow[] = salary
+  ? Object.entries(salary).map(([key, v]) => {
+      const isString = typeof v === 'string';
+      return {
+        key,
+        isString,
+        value: isString ? (v as string) : '',
+        subEntries: !isString && v && typeof v === 'object'
+          ? (Object.entries(v as Record<string, string>) as [string, string][])
+          : [],
+      };
+    })
+  : [];
+---
+<Base title={`${career.name} — Beyond10`} description={career.one_liner ?? ''}>
+  <article class="container-page py-12 sm:py-16" data-family={career.family}>
+    <!-- Breadcrumb -->
+    <nav class="text-xs text-slate-500 mb-4" aria-label="Breadcrumb">
+      <a href="/careers" class="hover:text-slate-700">All careers</a>
+      <span aria-hidden="true"> · </span>
+      {fam && <a href={`/careers?family=${fam.id}`} class="hover:text-slate-700">{fam.name}</a>}
+    </nav>
+
+    <header class="mb-10 max-w-3xl">
+      {fam && (
+        <span class="pill fam-tag font-medium">{fam.name}</span>
+      )}
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">{career.name}</h1>
+      {career.one_liner && (
+        <p class="mt-4 text-lg text-slate-700 leading-relaxed">{career.one_liner}</p>
+      )}
+      {career.description && (
+        <p class="mt-3 text-slate-600 leading-relaxed">{career.description}</p>
+      )}
+    </header>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2 space-y-10">
+        <!-- Pathway -->
+        {pathway && (
+          <section>
+            <h2 class="text-xl font-semibold text-slate-900 mb-4">Your pathway</h2>
+            <ol class="relative border-l-2 border-stone-200 pl-6 space-y-5">
+              {Object.entries(pathway).map(([stage, value]) => (
+                <li class="relative">
+                  <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-blue-600 ring-4 ring-white"></span>
+                  <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">{stage.replace(/_/g, ' ')}</p>
+                  <p class="text-sm text-slate-700 mt-0.5">{value}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        <!-- Salary -->
+        {salaryRows.length > 0 && (
+          <section>
+            <h2 class="text-xl font-semibold text-slate-900 mb-4">Realistic salary</h2>
+            <div class="grid sm:grid-cols-2 gap-3">
+              {salaryRows.map((row) => (
+                <div class="card p-4">
+                  <p class="text-xs uppercase tracking-wider text-slate-500">{row.key.replace(/_/g, ' ')}</p>
+                  <div class="mt-1 text-sm font-semibold text-slate-900">
+                    {row.isString ? (
+                      <p>{row.value}</p>
+                    ) : (
+                      <ul class="space-y-0.5">
+                        {row.subEntries.map(([sub, val]) => (
+                          <li class="text-xs">
+                            <span class="text-slate-500 capitalize">{sub.replace(/_/g, ' ')}:</span> {val}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- AI impact -->
+        {ai && (
+          <section>
+            <h2 class="text-xl font-semibold text-slate-900 mb-4">AI impact &amp; resilience</h2>
+            <div class="card p-5">
+              <div class="flex items-baseline justify-between gap-3">
+                <p class="text-sm text-slate-500">Resilience score</p>
+                <p class="text-sm font-semibold tabular-nums">
+                  {ai.rating !== undefined && (
+                    <>
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <span class={i < (5 - ai.rating!) ? 'text-emerald-500' : 'text-stone-300'}>●</span>
+                      ))}
+                      <span class="ml-2 text-slate-600 text-xs">{(5 - ai.rating!)}/5 — higher is more durable</span>
+                    </>
+                  )}
+                </p>
+              </div>
+              {ai.reasoning && <p class="mt-3 text-sm text-slate-700 leading-relaxed">{ai.reasoning}</p>}
+              {ai.durable_skills && ai.durable_skills.length > 0 && (
+                <div class="mt-4">
+                  <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Durable skills</p>
+                  <div class="mt-2 flex flex-wrap gap-1.5">
+                    {ai.durable_skills.map((s) => <span class="pill bg-emerald-50 text-emerald-700">{s}</span>)}
+                  </div>
+                </div>
+              )}
+              {ai.at_risk_tasks && ai.at_risk_tasks.length > 0 && (
+                <div class="mt-3">
+                  <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">At-risk tasks</p>
+                  <div class="mt-2 flex flex-wrap gap-1.5">
+                    {ai.at_risk_tasks.map((s) => <span class="pill bg-amber-50 text-amber-700">{s}</span>)}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
+        <!-- Skills + plan B + myths in a 2-col grid -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          {career.skills_to_build && (
+            <section>
+              <h3 class="font-semibold text-slate-900">Skills to build now</h3>
+              <ul class="mt-3 space-y-1.5 text-sm text-slate-700">
+                {career.skills_to_build.map((s) => (
+                  <li class="flex gap-2"><span class="text-blue-600">›</span><span>{s}</span></li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {career.plan_b && (
+            <section>
+              <h3 class="font-semibold text-slate-900">Plan B</h3>
+              <p class="mt-1 text-xs text-slate-500">If this doesn't work out</p>
+              <ul class="mt-3 space-y-1.5 text-sm">
+                {career.plan_b.map((bid) => {
+                  const c = careers.find((x) => x.id === bid);
+                  return c ? (
+                    <li><a href={`/careers/${c.id}`} class="text-slate-700 hover:text-blue-600 inline-flex items-center gap-1">{c.name} <span class="text-slate-400">›</span></a></li>
+                  ) : null;
+                })}
+              </ul>
+            </section>
+          )}
+        </div>
+
+        {career.myths && career.myths.length > 0 && (
+          <section>
+            <h2 class="text-xl font-semibold text-slate-900 mb-3">Common myths busted</h2>
+            <ul class="space-y-2">
+              {career.myths.map((m) => (
+                <li class="card p-4 text-sm text-slate-700 leading-relaxed">{m}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="space-y-6">
+        {examObjs.length > 0 && (
+          <section class="card p-5">
+            <h3 class="font-semibold text-slate-900">Entrance exams</h3>
+            <ul class="mt-3 space-y-2">
+              {examObjs.map((e) => (
+                <li>
+                  <a href={`/exams/${e.id}`} class="block group">
+                    <p class="text-sm font-medium text-slate-900 group-hover:text-blue-600">{e.name}</p>
+                    <p class="text-xs text-slate-500 truncate">{e.full_name}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {collegeObjs.length > 0 && (
+          <section class="card p-5">
+            <h3 class="font-semibold text-slate-900">Top colleges</h3>
+            <ul class="mt-3 space-y-2">
+              {collegeObjs.map((c) => (
+                <li class="text-sm">
+                  <p class="font-medium text-slate-900">{c.name}</p>
+                  <p class="text-xs text-slate-500">{c.city}, {c.state}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {schObjs.length > 0 && (
+          <section class="card p-5">
+            <h3 class="font-semibold text-slate-900">Scholarships</h3>
+            <ul class="mt-3 space-y-2">
+              {schObjs.map((s) => (
+                <li class="text-sm">
+                  <a href="/scholarships" class="font-medium text-slate-900 hover:text-blue-600">{s.name}</a>
+                  {s.amount && <p class="text-xs text-slate-500 line-clamp-2">{s.amount}</p>}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {career.source && (
+          <p class="text-xs text-slate-400 px-2">Source: {career.source}</p>
+        )}
+      </aside>
+    </div>
+  </article>
+</Base>

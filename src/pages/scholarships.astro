@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import ScholarshipCard from '../components/ScholarshipCard.astro';
+import { scholarships } from '../lib/data';
+
+const groups = [
+  { id: 'state', label: 'AP State' },
+  { id: 'national', label: 'National' },
+  { id: 'csr', label: 'Corporate / CSR' },
+  { id: 'institutional', label: 'College-specific' },
+  { id: 'aggregator', label: 'Aggregators' },
+];
+
+const grouped = groups.map((g) => ({
+  ...g,
+  items: scholarships.filter((s) => s.type === g.id),
+}));
+---
+<Base
+  title="Scholarships — Beyond10"
+  description={`${scholarships.length} scholarships in India 2026: AP Jagananna, NMMS, INSPIRE, Reliance, Tata, Aditya Birla, AICTE Pragati, ICAI, AIIMS waivers and more.`}
+>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow={`${scholarships.length} schemes`}
+      title="Scholarships you should know about"
+      description="State (AP), national, corporate / CSR, and college-specific. Cost is the most common reason ambition collapses in tier-3 India — these schemes engineer it out of the conversation."
+    />
+
+    <!-- Quick filter -->
+    <div class="mb-8 flex flex-wrap gap-2" id="sch-filter">
+      <button data-type="all" class="filter-btn pill bg-slate-900 text-white" aria-pressed="true">
+        All ({scholarships.length})
+      </button>
+      {groups.map((g) => {
+        const c = scholarships.filter((s) => s.type === g.id).length;
+        if (c === 0) return null;
+        return (
+          <button data-type={g.id} class="filter-btn pill" aria-pressed="false">
+            {g.label} ({c})
+          </button>
+        );
+      })}
+    </div>
+
+    {grouped.map((g) => (
+      g.items.length > 0 && (
+        <section class="mb-10" data-group={g.id}>
+          <h2 class="text-lg font-semibold text-slate-900 mb-4">{g.label}</h2>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {g.items.map((s) => <ScholarshipCard scholarship={s} />)}
+          </div>
+        </section>
+      )
+    ))}
+  </section>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('#sch-filter .filter-btn');
+    const sections = document.querySelectorAll<HTMLElement>('[data-group]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.type ?? 'all';
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('bg-slate-900', active);
+          b.classList.toggle('text-white', active);
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        sections.forEach((sec) => {
+          sec.style.display = target === 'all' || sec.dataset.group === target ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</Base>

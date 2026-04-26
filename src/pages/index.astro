@@ -1,0 +1,199 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import FamilyTile from '../components/FamilyTile.astro';
+import CareerCard from '../components/CareerCard.astro';
+import ExamCard from '../components/ExamCard.astro';
+import {
+  families,
+  careers,
+  exams,
+  topPaying,
+  scholarships,
+  colleges,
+  streams,
+  counts,
+  careerById,
+  familyById,
+} from '../lib/data';
+
+const headlineExamIds = ['jee-main', 'neet-ug', 'clat', 'cuet-ug', 'ipmat-indore', 'ca-foundation'];
+const headlineExams = headlineExamIds.map((id) => exams.find((e) => e.id === id)!).filter(Boolean);
+
+const headlinePaying = topPaying.slice(0, 6);
+---
+<Base title="Beyond10">
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-stone-50 to-paper"></div>
+    <div class="absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-stone-300 to-transparent opacity-60"></div>
+
+    <div class="container-page pt-12 pb-14 sm:pt-20 sm:pb-20">
+      <div class="max-w-3xl animate-rise">
+        <div class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-600 shadow-sm">
+          <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          93% of Indian students know fewer than 10 careers — there are 250+
+        </div>
+        <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight">
+          Beyond MPC and BiPC.<br />
+          <span class="text-blue-600">Discover what India offers</span><br />
+          after Class&nbsp;10.
+        </h1>
+        <p class="mt-5 text-lg text-slate-600 leading-relaxed max-w-2xl">
+          Beyond10 is a free, sourced career-discovery platform for students in India. Explore <strong class="font-semibold text-slate-800">{counts.careers} careers</strong>, <strong class="font-semibold text-slate-800">{counts.exams} entrance exams</strong>, <strong class="font-semibold text-slate-800">{counts.scholarships} scholarships</strong> and <strong class="font-semibold text-slate-800">top-paying paths</strong> — without a coaching-institute pitch attached.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="/careers" class="btn-primary">Browse careers</a>
+          <a href="/streams" class="btn-secondary">Pick your stream</a>
+        </div>
+
+        <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-xl">
+          {[
+            ['Careers mapped', counts.careers],
+            ['Entrance exams', counts.exams],
+            ['Scholarships', counts.scholarships],
+            ['Top colleges', counts.colleges],
+          ].map(([label, value]) => (
+            <div>
+              <dt class="text-xs uppercase tracking-wider text-slate-500">{label}</dt>
+              <dd class="mt-1 text-2xl font-bold text-slate-900 tabular-nums">{value}+</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAMILIES -->
+  <section class="container-page py-14 sm:py-20">
+    <Section
+      eyebrow="Career universe"
+      title="8 families, hundreds of paths"
+      description="Engineering and medicine are 2 of 8. Pick a family that matches who you are — not just what your school offers."
+      cta={{ label: 'See all careers', href: '/careers' }}
+    />
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {families.map((family) => (
+        <FamilyTile
+          family={family}
+          count={careers.filter((c) => c.family === family.id).length}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- TOP-PAYING TEASER -->
+  <section class="bg-stone-100 border-y border-stone-200 py-14 sm:py-20">
+    <div class="container-page">
+      <Section
+        eyebrow="Realistic salary, sourced"
+        title="Where the money actually is in 2026"
+        description="Compensation drawn from India Skills Report 2026, AmbitionBox, Levels.fyi, and firm-published reports. Numbers are gross fixed pay; bonuses noted where significant."
+        cta={{ label: 'Full ranking', href: '/top-paying' }}
+      />
+      <div class="grid gap-4 md:grid-cols-2">
+        {headlinePaying.map((rank) => {
+          const career = careerById(rank.career_id);
+          const fam = career ? familyById(career.family) : undefined;
+          return (
+            <article class="card p-5" data-family={career?.family}>
+              <div class="flex items-start gap-4">
+                <span class="shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-slate-900 text-white font-bold tabular-nums">
+                  #{rank.rank}
+                </span>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-semibold text-slate-900">{rank.name}</h3>
+                  {fam && (
+                    <p class="text-xs mt-0.5 fam-tag inline-block px-2 py-0.5 rounded-full font-medium">
+                      {fam.name}
+                    </p>
+                  )}
+                  <dl class="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                    <dt class="text-slate-500">Fresher</dt>
+                    <dd class="text-slate-900 font-semibold tabular-nums">₹{rank.fresher_inr_lpa} LPA</dd>
+                    <dt class="text-slate-500">10-year</dt>
+                    <dd class="text-slate-900 font-semibold tabular-nums">₹{rank.ten_year_inr_lpa} LPA</dd>
+                    {rank.top_inr_cr && (
+                      <>
+                        <dt class="text-slate-500">Top</dt>
+                        <dd class="text-emerald-700 font-semibold tabular-nums">₹{rank.top_inr_cr} Cr</dd>
+                      </>
+                    )}
+                  </dl>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- HEADLINE EXAMS -->
+  <section class="container-page py-14 sm:py-20">
+    <Section
+      eyebrow="2026 calendar"
+      title="The exams that matter most"
+      description="JEE and NEET aren't the only doors. Here are the six entrance exams every Class IX–X student in India should know about — with dates and eligibility for 2026."
+      cta={{ label: 'All entrance exams', href: '/exams' }}
+    />
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {headlineExams.map((exam) => <ExamCard exam={exam} />)}
+    </div>
+  </section>
+
+  <!-- STREAMS / AFTER 10 -->
+  <section class="bg-slate-900 text-white py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-3 gap-10 items-start">
+        <div class="lg:col-span-1">
+          <p class="text-xs font-semibold uppercase tracking-wider text-blue-300 mb-2">Right after 10th</p>
+          <h2 class="text-3xl font-bold tracking-tight">Pick a stream that matches your future, not your fear</h2>
+          <p class="mt-4 text-slate-300 leading-relaxed">
+            AP Inter now offers <strong>6 streams</strong> — including the new <strong>MBiPC</strong> that lets you keep both engineering and medicine open. Compare honestly.
+          </p>
+          <a href="/streams" class="mt-6 inline-flex items-center gap-2 rounded-full bg-white text-slate-900 px-5 py-2.5 text-sm font-semibold hover:bg-stone-100">
+            Compare streams
+          </a>
+        </div>
+        <div class="lg:col-span-2 grid sm:grid-cols-2 gap-3">
+          {streams.slice(0, 6).map((s) => (
+            <a href={`/streams#${s.id}`} class="block rounded-xl bg-slate-800/60 hover:bg-slate-800 ring-1 ring-slate-700 p-4 transition-colors">
+              <div class="flex items-baseline justify-between">
+                <h3 class="font-semibold text-white">{s.name}</h3>
+                <span class="text-xs text-slate-400 tabular-nums">{s.avg_employability_pct}% emp.</span>
+              </div>
+              <p class="mt-1 text-xs text-slate-400">{s.full_name}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="container-page py-14 sm:py-20">
+    <Section
+      eyebrow="Why trust this"
+      title="Sourced. Free. No coaching-institute pitch."
+      description="Beyond10's de-facto competitor in tier-3 India is the corner Sri Chaitanya admissions counsellor. We're built differently — every fact has a source, no school pays for placement, no upsell waits at the end."
+    />
+    <div class="grid gap-6 sm:grid-cols-3">
+      <div class="card p-6">
+        <div class="text-2xl">📚</div>
+        <h3 class="mt-3 font-semibold text-slate-900">Every entry has a source</h3>
+        <p class="mt-1.5 text-sm text-slate-600">NIRF 2025, India Skills Report 2026, NTA, ICAI, UPSC, Jnanabhumi AP — and 30+ more. Open the <a href="/about#sources" class="underline">sources page</a>.</p>
+      </div>
+      <div class="card p-6">
+        <div class="text-2xl">🆓</div>
+        <h3 class="mt-3 font-semibold text-slate-900">Free at the point of use</h3>
+        <p class="mt-1.5 text-sm text-slate-600">No login wall. No paywall. No "premium". The student opens, reads, decides — without anyone watching.</p>
+      </div>
+      <div class="card p-6">
+        <div class="text-2xl">🤖</div>
+        <h3 class="mt-3 font-semibold text-slate-900">Honest about AI</h3>
+        <p class="mt-1.5 text-sm text-slate-600">Every career carries an AI-resilience rating with reasoning. We don't promise any career is "AI-proof" — we show you which skills compound.</p>
+      </div>
+    </div>
+  </section>
+</Base>

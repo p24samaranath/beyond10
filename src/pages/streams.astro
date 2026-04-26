@@ -1,0 +1,129 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { streams, careerById, examById } from '../lib/data';
+---
+<Base
+  title="Streams after 10th — Beyond10"
+  description="MPC, BiPC, MBiPC, MEC, CEC, HEC, vocational — what each AP Inter stream leads to. Compare honestly before you decide."
+>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow="Right after 10th · AP Inter"
+      title="Pick a stream that matches your future"
+      description="AP Inter now offers 6 academic streams plus vocational/ITI/Polytechnic. The new MBiPC group lets you keep both engineering and medicine open. Use this to compare honestly — careers, exams, and employability for each."
+    />
+
+    <!-- Quick-jump nav -->
+    <nav class="mb-10 flex flex-wrap gap-2">
+      {streams.map((s) => (
+        <a href={`#${s.id}`} class="pill bg-stone-100 hover:bg-slate-900 hover:text-white text-slate-700 transition-colors">
+          {s.name}
+        </a>
+      ))}
+    </nav>
+
+    <div class="space-y-8">
+      {streams.map((s) => (
+        <article id={s.id} class="card p-6 sm:p-8 scroll-mt-20">
+          <header class="flex flex-wrap items-start justify-between gap-3 mb-4">
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900">{s.name}</h2>
+              <p class="text-sm text-slate-500 mt-0.5">{s.full_name}</p>
+            </div>
+            {s.avg_employability_pct && (
+              <div class="text-right">
+                <p class="text-xs uppercase tracking-wider text-slate-500">Avg employability</p>
+                <p class="text-2xl font-bold tabular-nums text-emerald-600">{s.avg_employability_pct}%</p>
+              </div>
+            )}
+          </header>
+
+          <p class="text-slate-700 leading-relaxed">{s.description}</p>
+
+          <!-- Subjects -->
+          {s.subjects && (
+            <div class="mt-5 flex flex-wrap gap-1.5">
+              {s.subjects.map((sub) => (
+                <span class="pill bg-blue-50 text-blue-700 text-xs">{sub}</span>
+              ))}
+            </div>
+          )}
+
+          <!-- Best for / Not for -->
+          <div class="mt-6 grid sm:grid-cols-2 gap-5">
+            <div>
+              <h3 class="text-sm font-semibold text-emerald-700 mb-2 flex items-center gap-1.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Best for
+              </h3>
+              <ul class="space-y-1.5 text-sm text-slate-700">
+                {s.best_for?.map((b) => <li class="flex gap-2"><span class="text-emerald-500 shrink-0">›</span>{b}</li>)}
+              </ul>
+            </div>
+            {s.not_for && (
+              <div>
+                <h3 class="text-sm font-semibold text-amber-700 mb-2 flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  Not for
+                </h3>
+                <ul class="space-y-1.5 text-sm text-slate-700">
+                  {s.not_for.map((n) => <li class="flex gap-2"><span class="text-amber-500 shrink-0">›</span>{n}</li>)}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <!-- Careers + exams -->
+          <div class="mt-6 grid sm:grid-cols-2 gap-5">
+            {s.careers_after && s.careers_after.length > 0 && (
+              <div>
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Careers this opens</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  {s.careers_after.slice(0, 12).map((cid) => {
+                    const c = careerById(cid);
+                    return c ? (
+                      <a href={`/careers/${c.id}`} class="pill bg-stone-100 hover:bg-slate-900 hover:text-white text-slate-700 transition-colors">
+                        {c.name}
+                      </a>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+            )}
+            {s.entrance_exams && s.entrance_exams.length > 0 && (
+              <div>
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Entrance exams</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  {s.entrance_exams.slice(0, 12).map((eid) => {
+                    const e = examById(eid);
+                    return e ? (
+                      <a href={`/exams/${e.id}`} class="pill bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-700 transition-colors">
+                        {e.name}
+                      </a>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {s.alumni_typical_paths && (
+            <div class="mt-6 rounded-xl bg-stone-50 border border-stone-200 p-4">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Typical alumni paths</h3>
+              <ul class="space-y-1.5 text-sm text-slate-700">
+                {s.alumni_typical_paths.map((p) => <li class="flex gap-2"><span class="text-blue-600 shrink-0">›</span>{p}</li>)}
+              </ul>
+            </div>
+          )}
+
+          {s.salary_starting_inr_monthly && (
+            <p class="mt-4 text-sm text-slate-700"><strong>Starting salary:</strong> {s.salary_starting_inr_monthly}</p>
+          )}
+
+          <p class="mt-5 text-xs text-slate-400">Source: {s.source}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>

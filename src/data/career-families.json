@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "updated": "2026-04-26",
+  "families": [
+    {
+      "id": "engineering-tech",
+      "name": "Engineering & Technology",
+      "tagline": "Build the future — software, hardware, infrastructure, AI.",
+      "icon": "cpu",
+      "color": "#2563eb",
+      "career_count": 10,
+      "entry_streams": ["MPC", "MBiPC"],
+      "headline_exams": ["jee-main", "jee-advanced", "ap-eapcet", "bitsat"],
+      "blurb": "From IIT-grade computer science to civil engineering that builds metros, this family hires more graduates than any other in India. India Skills Report 2026 places CS at 80% employability — the highest of any stream."
+    },
+    {
+      "id": "medical-healthcare",
+      "name": "Medical & Healthcare",
+      "tagline": "Care, cure, research — a doctor isn't the only doctor.",
+      "icon": "stethoscope",
+      "color": "#dc2626",
+      "career_count": 10,
+      "entry_streams": ["BiPC", "MBiPC"],
+      "headline_exams": ["neet-ug", "aiims-bsc-nursing", "icar-aieea"],
+      "blurb": "MBBS is the famous one; nursing, physiotherapy, B.Pharm, BDS, AYUSH, public health, biomedical engineering, clinical psychology, and veterinary medicine are the eight other doors into healthcare in India."
+    },
+    {
+      "id": "law-public-policy",
+      "name": "Law & Public Policy",
+      "tagline": "Argue, govern, defend, diplomate.",
+      "icon": "scale",
+      "color": "#7c3aed",
+      "career_count": 8,
+      "entry_streams": ["MPC", "BiPC", "MEC", "CEC", "HEC"],
+      "headline_exams": ["clat", "ailet", "nda", "upsc-cse"],
+      "blurb": "Any stream can lead here. CLAT and AILET land you in NLUs after Class 12. UPSC and NDA open civil and defence services. India is short of corporate lawyers — Tier-1 firms pay ₹15–25 LPA to fresh NLU grads."
+    },
+    {
+      "id": "commerce-finance-business",
+      "name": "Commerce, Finance & Business",
+      "tagline": "Numbers, capital, decisions.",
+      "icon": "calculator",
+      "color": "#059669",
+      "career_count": 10,
+      "entry_streams": ["MEC", "CEC", "MPC", "BiPC"],
+      "headline_exams": ["ca-foundation", "cseet", "cma-foundation", "ipmat-indore", "ipmat-rohtak", "jipmat", "cfa-l1"],
+      "blurb": "Commerce graduate employability jumped from 55% to 62.81% in India Skills Report 2026, driven by BFSI and fintech. CA, CS, CMA, ACCA, CFA, IPM-IIM, investment banking — none require an engineering degree."
+    },
+    {
+      "id": "design-media-creative",
+      "name": "Design, Media & Creative",
+      "tagline": "Make things people use, watch, wear.",
+      "icon": "palette",
+      "color": "#ea580c",
+      "career_count": 9,
+      "entry_streams": ["any"],
+      "headline_exams": ["nid-dat", "nift", "uceed", "nata"],
+      "blurb": "UX designers, architects, animators, content creators. NID, NIFT, IIT-Bombay (UCEED) and CEPT (NATA) are gateways. Digital-first hiring is reshaping this family — fastest growing in India per LinkedIn 2026."
+    },
+    {
+      "id": "liberal-arts-social-sciences",
+      "name": "Liberal Arts & Social Sciences",
+      "tagline": "Understand people, history, ideas, society.",
+      "icon": "book-open",
+      "color": "#0891b2",
+      "career_count": 9,
+      "entry_streams": ["HEC", "any"],
+      "headline_exams": ["cuet-ug", "ailet", "set"],
+      "blurb": "Economics, psychology, political science, sociology, journalism. Ashoka, Krea, FLAME, Azim Premji, Symbiosis, BHU and DU (via CUET) make this a real career — not 'what's left'. Average employability has crossed 55% for Arts grads."
+    },
+    {
+      "id": "vocational-trades-sports",
+      "name": "Vocational, Trades & Sports",
+      "tagline": "Skilled hands, strong bodies, real income — fast.",
+      "icon": "wrench",
+      "color": "#65a30d",
+      "career_count": 10,
+      "entry_streams": ["any", "ITI", "Polytechnic"],
+      "headline_exams": ["aissee", "nchm-jee", "cpl-dgca"],
+      "blurb": "ITI electrician/welder/fitter starts at ₹18–28K/month and crosses ₹1.5 lakh/month with experience. Pilot, chef, hotel management, sports coach, defence (other ranks), agripreneur, solar tech. Ready-to-work in 1–3 years."
+    },
+    {
+      "id": "science-research",
+      "name": "Science & Research",
+      "tagline": "Discover. Patent. Publish. Build the science India needs.",
+      "icon": "flask",
+      "color": "#9333ea",
+      "career_count": 9,
+      "entry_streams": ["MPC", "BiPC", "MBiPC"],
+      "headline_exams": ["iiser-iat", "cmi-entrance", "isi-admission", "icar-aieea", "neet-ug"],
+      "blurb": "IISER, IISc, NISER, CMI, ISI, TIFR, NIPER. BS-MS dual degrees, integrated PhDs, INSPIRE-SHE scholarship of ₹80,000/year. India needs astrophysicists, climate scientists, mathematicians, statisticians — not just IIT engineers."
+    }
+  ]
+}

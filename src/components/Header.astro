@@ -1,0 +1,80 @@
+---
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+
+const navItems = [
+  { href: '/careers', label: 'Careers' },
+  { href: '/exams', label: 'Exams' },
+  { href: '/top-paying', label: 'Top-paying' },
+  { href: '/streams', label: 'After 10th' },
+  { href: '/scholarships', label: 'Scholarships' },
+  { href: '/colleges', label: 'Colleges' },
+];
+---
+<header class="sticky top-0 z-40 bg-white/85 backdrop-blur border-b border-stone-200">
+  <div class="container-page flex items-center justify-between h-14">
+    <a href="/" class="flex items-center gap-2 group" aria-label="Beyond10 home">
+      <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white font-bold text-sm">B</span>
+      <span class="font-display font-bold text-lg tracking-tight">Beyond<span class="text-blue-600">10</span></span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-1" aria-label="Primary">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'px-3 py-1.5 rounded-md text-sm font-medium transition-colors',
+            isActive(item.href)
+              ? 'text-slate-900 bg-stone-100'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-stone-50',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <button
+      type="button"
+      id="menu-toggle"
+      class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md hover:bg-stone-100"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" class="md:hidden hidden border-t border-stone-200 bg-white" aria-label="Mobile">
+    <div class="container-page py-2 flex flex-col">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'px-3 py-2.5 rounded-md text-sm font-medium',
+            isActive(item.href)
+              ? 'text-slate-900 bg-stone-100'
+              : 'text-slate-600 hover:bg-stone-50',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const nav = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>

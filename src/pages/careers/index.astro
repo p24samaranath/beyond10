@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import CareerCard from '../../components/CareerCard.astro';
+import { careers, families } from '../../lib/data';
+
+// Sort: family order, then alpha
+const familyOrder = new Map(families.map((f, i) => [f.id, i]));
+const sorted = [...careers].sort((a, b) => {
+  const fa = familyOrder.get(a.family) ?? 999;
+  const fb = familyOrder.get(b.family) ?? 999;
+  if (fa !== fb) return fa - fb;
+  return a.name.localeCompare(b.name);
+});
+---
+<Base
+  title="Careers — Beyond10"
+  description={`Browse ${careers.length} careers across 8 families: engineering, medicine, law, commerce, design, liberal arts, vocational, and science research.`}
+>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow={`${careers.length} careers · 8 families`}
+      title="Careers in India after Class 10"
+      description="Filter by family. Each card shows fresher salary and an AI-resilience score. Tap into any career for the full pathway, exams, colleges, and plan B."
+    />
+
+    <!-- Family filter (client-side) -->
+    <div class="mb-6 flex flex-wrap gap-2" id="family-filter">
+      <button data-family="all" class="filter-btn pill bg-slate-900 text-white" aria-pressed="true">
+        All ({careers.length})
+      </button>
+      {families.map((f) => {
+        const c = careers.filter((x) => x.family === f.id).length;
+        return (
+          <button
+            data-family={f.id}
+            data-fam-color={f.color}
+            class="filter-btn pill"
+            aria-pressed="false"
+          >
+            {f.name.split(' ')[0]} ({c})
+          </button>
+        );
+      })}
+    </div>
+
+    <div id="career-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {sorted.map((c) => (
+        <div data-career-fam={c.family}>
+          <CareerCard career={c} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('[data-career-fam]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.family ?? 'all';
+
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('bg-slate-900', active);
+          b.classList.toggle('text-white', active);
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+
+        cards.forEach((card) => {
+          const show = target === 'all' || card.dataset.careerFam === target;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // Pre-filter from URL ?family=...
+    const params = new URLSearchParams(location.search);
+    const initial = params.get('family');
+    if (initial) {
+      const btn = document.querySelector<HTMLButtonElement>(`[data-family="${initial}"]`);
+      btn?.click();
+      btn?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+</Base>

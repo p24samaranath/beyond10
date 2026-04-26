@@ -1,0 +1,338 @@
+{
+  "version": "1.0",
+  "updated": "2026-04-26",
+  "scholarships": [
+    {
+      "id": "jagananna-vidya-deevena",
+      "name": "Jagananna Vidya Deevena (JVD)",
+      "type": "state",
+      "state": "Andhra Pradesh",
+      "category": "Post-Matric tuition reimbursement",
+      "amount": "Full tuition fee reimbursement (Inter, ITI, Polytechnic, Degree, PG, Professional courses)",
+      "frequency": "Annual",
+      "eligibility": {
+        "categories": ["SC", "ST", "BC", "EBC", "Kapu", "Minority", "Differently-Abled"],
+        "income_limit_inr": 250000,
+        "land_limit": "Below 10 acres wet OR 25 acres dry OR 25 acres combined",
+        "asset_rules": "No income-tax-paying family member; no four-wheeler (auto/tractor allowed)",
+        "attendance": "Min 75%",
+        "domicile": "Andhra Pradesh"
+      },
+      "official_url": "https://jnanabhumi.ap.gov.in",
+      "documents": ["Aadhaar", "Income certificate", "Caste certificate", "SSC marks memo", "Bonafide", "Bank account (mother's preferred)"],
+      "typical_deadline": "Rolling, opens for each academic year",
+      "applies_to_careers": ["software-engineer", "civil-engineer", "mechanical-engineer", "ca", "lawyer", "mbbs-doctor", "nurse"],
+      "source": "AP Welfare Dept, jnanabhumi.ap.gov.in"
+    },
+    {
+      "id": "jagananna-vasathi-deevena",
+      "name": "Jagananna Vasathi Deevena",
+      "type": "state",
+      "state": "Andhra Pradesh",
+      "category": "Food + hostel stipend",
+      "amount": "ITI ₹10,000/yr | Polytechnic ₹15,000/yr | Other higher education ₹20,000/yr",
+      "frequency": "Annual",
+      "eligibility": {"same_as": "jagananna-vidya-deevena"},
+      "official_url": "https://jnanabhumi.ap.gov.in",
+      "credited_to": "Mother's bank account",
+      "source": "AP Welfare Dept"
+    },
+    {
+      "id": "jagananna-videshi-vidya-deevena",
+      "name": "Jagananna Videshi Vidya Deevena",
+      "type": "state",
+      "state": "Andhra Pradesh",
+      "category": "Overseas study scholarship",
+      "amount": "Tuition + living for QS top-200 university programmes",
+      "frequency": "Annual",
+      "eligibility": {
+        "categories": ["SC", "ST", "BC", "EBC", "Kapu"],
+        "income_limit_inr": 800000,
+        "admission": "Confirmed admission to QS top-200 university",
+        "domicile": "Andhra Pradesh"
+      },
+      "official_url": "https://jnanabhumi.ap.gov.in",
+      "source": "AP Welfare Dept"
+    },
+    {
+      "id": "ambedkar-overseas-vidya-nidhi",
+      "name": "Ambedkar Overseas Vidya Nidhi",
+      "type": "state",
+      "state": "Andhra Pradesh",
+      "category": "Overseas study scholarship",
+      "amount": "Tuition + travel + living",
+      "eligibility": {
+        "categories": ["SC", "ST", "BC", "EBC", "Kapu"],
+        "marks_min_pct": 60,
+        "attendance_min_pct": 75,
+        "english_test": "Required (IELTS/TOEFL)"
+      },
+      "official_url": "https://apsocialwelfare.ap.gov.in",
+      "source": "AP Social Welfare Dept"
+    },
+    {
+      "id": "ntr-vidyonnathi",
+      "name": "NTR Vidyonnathi",
+      "type": "state",
+      "state": "Andhra Pradesh",
+      "category": "STEM overseas scholarship for BC students",
+      "amount": "Coverage to study STEM at universities in UK/USA/Canada/Australia/Germany etc.",
+      "eligibility": {"categories": ["BC"], "stream": "STEM"},
+      "official_url": "https://apbcwelfare.ap.gov.in",
+      "source": "AP Backward Classes Welfare Dept"
+    },
+    {
+      "id": "nmms",
+      "name": "National Means-cum-Merit Scholarship (NMMS)",
+      "type": "national",
+      "category": "Pre-Matric merit + means",
+      "amount": "₹12,000/year (₹1,000/month) from Class IX to Class XII",
+      "frequency": "Renewed annually subject to performance",
+      "eligibility": {
+        "income_limit_inr": 350000,
+        "school_type": "Govt / Govt-aided / Local body schools (NOT KV / JNV / private / Sainik)",
+        "marks_min_pct": "Class VII >= 55% (50% SC/ST)",
+        "exam": "State-level NMMS exam in Class VIII"
+      },
+      "official_url": "https://scholarships.gov.in",
+      "source": "Ministry of Education, NSP"
+    },
+    {
+      "id": "inspire-she",
+      "name": "INSPIRE-SHE (Scholarship for Higher Education)",
+      "type": "national",
+      "category": "Science research scholarship",
+      "amount": "₹80,000/year for 5 years (Bachelor + Master in pure sciences)",
+      "eligibility": {
+        "marks_min_pct": "Top 1% in Class XII state board OR JEE Top 10,000 / NEET Top 10,000 / KVPY",
+        "stream": "Pure sciences (BSc / BS-MS)"
+      },
+      "official_url": "https://online-inspire.gov.in",
+      "applies_to_careers": ["research-scientist", "mathematician", "biotechnologist"],
+      "source": "DST, Ministry of Science & Tech"
+    },
+    {
+      "id": "nsp-pre-matric-minorities",
+      "name": "Pre-Matric Scholarship for Minorities",
+      "type": "national",
+      "category": "Pre-Matric minority scholarship",
+      "amount": "₹1,000–11,000 per year",
+      "eligibility": {"categories": ["Muslim", "Christian", "Sikh", "Buddhist", "Jain", "Parsi"], "income_limit_inr": 100000, "marks_min_pct": 50},
+      "official_url": "https://scholarships.gov.in",
+      "source": "Ministry of Minority Affairs"
+    },
+    {
+      "id": "nsp-post-matric-sc-st-obc",
+      "name": "Post-Matric Scholarship for SC / ST / OBC",
+      "type": "national",
+      "category": "Post-Matric reservation-based",
+      "amount": "Tuition + maintenance allowance (₹230–1,200/month) varies by course",
+      "eligibility": {"categories": ["SC", "ST", "OBC"], "income_limit_inr_sc": 250000, "income_limit_inr_obc": 150000},
+      "official_url": "https://scholarships.gov.in",
+      "source": "Ministry of Social Justice & Empowerment"
+    },
+    {
+      "id": "aicte-pragati",
+      "name": "AICTE Pragati Scholarship for Girls",
+      "type": "national",
+      "category": "Girls in technical education",
+      "amount": "₹50,000/year for tuition / books / fees + monthly stipend",
+      "eligibility": {
+        "gender": "Female",
+        "income_limit_inr": 800000,
+        "course": "AICTE-approved technical programme (Engineering / Pharmacy / Architecture / Hotel Mgmt etc.)",
+        "stream": "Class 12 admission to the technical programme"
+      },
+      "official_url": "https://scholarships.gov.in",
+      "applies_to_careers": ["software-engineer", "civil-engineer", "ai-ml-engineer", "pharmacist", "hotel-manager"],
+      "source": "AICTE, NSP"
+    },
+    {
+      "id": "aicte-saksham",
+      "name": "AICTE Saksham (PwD)",
+      "type": "national",
+      "category": "Differently-abled in technical education",
+      "amount": "₹50,000/year",
+      "eligibility": {"disability_min_pct": 40, "income_limit_inr": 800000, "course": "AICTE-approved technical programme"},
+      "official_url": "https://scholarships.gov.in",
+      "source": "AICTE, NSP"
+    },
+    {
+      "id": "reliance-foundation-ug",
+      "name": "Reliance Foundation Undergraduate Scholarship",
+      "type": "csr",
+      "category": "Merit-cum-need UG scholarship",
+      "amount": "Up to ₹2,00,000 per degree (with mentorship & alumni network)",
+      "eligibility": {
+        "course": "First-year UG in any recognised institution",
+        "income_limit_inr": 1500000,
+        "merit": "Class 12 ≥ 60% (relaxed for hardship)"
+      },
+      "official_url": "https://www.scholarships.reliancefoundation.org",
+      "applies_to_careers": ["software-engineer", "ai-ml-engineer", "mbbs-doctor", "lawyer", "ca", "any UG career"],
+      "source": "Reliance Foundation"
+    },
+    {
+      "id": "reliance-foundation-ai",
+      "name": "Reliance Foundation Scholarship for AI & Computing",
+      "type": "csr",
+      "category": "AI/CS specialist scholarship",
+      "amount": "Up to ₹6,00,000 over the degree",
+      "eligibility": {"course": "B.Tech/B.E. in AI / CS / Maths & Computing / Electrical & Electronics", "selection": "Top 100 first-year students nationally"},
+      "official_url": "https://www.scholarships.reliancefoundation.org",
+      "source": "Reliance Foundation"
+    },
+    {
+      "id": "tata-pankh",
+      "name": "Tata Capital Pankh Scholarship",
+      "type": "csr",
+      "category": "Need-based UG scholarship",
+      "amount": "Up to ₹50,000/year",
+      "eligibility": {"income_limit_inr": 250000, "merit": "Class 10/12 ≥ 60%"},
+      "official_url": "https://www.tatacapital.com/csr",
+      "source": "Tata Capital CSR"
+    },
+    {
+      "id": "aditya-birla-capital",
+      "name": "Aditya Birla Capital Scholarship",
+      "type": "csr",
+      "category": "Need-based UG scholarship",
+      "amount": "₹60,000/year",
+      "eligibility": {"income_limit_inr": 800000, "merit": "Class 12 ≥ 75%"},
+      "official_url": "https://www.adityabirlacapital.com/csr",
+      "source": "Aditya Birla Capital Foundation"
+    },
+    {
+      "id": "kc-mahindra",
+      "name": "K.C. Mahindra Scholarship for Post-Graduate Studies Abroad",
+      "type": "csr",
+      "category": "Overseas PG scholarship",
+      "amount": "Up to ₹10 lakh interest-free loan-cum-grant",
+      "eligibility": {"course": "Postgraduate study abroad (admission confirmed)"},
+      "official_url": "https://www.kcmet.org",
+      "source": "K.C. Mahindra Education Trust"
+    },
+    {
+      "id": "op-jindal-engg-mgmt",
+      "name": "OPJEMS — O.P. Jindal Engineering and Management Scholarship",
+      "type": "csr",
+      "category": "Merit scholarship for engineering + management students",
+      "amount": "₹80,000 per year",
+      "eligibility": {"course": "B.E./B.Tech or MBA at select Tier-1 institutions"},
+      "official_url": "https://www.opjems.org",
+      "source": "Jindal Group CSR"
+    },
+    {
+      "id": "icai-merit-cum-need",
+      "name": "ICAI Merit-cum-Need Scholarship",
+      "type": "institutional",
+      "category": "CA student scholarship",
+      "amount": "₹15,000 per year",
+      "eligibility": {"course": "Registered CA student", "income_limit_inr": 360000, "merit": "Top scorers across regions"},
+      "official_url": "https://www.icai.org",
+      "source": "ICAI Board of Studies"
+    },
+    {
+      "id": "icai-endowment",
+      "name": "ICAI Endowment Scholarship",
+      "type": "institutional",
+      "amount": "₹1,500/month",
+      "eligibility": {"course": "CA student", "income_limit_inr": 360000, "category": "Needy meritorious"},
+      "official_url": "https://www.icai.org",
+      "source": "ICAI"
+    },
+    {
+      "id": "iit-mcm",
+      "name": "IIT Merit-cum-Means (MCM) Scholarship",
+      "type": "institutional",
+      "category": "IIT undergraduate scholarship",
+      "amount": "Tuition fee waiver (full / two-thirds depending on slab) + ₹1,000/month pocket allowance",
+      "eligibility": {"course": "B.Tech at IIT", "income_limit_inr": 450000, "merit": "Maintain SGPA"},
+      "official_url": "https://home.iitb.ac.in/finaid",
+      "source": "IIT Senate-approved policy"
+    },
+    {
+      "id": "aiims-fee-waiver-ews",
+      "name": "AIIMS EWS / Means Fee Waiver",
+      "type": "institutional",
+      "amount": "Effective full tuition waiver for EWS students",
+      "eligibility": {"course": "MBBS at AIIMS", "category": "EWS / financially weaker"},
+      "official_url": "https://aiimsexams.ac.in",
+      "source": "AIIMS Delhi"
+    },
+    {
+      "id": "nalsar-aspire",
+      "name": "NALSAR Aspire Scholarship",
+      "type": "institutional",
+      "category": "Need-based law school scholarship",
+      "amount": "Tuition + hostel coverage based on slab",
+      "eligibility": {"course": "BA LLB at NALSAR Hyderabad", "category": "Need-based"},
+      "official_url": "https://www.nalsar.ac.in",
+      "source": "NALSAR Hyderabad"
+    },
+    {
+      "id": "ashoka-aid",
+      "name": "Ashoka Financial Aid",
+      "type": "institutional",
+      "category": "Liberal-arts undergraduate aid",
+      "amount": "Up to 100% tuition + hostel for highest-need students",
+      "eligibility": {"course": "Ashoka University UG", "category": "Need-based, family income-based slab"},
+      "official_url": "https://www.ashoka.edu.in/financial-aid",
+      "source": "Ashoka University"
+    },
+    {
+      "id": "krea-aid",
+      "name": "Krea Need-Based Financial Aid",
+      "type": "institutional",
+      "amount": "Up to 100% tuition slab-based",
+      "eligibility": {"course": "Krea UG", "category": "Need-based"},
+      "official_url": "https://krea.edu.in/sias-financial-aid",
+      "source": "Krea University"
+    },
+    {
+      "id": "buddy4study-portal",
+      "name": "Buddy4Study Aggregator",
+      "type": "aggregator",
+      "category": "300+ scholarships from govt, CSR, foundations",
+      "official_url": "https://www.buddy4study.com",
+      "source": "Buddy4Study"
+    },
+    {
+      "id": "vidyasaarathi",
+      "name": "Vidyasaarathi (NSDL)",
+      "type": "aggregator",
+      "category": "Corporate-funded scholarships portal",
+      "official_url": "https://www.vidyasaarathi.co.in",
+      "source": "NSDL e-Gov"
+    },
+    {
+      "id": "ffe",
+      "name": "Foundation for Excellence (FFE)",
+      "type": "csr",
+      "category": "Engineering / Medicine UG scholarships",
+      "amount": "₹35,000/year tuition + mentorship",
+      "eligibility": {"course": "B.Tech / MBBS at recognised institutions", "income_limit_inr": 360000},
+      "official_url": "https://www.ffe.org",
+      "source": "FFE"
+    },
+    {
+      "id": "vidya-poshak",
+      "name": "Vidya Poshak Scholarship",
+      "type": "csr",
+      "category": "PUC + UG scholarship",
+      "amount": "₹6,000–25,000/year",
+      "eligibility": {"income_limit_inr": 200000, "merit": "Class 10 ≥ 85%"},
+      "official_url": "https://www.vidyaposhak.org",
+      "source": "Vidya Poshak"
+    },
+    {
+      "id": "swami-dayanand",
+      "name": "Swami Dayanand Education Foundation",
+      "type": "csr",
+      "category": "Merit-cum-need PG and UG",
+      "amount": "Up to full tuition + maintenance",
+      "official_url": "https://www.dayanandeducation.org",
+      "source": "SDEF"
+    }
+  ]
+}

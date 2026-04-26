@@ -1,0 +1,70 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import ExamCard from '../../components/ExamCard.astro';
+import { exams, families } from '../../lib/data';
+
+// Sort: by family, then by name
+const familyOrder = new Map(families.map((f, i) => [f.id, i]));
+const sorted = [...exams].sort((a, b) => {
+  const fa = familyOrder.get(a.family) ?? 999;
+  const fb = familyOrder.get(b.family) ?? 999;
+  if (fa !== fb) return fa - fb;
+  return a.name.localeCompare(b.name);
+});
+---
+<Base
+  title="Competitive exams — Beyond10"
+  description={`${exams.length} entrance exams in India 2026 — JEE, NEET, CLAT, IPMAT, CUET, NDA, NID, NIFT, CA Foundation and more.`}
+>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow={`${exams.length} exams · 2026 calendar`}
+      title="Competitive exams in India 2026"
+      description="From JEE and NEET to NID DAT and CA Foundation. Filter by family. Each card shows the next 2026 date and difficulty rating."
+    />
+
+    <div class="mb-6 flex flex-wrap gap-2" id="exam-family-filter">
+      <button data-family="all" class="filter-btn pill bg-slate-900 text-white" aria-pressed="true">
+        All ({exams.length})
+      </button>
+      {families.map((f) => {
+        const c = exams.filter((x) => x.family === f.id).length;
+        if (c === 0) return null;
+        return (
+          <button data-family={f.id} class="filter-btn pill" aria-pressed="false">
+            {f.name.split(' ')[0]} ({c})
+          </button>
+        );
+      })}
+    </div>
+
+    <div id="exam-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {sorted.map((e) => (
+        <div data-exam-fam={e.family}>
+          <ExamCard exam={e} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('#exam-family-filter .filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('[data-exam-fam]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.family ?? 'all';
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('bg-slate-900', active);
+          b.classList.toggle('text-white', active);
+          b.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        cards.forEach((c) => {
+          c.style.display = target === 'all' || c.dataset.examFam === target ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</Base>

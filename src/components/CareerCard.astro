@@ -1,0 +1,66 @@
+---
+import type { Career } from '../lib/data';
+import { familyById } from '../lib/data';
+
+interface Props {
+  career: Career;
+}
+
+const { career } = Astro.props;
+const fam = familyById(career.family);
+
+function pickSalary(c: Career): string {
+  const s = c.salary_inr as Record<string, unknown> | undefined;
+  if (!s) return '—';
+  if (typeof s.fresher === 'string') return s.fresher;
+  if (typeof s.fresher === 'object' && s.fresher !== null) {
+    const obj = s.fresher as Record<string, string>;
+    return obj.product_companies ?? obj.service_companies ?? Object.values(obj)[0];
+  }
+  return '—';
+}
+
+const fresher = pickSalary(career);
+const aiRating = (career.ai_impact as { rating?: number } | undefined)?.rating;
+---
+<a
+  href={`/careers/${career.id}`}
+  data-family={career.family}
+  class="card card-hover group block overflow-hidden"
+>
+  <div class="fam-stripe h-1"></div>
+  <div class="p-5">
+    <div class="flex items-start justify-between gap-3">
+      <h3 class="font-semibold text-slate-900 leading-snug group-hover:text-slate-700">
+        {career.name}
+      </h3>
+      {fam && (
+        <span class="pill fam-tag font-medium whitespace-nowrap text-[10px]">{fam.name.split(' ')[0]}</span>
+      )}
+    </div>
+    {career.one_liner && (
+      <p class="mt-2 text-sm text-slate-600 leading-relaxed line-clamp-2">
+        {career.one_liner}
+      </p>
+    )}
+
+    <dl class="mt-4 grid grid-cols-2 gap-3 text-xs">
+      <div>
+        <dt class="text-slate-500">Fresher salary</dt>
+        <dd class="font-semibold text-slate-900 mt-0.5">{fresher}</dd>
+      </div>
+      <div>
+        <dt class="text-slate-500">AI resilience</dt>
+        <dd class="font-semibold text-slate-900 mt-0.5">
+          {aiRating !== undefined ? (
+            <span title={`${aiRating}/5 — lower = more AI-exposed`}>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span class={i < (5 - aiRating) ? 'text-emerald-500' : 'text-stone-300'}>●</span>
+              ))}
+            </span>
+          ) : '—'}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</a>

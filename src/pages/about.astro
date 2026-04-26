@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { sources, counts } from '../lib/data';
+---
+<Base
+  title="About + sources — Beyond10"
+  description="Methodology, sources, and trust principles behind Beyond10."
+>
+  <section class="container-page py-12 sm:py-16 max-w-3xl">
+    <Section
+      eyebrow="About"
+      title="What Beyond10 is — and isn't"
+    />
+
+    <div class="prose-tight space-y-5">
+      <p>Beyond10 is a free, sourced career-discovery platform for Class IX–X students in India. It exists because <strong>93% of Indian students are aware of fewer than 10 careers</strong> against the 250+ that exist (IC3 Institute, 2022), and only <strong>13.2% have ever spoken to a professional career counsellor</strong>.</p>
+
+      <p>Our de-facto competitor in tier-3 India is the corner Sri Chaitanya admissions counsellor — whose objective function is filling EAMCET / JEE / NEET batches. We're built differently:</p>
+
+      <ul>
+        <li><strong>Free.</strong> No login wall, no paywall, no premium tier.</li>
+        <li><strong>Sourced.</strong> Every fact carries a source — see below.</li>
+        <li><strong>Honest about AI.</strong> We don't promise any career is "AI-proof." Every career has a resilience rating with reasoning.</li>
+        <li><strong>Coaching-neutral.</strong> No coaching institute pays for placement on this site.</li>
+      </ul>
+    </div>
+
+    <hr class="my-12 border-stone-200" />
+
+    <h2 id="methodology" class="text-2xl font-bold text-slate-900 mb-4 scroll-mt-20">Methodology</h2>
+    <div class="prose-tight space-y-4">
+      <p>Beyond10's data is compiled from 50+ authoritative Indian sources — government bodies, official exam conducting authorities, NIRF rankings, India Skills Report 2026, salary aggregators, and corporate scholarship portals.</p>
+      <p>Numbers reflect the <strong>realistic 90th-percentile experienced practitioner</strong>, not the headline "topper got ₹2 Cr" claim. Salary ranges are gross fixed pay; bonuses, ESOPs, and allowances are noted only where significant.</p>
+      <p>The data refresh cadence is <strong>quarterly</strong> for exam dates and scholarship deadlines, and <strong>annually</strong> for salary and AI-impact ratings.</p>
+    </div>
+
+    <hr class="my-12 border-stone-200" />
+
+    <h2 id="trust" class="text-2xl font-bold text-slate-900 mb-4 scroll-mt-20">Trust &amp; safety</h2>
+    <div class="prose-tight space-y-4">
+      <ul>
+        <li><strong>Anonymous by default.</strong> No login required to browse anything.</li>
+        <li><strong>No third-party trackers.</strong> No Google Analytics on student-mode pages.</li>
+        <li><strong>No advertising.</strong> No "sponsored" career placements ever.</li>
+        <li><strong>DPDP Act 2023 aligned.</strong> Built for minors with explicit consent and data minimisation in mind.</li>
+        <li><strong>Mental health.</strong> If you or someone you know needs help, please reach out to <a href="https://telemanas.mohfw.gov.in" target="_blank" rel="noopener" class="underline">Tele-MANAS (14416)</a> or <a href="https://icallhelpline.org" target="_blank" rel="noopener" class="underline">iCall</a>.</li>
+      </ul>
+    </div>
+
+    <hr class="my-12 border-stone-200" />
+
+    <h2 id="sources" class="text-2xl font-bold text-slate-900 mb-2 scroll-mt-20">Sources ({sources.length})</h2>
+    <p class="text-sm text-slate-600 mb-6">Every entry in our data has a source. This is the canonical list.</p>
+    <ul class="space-y-2">
+      {sources.map((s) => (
+        <li class="border-b border-stone-100 pb-2">
+          <a href={s.url} target="_blank" rel="noopener noreferrer" class="font-medium text-slate-900 hover:text-blue-600">
+            {s.name}
+            <span class="text-stone-400 text-xs ml-1">↗</span>
+          </a>
+          <p class="text-xs text-slate-500">{s.used_for}</p>
+        </li>
+      ))}
+    </ul>
+
+    <hr class="my-12 border-stone-200" />
+
+    <h2 class="text-2xl font-bold text-slate-900 mb-4">Coverage at a glance</h2>
+    <dl class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      {[
+        ['Careers', counts.careers],
+        ['Entrance exams', counts.exams],
+        ['Top-paying ranked', counts.topPaying],
+        ['Scholarships', counts.scholarships],
+        ['Top colleges', counts.colleges],
+        ['AP Inter streams', counts.streams],
+        ['Career families', counts.families],
+        ['Sources', sources.length],
+      ].map(([label, value]) => (
+        <div class="card p-4">
+          <dt class="text-xs uppercase tracking-wider text-slate-500">{label}</dt>
+          <dd class="mt-1 text-2xl font-bold tabular-nums text-slate-900">{value}+</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+</Base>

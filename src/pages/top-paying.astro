@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { topPaying, topPayingContext, careerById, familyById } from '../lib/data';
+---
+<Base
+  title="Top-paying careers in India 2026 — Beyond10"
+  description="Ranked list of the highest-paying careers in India 2026 with realistic salary trajectories from fresher to top — every entry sourced."
+>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow={`${topPaying.length} top-paying paths · sourced`}
+      title="Where the money actually is"
+      description={topPayingContext}
+    />
+
+    <div class="space-y-3">
+      {topPaying.map((rank) => {
+        const career = careerById(rank.career_id);
+        const fam = career ? familyById(career.family) : undefined;
+        return (
+          <a
+            href={career ? `/careers/${career.id}` : '#'}
+            class="card card-hover p-5 sm:p-6 grid sm:grid-cols-12 gap-4 items-center"
+            data-family={career?.family}
+          >
+            <div class="sm:col-span-1 flex sm:block items-center gap-3">
+              <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-900 text-white font-bold text-lg tabular-nums">
+                #{rank.rank}
+              </span>
+            </div>
+
+            <div class="sm:col-span-5">
+              <h3 class="font-semibold text-slate-900 leading-snug">{rank.name}</h3>
+              {fam && (
+                <p class="mt-1 text-xs fam-tag inline-block px-2 py-0.5 rounded-full font-medium">
+                  {fam.name}
+                </p>
+              )}
+              {rank.entry_path && (
+                <p class="mt-2 text-xs text-slate-500 line-clamp-2">
+                  <span class="font-semibold text-slate-700">Entry:</span> {rank.entry_path}
+                </p>
+              )}
+            </div>
+
+            <dl class="sm:col-span-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+              <div>
+                <dt class="text-slate-500">Fresher</dt>
+                <dd class="mt-0.5 text-sm font-semibold text-slate-900 tabular-nums">₹{rank.fresher_inr_lpa}</dd>
+              </div>
+              <div>
+                <dt class="text-slate-500">5-year</dt>
+                <dd class="mt-0.5 text-sm font-semibold text-slate-900 tabular-nums">₹{rank.five_year_inr_lpa}</dd>
+              </div>
+              <div>
+                <dt class="text-slate-500">10-year</dt>
+                <dd class="mt-0.5 text-sm font-semibold text-slate-900 tabular-nums">₹{rank.ten_year_inr_lpa}</dd>
+              </div>
+              {rank.top_inr_cr && (
+                <div>
+                  <dt class="text-slate-500">Top</dt>
+                  <dd class="mt-0.5 text-sm font-semibold text-emerald-700 tabular-nums">₹{rank.top_inr_cr} Cr</dd>
+                </div>
+              )}
+            </dl>
+
+            <div class="sm:col-span-1 text-right hidden sm:block">
+              <span class="text-slate-400 text-2xl">›</span>
+            </div>
+
+            {rank.note && (
+              <p class="sm:col-span-12 text-xs text-amber-700 bg-amber-50 px-3 py-2 rounded-md">
+                {rank.note}
+              </p>
+            )}
+          </a>
+        );
+      })}
+    </div>
+
+    <p class="mt-10 text-xs text-slate-500 max-w-3xl">
+      <strong>How to read this:</strong> Salary ranges are realistic — not the "topper got ₹2 Cr" headline some coaching ads show. Bonuses, ESOPs, and allowances are noted only where significant. "Top" means a 90th-percentile experienced practitioner, not a guarantee. AP-specific notes appear on individual career pages.
+    </p>
+  </section>
+</Base>

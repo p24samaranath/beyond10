@@ -1,0 +1,761 @@
+{
+  "version": "1.0",
+  "updated": "2026-04-26",
+  "careers": [
+    {
+      "id": "software-engineer",
+      "name": "Software Engineer",
+      "family": "engineering-tech",
+      "one_liner": "Designs, builds, and maintains software systems — from apps you use daily to the infrastructure that powers them.",
+      "description": "Writes code, reviews PRs, debugs production issues, designs APIs and databases. Works in product companies (Google, Microsoft, Razorpay) or services (TCS, Infosys, Accenture). India's most-hired role.",
+      "typical_day": "Stand-up at 10 AM, code 2–3 features, code reviews, deploy, on-call rotations, learning new frameworks.",
+      "stream": ["MPC", "MBiPC"],
+      "pathway": {
+        "class_10": "Pick MPC. Start light Python via Khan Academy or NPTEL. Learn typing.",
+        "class_11_12": "Crack JEE Main / EAPCET / BITSAT. Side-projects on GitHub.",
+        "undergraduate": "B.Tech in CSE (4 yrs) — IIT/NIT/IIIT/BITS or AP-state college.",
+        "entry_role": "Software Development Engineer-1 / Junior Developer (₹4–25 LPA depending on college tier)",
+        "growth_path": "SDE-2 → Senior SDE → Tech Lead / EM (₹40–100+ LPA at FAANG India)"
+      },
+      "entrance_exams": ["jee-main", "jee-advanced", "ap-eapcet", "bitsat", "viteee"],
+      "top_colleges": ["iit-bombay", "iit-delhi", "iit-madras", "iiit-hyderabad", "bits-pilani", "nit-trichy", "iiit-sri-city"],
+      "salary_inr": {
+        "fresher": {
+          "service_companies": "₹3.5–4.5 LPA (TCS, Infosys, Wipro)",
+          "product_companies": "₹15–30 LPA (Google, Amazon, Microsoft)",
+          "infosys_specialist_2026": "Up to ₹21 LPA"
+        },
+        "five_year": "₹15–35 LPA",
+        "ten_year": "₹35 LPA – 1 Cr (Staff Engineer / EM)",
+        "fifteen_year": "₹50 LPA – 2 Cr+ (Director / Principal)"
+      },
+      "scholarships": ["jagananna-vidya-deevena", "reliance-foundation-ug", "iit-mcm"],
+      "ai_impact": {
+        "rating": 3,
+        "reasoning": "Boilerplate code is being automated by Copilot/Cursor. System design, debugging novel issues, customer-facing engineering remain human-led. Expect 'AI-augmented engineer' as the new normal — fewer junior roles per project, more senior+AI productivity.",
+        "durable_skills": ["system design", "debugging skills", "code review judgment", "customer empathy", "leadership"],
+        "at_risk_tasks": ["routine CRUD coding", "writing test boilerplate", "translating specs to code"]
+      },
+      "skills_to_build": ["Python or Java fundamentals", "Data structures + algorithms", "Git/GitHub", "One frontend framework (React)", "SQL", "Linux command line"],
+      "plan_b": ["data-scientist", "ai-ml-engineer", "product-manager"],
+      "myths": ["You need IIT to get a high-paying SDE job — false; product-company hiring is increasingly skill-based", "You stop coding after 5 years — false; many senior engineers code daily", "Indian engineers only do 'service' work — false; global product companies have massive India offices"],
+      "popularity_score": 10,
+      "demand_growth": "+18% YoY",
+      "source": "India Skills Report 2026, Levels.fyi, Naukri JobSpeak"
+    },
+    {
+      "id": "data-scientist",
+      "name": "Data Scientist",
+      "family": "engineering-tech",
+      "one_liner": "Turns raw data into business decisions using statistics, machine learning, and storytelling.",
+      "description": "Builds predictive models, runs experiments, communicates insights. Works with product, marketing, finance teams. Data scientists at Indian fintech / e-comm earn 25–40% premium for AI specialisation.",
+      "typical_day": "SQL queries, model training in Jupyter, A/B test analysis, stakeholder presentations, MLOps.",
+      "stream": ["MPC", "MBiPC"],
+      "pathway": {
+        "class_10": "Strong maths + curiosity. Try Khan Academy stats.",
+        "class_11_12": "Maths + Physics + (CS elective if available). JEE / EAPCET / BITSAT.",
+        "undergraduate": "B.Tech CSE / Data Science / Stats (IIT, IIIT-H, IIT Madras BSc Data Science online + on-campus, ISI)",
+        "entry_role": "Data Analyst (₹6–10 LPA) → Data Scientist after 1–2 years",
+        "growth_path": "Senior DS → Lead DS / ML Engineer → Head of Data (₹50–80 LPA at top firms)"
+      },
+      "entrance_exams": ["jee-main", "iiser-iat", "isi-admission", "ap-eapcet", "bitsat"],
+      "top_colleges": ["isi-kolkata", "iiit-hyderabad", "iit-madras", "iisc-bangalore", "cmi-chennai"],
+      "salary_inr": {
+        "fresher": "₹6–9 LPA (₹12–20 LPA at IIT/NIT product cos)",
+        "five_year": "₹15–30 LPA",
+        "ten_year": "₹30–60 LPA (Senior DS)",
+        "ai_specialist_premium": "+25–40% above generalist"
+      },
+      "scholarships": ["jagananna-vidya-deevena", "reliance-foundation-ug", "inspire-she"],
+      "ai_impact": {
+        "rating": 4,
+        "reasoning": "Routine SQL and dashboarding are being absorbed by AI tools. Causal inference, experimental design, business judgment, storytelling remain human. Generalists hurt; specialists thrive.",
+        "durable_skills": ["statistical thinking", "experimental design", "domain expertise", "communication"],
+        "at_risk_tasks": ["routine reporting", "basic SQL", "manual feature engineering"]
+      },
+      "skills_to_build": ["Python (pandas, numpy, scikit-learn)", "SQL deeply", "Statistics fundamentals", "One BI tool (Tableau/PowerBI)", "Storytelling/communication"],
+      "plan_b": ["ai-ml-engineer", "software-engineer", "actuary"],
+      "myths": ["You need a PhD — false; ~80% of working DSes have only Bachelor's/Master's", "It's all coding — actually 40% communication, 30% analysis, 30% coding"],
+      "popularity_score": 9,
+      "demand_growth": "+25% YoY",
+      "source": "India Skills Report 2026, AmbitionBox, AnalyticsVidhya"
+    },
+    {
+      "id": "ai-ml-engineer",
+      "name": "AI / ML Engineer",
+      "family": "engineering-tech",
+      "one_liner": "Builds and ships machine learning systems — from recommendation engines to LLM-powered products.",
+      "description": "Trains, fine-tunes, evaluates, and deploys ML models. India holds 16% of global AI talent and is projected to reach 1.25 million AI professionals by 2027. GenAI commands the highest premium of any 2026 role.",
+      "typical_day": "Data prep, model training/eval, deploying APIs, monitoring drift, on-call for inference latency, prompt engineering.",
+      "stream": ["MPC", "MBiPC"],
+      "pathway": {
+        "class_10": "Maths foundation. Try free ML courses (Andrew Ng on Coursera audit).",
+        "class_11_12": "JEE / EAPCET / BITSAT. Build a small ML project.",
+        "undergraduate": "B.Tech CSE / AI / Data Science. Specialisation in junior year.",
+        "entry_role": "ML Engineer / Applied Scientist (₹10–20 LPA freshers; ₹25–40 LPA at top product cos)",
+        "growth_path": "Senior MLE → Staff MLE → Principal / Head of AI (₹60 LPA – 1.5 Cr)"
+      },
+      "entrance_exams": ["jee-main", "jee-advanced", "ap-eapcet", "bitsat", "iiser-iat"],
+      "top_colleges": ["iit-madras", "iit-bombay", "iiit-hyderabad", "iisc-bangalore"],
+      "salary_inr": {
+        "fresher": "₹10–20 LPA (top product cos ₹25–40 LPA)",
+        "five_year": "₹25–50 LPA",
+        "ten_year": "₹50–80 LPA",
+        "principal_genai": "₹80 LPA – 1.5 Cr+"
+      },
+      "scholarships": ["jagananna-vidya-deevena", "reliance-foundation-ug-ai", "iit-mcm"],
+      "ai_impact": {
+        "rating": 2,
+        "reasoning": "These are the people building AI — most resilient role in tech. Risk only if you stay generalist; specialise in GenAI, MLOps, or evals to compound.",
+        "durable_skills": ["ML systems design", "evaluation methodology", "prompt engineering", "infra"],
+        "at_risk_tasks": ["building basic classifiers from scratch (now AutoML)"]
+      },
+      "skills_to_build": ["Python deep", "PyTorch or TensorFlow", "Math: linear algebra + probability", "Cloud (AWS/GCP)", "MLOps tools (MLflow, Kubeflow)"],
+      "plan_b": ["data-scientist", "software-engineer", "research-scientist"],
+      "myths": ["AI engineers only work for FAANG — false; every Indian fintech, e-comm, healthtech is hiring", "You need to publish papers — false; product MLE work is mostly engineering"],
+      "popularity_score": 10,
+      "demand_growth": "+35% YoY",
+      "source": "India Skills Report 2026, Levels.fyi, IGmGuru"
+    },
+    {
+      "id": "civil-engineer",
+      "name": "Civil Engineer",
+      "family": "engineering-tech",
+      "one_liner": "Designs and builds infrastructure — buildings, bridges, metros, ports, water systems.",
+      "description": "Works in construction, real estate, government PWD, consulting (L&T, AECOM, Tata Projects). Stable government careers via Engineering Services Examination.",
+      "stream": ["MPC", "MBiPC"],
+      "pathway": {
+        "class_10": "MPC + interest in physics-applied-to-the-real-world.",
+        "class_11_12": "JEE / EAPCET. Visit construction sites if possible.",
+        "undergraduate": "B.Tech Civil — IIT/NIT/JNTU/Andhra University.",
+        "entry_role": "Site engineer / design engineer (₹4–8 LPA private; ₹6–7 LPA L&T)",
+        "growth_path": "Project Manager → Project Director (₹25–50 LPA at L&T-tier; PSU/government track for stability)"
+      },
+      "entrance_exams": ["jee-main", "ap-eapcet"],
+      "top_colleges": ["iit-bombay", "iit-madras", "iit-roorkee", "nit-warangal", "jntu-kakinada"],
+      "salary_inr": {
+        "fresher": "₹4–8 LPA",
+        "five_year": "₹10–18 LPA",
+        "ten_year": "₹20–40 LPA"
+      },
+      "scholarships": ["jagananna-vidya-deevena", "reliance-foundation-ug"],
+      "ai_impact": {
+        "rating": 2,
+        "reasoning": "On-site engineering is fundamentally physical. AutoCAD/BIM augments rather than replaces. Risk only in pure design/drafting roles."
+      },
+      "skills_to_build": ["AutoCAD", "Revit / BIM", "Site supervision", "Project management"],
+      "plan_b": ["mechanical-engineer", "architect", "urban-planner"],
+      "popularity_score": 6,
+      "demand_growth": "+8% YoY (infrastructure push)",
+      "source": "India Skills Report 2026"
+    },
+    {
+      "id": "mechanical-engineer",
+      "name": "Mechanical Engineer",
+      "family": "engineering-tech",
+      "one_liner": "Designs machines, vehicles, factories, and the manufacturing systems that make modern India work.",
+      "stream": ["MPC", "MBiPC"],
+      "pathway": {
+        "class_11_12": "JEE / EAPCET — MPC.",
+        "undergraduate": "B.Tech Mechanical (4 yrs).",
+        "entry_role": "Design / production engineer (₹4–10 LPA)",
+        "growth_path": "Engineering Manager → Plant Manager (₹20–50 LPA)"
+      },
+      "entrance_exams": ["jee-main", "ap-eapcet", "bitsat"],
+      "top_colleges": ["iit-madras", "iit-bombay", "iit-kanpur", "nit-trichy"],
+      "salary_inr": {"fresher": "₹4–10 LPA", "five_year": "₹10–20 LPA", "ten_year": "₹25–50 LPA"},
+      "ai_impact": {"rating": 3, "reasoning": "CAD and FEA are AI-augmented; production lines are being automated. Manufacturing strategy and process engineering remain human."},
+      "popularity_score": 6,
+      "source": "India Skills Report 2026"
+    },
+    {
+      "id": "electrical-engineer",
+      "name": "Electrical Engineer",
+      "family": "engineering-tech",
+      "one_liner": "Power systems, semiconductors, EV powertrains, renewable energy — the foundation of modern India.",
+      "stream": ["MPC"],
+      "pathway": {
+        "undergraduate": "B.Tech EEE (4 yrs)",
+        "entry_role": "Design / power engineer (₹4–10 LPA private; PSU pays well)",
+        "growth_path": "Senior engineer → DGM (₹15–40 LPA in private; PSU equivalent)"
+      },
+      "entrance_exams": ["jee-main", "ap-eapcet", "bitsat"],
+      "top_colleges": ["iit-bombay", "iit-madras", "nit-warangal", "bits-pilani"],
+      "salary_inr": {"fresher": "₹4–10 LPA", "five_year": "₹12–22 LPA", "ten_year": "₹22–45 LPA"},
+      "ai_impact": {"rating": 2, "reasoning": "Semiconductor design is booming under India's chip-fab push. Power engineering is durable."},
+      "popularity_score": 6,
+      "source": "India Skills Report 2026"
+    },
+    {
+      "id": "aerospace-engineer",
+      "name": "Aerospace Engineer",
+      "family": "engineering-tech",
+      "one_liner": "Designs aircraft, satellites, drones — works at ISRO, HAL, DRDO, or global firms.",
+      "stream": ["MPC"],
+      "pathway": {
+        "undergraduate": "B.Tech Aerospace — IIT Bombay/Madras/Kanpur, or BS at IIST",
+        "growth_path": "ISRO Scientist → Project Director (₹12–30 LPA government track)"
+      },
+      "entrance_exams": ["jee-main", "jee-advanced", "iist-isat"],
+      "top_colleges": ["iit-bombay", "iit-madras", "iist-thiruvananthapuram", "iisc-bangalore"],
+      "salary_inr": {"fresher": "₹6–12 LPA", "ten_year": "₹20–40 LPA"},
+      "ai_impact": {"rating": 2, "reasoning": "Frontier R&D is highly resilient."},
+      "popularity_score": 5,
+      "source": "ISRO careers, India Skills Report 2026"
+    },
+    {
+      "id": "cybersecurity-analyst",
+      "name": "Cybersecurity Analyst",
+      "family": "engineering-tech",
+      "one_liner": "Defends systems, networks, and data from attacks. India's cybersecurity market projected to hit ₹280 bn.",
+      "stream": ["MPC", "MBiPC"],
+      "pathway": {
+        "undergraduate": "B.Tech CSE / Cybersecurity, plus certifications (CompTIA Security+, CEH, OSCP)",
+        "growth_path": "SOC Analyst → Pentester → CISO (₹30 LPA – 1.5 Cr at senior)"
+      },
+      "entrance_exams": ["jee-main", "ap-eapcet"],
+      "salary_inr": {"fresher": "₹6–12 LPA", "five_year": "₹15–30 LPA", "ten_year": "₹35–60 LPA"},
+      "ai_impact": {"rating": 1, "reasoning": "AI both creates threats and defends — cyber is one of the safest growth roles. 30–35% YoY job growth."},
+      "popularity_score": 8,
+      "demand_growth": "+30–35% YoY",
+      "source": "Cryptus, India Skills Report 2026"
+    },
+    {
+      "id": "robotics-engineer",
+      "name": "Robotics Engineer",
+      "family": "engineering-tech",
+      "one_liner": "Builds physical autonomous systems — warehouse robots, drones, surgical robots, self-driving.",
+      "stream": ["MPC"],
+      "pathway": {"undergraduate": "B.Tech Mech/EEE/CSE + Robotics M.Tech.", "growth_path": "Robotics Engineer → Lead → Head of Robotics (₹15–60 LPA)"},
+      "entrance_exams": ["jee-main", "jee-advanced"],
+      "salary_inr": {"fresher": "₹6–14 LPA", "ten_year": "₹25–60 LPA"},
+      "ai_impact": {"rating": 1, "reasoning": "AI's physical embodiment — fastest-growing niche in 2026."},
+      "popularity_score": 5,
+      "source": "India Skills Report 2026"
+    },
+    {
+      "id": "semiconductor-engineer",
+      "name": "Semiconductor / Chip Design Engineer",
+      "family": "engineering-tech",
+      "one_liner": "Designs the chips that power phones, cars, and AI servers. India's national chip-fab push (₹76,000 cr) is creating hundreds of thousands of roles.",
+      "stream": ["MPC"],
+      "pathway": {"undergraduate": "B.Tech ECE / EEE → M.Tech VLSI", "growth_path": "Design Engineer → Architect → Sr. Architect (₹25 LPA – 1.2 Cr at Qualcomm/Nvidia/AMD India)"},
+      "entrance_exams": ["jee-main", "jee-advanced"],
+      "top_colleges": ["iit-madras", "iit-bombay", "iit-delhi", "iisc-bangalore"],
+      "salary_inr": {"fresher": "₹8–18 LPA", "ten_year": "₹35–80 LPA"},
+      "ai_impact": {"rating": 1, "reasoning": "Chips are the hardware AI runs on — fundamentally durable."},
+      "popularity_score": 6,
+      "source": "India Skills Report 2026, MeitY Semiconductor Mission"
+    },
+    {
+      "id": "mbbs-doctor",
+      "name": "MBBS Doctor",
+      "family": "medical-healthcare",
+      "one_liner": "The default medical degree — opens specialisation in 30+ branches and 50+ year career.",
+      "description": "5.5-year programme (4.5 academic + 1 internship). Then optional MD/MS specialisation (3 yr) + super-specialisation (DM/MCh, 3 yr).",
+      "stream": ["BiPC", "MBiPC"],
+      "pathway": {
+        "class_10": "BiPC. Watch your fitness — medical careers are demanding.",
+        "class_11_12": "Crack NEET-UG. NCERT Biology is the bible.",
+        "undergraduate": "MBBS at AIIMS / JIPMER / KMC Manipal / state medical college via NEET",
+        "postgraduate": "MD/MS in your chosen specialty via NEET-PG (3 yrs)",
+        "entry_role": "Junior resident (₹5–8 LPA government; ₹6–12 LPA private)",
+        "growth_path": "Specialist → Super-specialist → Senior Consultant (₹25 LPA – 2 Cr+ at 15 yrs)"
+      },
+      "entrance_exams": ["neet-ug"],
+      "top_colleges": ["aiims-delhi", "jipmer-puducherry", "kasturba-medical", "maulana-azad", "aiims-bhubaneswar"],
+      "salary_inr": {
+        "fresher_intern": "₹15–30K/month",
+        "post_md": "₹15–40 LPA",
+        "ten_year_specialist": "₹25 LPA – 1 Cr",
+        "super_specialist": "₹50 LPA – 2 Cr+ (cardiology, neurosurgery, oncology)"
+      },
+      "scholarships": ["aiims-fee-waiver-ews", "jagananna-vidya-deevena"],
+      "ai_impact": {
+        "rating": 2,
+        "reasoning": "Diagnostics (radiology, pathology) are AI-augmented but not replaced. Surgery, patient care, complex judgment remain human-led. Indian doctor shortage means demand exceeds supply for decades.",
+        "at_risk_tasks": ["routine radiology screening", "first-pass dermatology"]
+      },
+      "skills_to_build": ["NCERT Biology mastery", "Mental endurance (long study + duty hours)", "Clinical communication"],
+      "plan_b": ["dentist", "ayush-doctor", "nurse", "biotechnologist"],
+      "myths": ["MBBS = ₹50 lakh package after 5 years — false; MBBS alone = ₹6–10 LPA, super-specialisation drives the big numbers", "Government medical colleges are second-class — false; AIIMS / JIPMER / Maulana Azad outrank most private"],
+      "popularity_score": 10,
+      "source": "NMC, India Skills Report 2026, Aspiromed"
+    },
+    {
+      "id": "dentist",
+      "name": "Dentist (BDS)",
+      "family": "medical-healthcare",
+      "one_liner": "Oral health specialist — clinic practice, hospital, or research.",
+      "stream": ["BiPC"],
+      "pathway": {"undergraduate": "BDS (5 yrs incl. internship) via NEET", "growth_path": "Clinic practice or MDS specialisation (₹5–25 LPA, own clinic can scale to ₹30 LPA+)"},
+      "entrance_exams": ["neet-ug"],
+      "salary_inr": {"fresher": "₹3–6 LPA", "five_year": "₹6–15 LPA", "own_clinic_10y": "₹15–40 LPA"},
+      "ai_impact": {"rating": 2},
+      "popularity_score": 5,
+      "source": "DCI India"
+    },
+    {
+      "id": "ayush-doctor",
+      "name": "AYUSH Doctor (BAMS / BHMS / BUMS / BSMS)",
+      "family": "medical-healthcare",
+      "one_liner": "Practitioner of Ayurveda, Homeopathy, Unani, or Siddha — strong govt push under Ministry of AYUSH.",
+      "stream": ["BiPC"],
+      "pathway": {"undergraduate": "BAMS / BHMS / BUMS / BSMS via NEET (5.5 yrs)", "growth_path": "Practice / MD AYUSH / govt Ayush Mission"},
+      "entrance_exams": ["neet-ug"],
+      "salary_inr": {"fresher": "₹2–5 LPA", "five_year": "₹5–10 LPA"},
+      "ai_impact": {"rating": 2},
+      "popularity_score": 4,
+      "source": "Ministry of AYUSH"
+    },
+    {
+      "id": "nurse",
+      "name": "Nurse (B.Sc Nursing)",
+      "family": "medical-healthcare",
+      "one_liner": "Direct patient care — India faces a 2-million nurse shortage; demand is exploding domestically and abroad.",
+      "stream": ["BiPC"],
+      "pathway": {"undergraduate": "B.Sc Nursing (4 yrs) via AIIMS BSc Nursing exam or state CET", "growth_path": "Staff Nurse → Nursing Officer → Matron / Director of Nursing (₹4–15 LPA in India; ₹50 LPA+ in Gulf/UK/US)"},
+      "entrance_exams": ["aiims-bsc-nursing", "neet-ug"],
+      "top_colleges": ["aiims-delhi-nursing", "cmc-vellore-nursing", "rak-college-nursing"],
+      "salary_inr": {"fresher": "₹3–6 LPA", "five_year": "₹6–10 LPA", "abroad": "₹40–80 LPA (UK/Australia/Canada)"},
+      "ai_impact": {"rating": 1, "reasoning": "Bedside care is one of the safest healthcare roles."},
+      "popularity_score": 7,
+      "source": "INC, AIIMS"
+    },
+    {
+      "id": "pharmacist",
+      "name": "Pharmacist (B.Pharm)",
+      "family": "medical-healthcare",
+      "one_liner": "Drug discovery, dispensing, regulatory affairs, pharmaceutical manufacturing — India is the pharmacy of the world.",
+      "stream": ["BiPC", "MPC"],
+      "pathway": {"undergraduate": "B.Pharm (4 yrs)", "growth_path": "QA → R&D → regulatory affairs (₹4–18 LPA Indian Pharma; higher at MNCs)"},
+      "entrance_exams": ["neet-ug", "ap-eapcet"],
+      "top_colleges": ["niper-mohali", "jamia-hamdard", "bits-pilani-pharm"],
+      "salary_inr": {"fresher": "₹3–6 LPA", "five_year": "₹6–14 LPA"},
+      "ai_impact": {"rating": 3},
+      "popularity_score": 5,
+      "source": "PCI India"
+    },
+    {
+      "id": "physiotherapist",
+      "name": "Physiotherapist (BPT)",
+      "family": "medical-healthcare",
+      "one_liner": "Rehabilitation specialist — sports, neurology, ortho, paediatric. Massive global demand.",
+      "stream": ["BiPC"],
+      "pathway": {"undergraduate": "BPT (4.5 yrs incl. internship)", "growth_path": "Clinic / sports team / MPT (₹3–15 LPA India; ₹40 LPA+ abroad)"},
+      "entrance_exams": ["neet-ug", "state-cet"],
+      "salary_inr": {"fresher": "₹3–6 LPA"},
+      "ai_impact": {"rating": 1},
+      "popularity_score": 5,
+      "source": "IAP India"
+    },
+    {
+      "id": "biotechnologist",
+      "name": "Biotechnologist",
+      "family": "medical-healthcare",
+      "one_liner": "Biopharma, vaccines, gene therapy, agritech. India's biotech industry crossed $150 bn in 2025.",
+      "stream": ["BiPC", "MPC", "MBiPC"],
+      "pathway": {"undergraduate": "B.Tech Biotech / B.Sc Biotech / IISER BS-MS", "growth_path": "Research scientist → R&D Lead at Biocon / Bharat Biotech / Serum Institute (₹6–40 LPA)"},
+      "entrance_exams": ["jee-main", "neet-ug", "iiser-iat"],
+      "salary_inr": {"fresher": "₹4–8 LPA", "ten_year": "₹15–35 LPA"},
+      "ai_impact": {"rating": 1, "reasoning": "AI accelerates drug discovery — biotech is one of the most AI-augmented growth fields."},
+      "popularity_score": 5,
+      "source": "DBT India"
+    },
+    {
+      "id": "veterinarian",
+      "name": "Veterinarian",
+      "family": "medical-healthcare",
+      "one_liner": "Animal doctor — clinical practice, livestock, wildlife, food safety.",
+      "stream": ["BiPC"],
+      "pathway": {"undergraduate": "B.V.Sc & A.H. (5.5 yrs) via ICAR AIEEA or state quota", "growth_path": "Govt vet → Director of Veterinary Services (₹5–18 LPA)"},
+      "entrance_exams": ["neet-ug", "icar-aieea"],
+      "salary_inr": {"fresher": "₹3–6 LPA", "ten_year": "₹10–20 LPA"},
+      "ai_impact": {"rating": 1},
+      "popularity_score": 3,
+      "source": "VCI India"
+    },
+    {
+      "id": "clinical-psychologist",
+      "name": "Clinical Psychologist",
+      "family": "medical-healthcare",
+      "one_liner": "Mental health professional — diagnosis and therapy. India's mental health workforce gap is 80%.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "BA/BSc Psychology + MA/MSc Clinical Psychology + M.Phil Clinical Psychology (RCI-licensed)", "growth_path": "Hospital / private practice (₹5–25 LPA)"},
+      "entrance_exams": ["cuet-ug", "set"],
+      "salary_inr": {"fresher": "₹3–6 LPA", "five_year": "₹8–18 LPA"},
+      "ai_impact": {"rating": 1, "reasoning": "Therapeutic relationship is fundamentally human; demand outstrips supply 10:1."},
+      "popularity_score": 6,
+      "source": "Rehabilitation Council of India"
+    },
+    {
+      "id": "lawyer",
+      "name": "Lawyer (Litigator / Corporate)",
+      "family": "law-public-policy",
+      "one_liner": "From courtroom litigator to corporate M&A advisor — most under-rated career in tier-3 India.",
+      "stream": ["any"],
+      "pathway": {
+        "class_11_12": "Any stream. Read the newspaper daily. Start CLAT prep in Class 11.",
+        "undergraduate": "BA LLB (5 yrs) at NLU via CLAT or AILET",
+        "entry_role": "Junior associate at Tier-1 firm (₹15–25 LPA NLU grad) or chamber under senior advocate (₹2–6 LPA litigation)",
+        "growth_path": "Senior associate → Partner (₹50 LPA – 5 Cr+); Litigation: Senior counsel (₹20 LPA – many crores)"
+      },
+      "entrance_exams": ["clat", "ailet", "set", "cuet-ug"],
+      "top_colleges": ["nlsiu-bangalore", "nalsar-hyderabad", "nlu-delhi", "nujs-kolkata", "dsnlu-vizag"],
+      "salary_inr": {
+        "fresher_nlu_tier1": "₹15–25 LPA (CAM, SAM, AZB, Khaitan, Trilegal)",
+        "fresher_litigation": "₹2–8 LPA initially",
+        "ten_year_partner_track": "₹50 LPA – 2 Cr",
+        "senior_counsel": "₹50 LPA – many crores"
+      },
+      "ai_impact": {
+        "rating": 2,
+        "reasoning": "Doc review and basic research are AI-automated. Negotiation, courtroom advocacy, complex judgment, client relationships are deeply human.",
+        "at_risk_tasks": ["doc review", "basic legal research"]
+      },
+      "skills_to_build": ["Reading speed", "English writing", "Current affairs (esp. Constitution & SC judgments)", "Public speaking", "Logical reasoning"],
+      "scholarships": ["nalsar-aspire", "jagananna-vidya-deevena"],
+      "plan_b": ["civil-services", "policy-analyst", "journalist"],
+      "myths": ["Lawyers earn nothing for first 5 years — false at NLUs (₹15-25 LPA day 1); true in pure litigation", "You need to be in Commerce/Arts — false; engineering+law (IP litigation) is lucrative"],
+      "popularity_score": 8,
+      "source": "Law Drishti, NIRF 2025, Quora industry data"
+    },
+    {
+      "id": "civil-services",
+      "name": "Civil Services Officer (IAS / IPS / IFS)",
+      "family": "law-public-policy",
+      "one_liner": "Top administrative tier of India — district magistrate at 27, Cabinet Secretary at 60.",
+      "stream": ["any (graduation in any subject)"],
+      "pathway": {
+        "undergraduate": "Bachelor's in any subject (engineering students also crack it)",
+        "exam": "UPSC Civil Services Examination — Prelims, Mains, Interview (12–18 months serious prep)",
+        "entry_role": "Sub-Collector / ASP / Asst. Secretary (₹56,100/month + allowances + housing)",
+        "growth_path": "Collector → Secretary → Chief Secretary / Cabinet Secretary"
+      },
+      "entrance_exams": ["upsc-cse"],
+      "salary_inr": {
+        "starting_govt_pay": "₹56,100/month (Level 10, 7th CPC) + housing + transport + utilities",
+        "ten_year": "₹1.5–2 LPM (DM-level)",
+        "secretary_level": "₹2.25 LPM + housing + status"
+      },
+      "ai_impact": {
+        "rating": 1,
+        "reasoning": "Public administration, policy judgment, electoral accountability are durable. AI augments routine paperwork."
+      },
+      "popularity_score": 9,
+      "annual_aspirants_lakhs": 11,
+      "selection_rate": "≈ 0.1%",
+      "myths": ["You need history/political-science — false; engineers and doctors crack it regularly"],
+      "source": "UPSC, India Year Book"
+    },
+    {
+      "id": "judge",
+      "name": "Judicial Service Officer (Judge)",
+      "family": "law-public-policy",
+      "one_liner": "Sub-Judge → District Judge → High Court → Supreme Court. State Judicial Service Examinations after LLB.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "LLB (3 yr) or BA LLB (5 yr)", "exam": "State Public Service Commission Civil Judge exam"},
+      "salary_inr": {"sub_judge_starting": "₹77K–₹1.36 LPM (7th CPC pay matrix)", "high_court_judge": "₹2.25 LPM + housing"},
+      "popularity_score": 5,
+      "source": "Indian Judiciary, State PSCs"
+    },
+    {
+      "id": "policy-analyst",
+      "name": "Public Policy Analyst",
+      "family": "law-public-policy",
+      "one_liner": "Researches and shapes policy at think tanks, government, multilaterals (UN, World Bank).",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "Economics / Political Science / Public Policy (Ashoka, NLS, JGU)", "postgraduate": "MPP at IIM-B / Harvard Kennedy / Sciences Po"},
+      "entrance_exams": ["cuet-ug", "set", "clat"],
+      "salary_inr": {"fresher": "₹6–12 LPA think tanks", "ten_year": "₹20–50 LPA"},
+      "popularity_score": 4,
+      "source": "Centre for Policy Research, NCAER"
+    },
+    {
+      "id": "nda-officer",
+      "name": "Defence Officer (Army / Navy / Air Force)",
+      "family": "law-public-policy",
+      "one_liner": "Commission via NDA after Class 12 — 3 yrs at NDA Pune + 1 yr service academy. Commissioned as Lieutenant.",
+      "stream": ["any (Army)", "MPC (Navy/Air Force)"],
+      "pathway": {"exam": "NDA & NA via UPSC + SSB Interview", "training": "3 yr NDA + 1 yr IMA/INA/AFA"},
+      "entrance_exams": ["nda", "aissee"],
+      "salary_inr": {"lieutenant_starting": "₹56,100 + ₹15,500 MSP + free housing/healthcare/canteen", "colonel": "₹1.7 LPM + housing", "general": "₹2.5 LPM"},
+      "ai_impact": {"rating": 1},
+      "popularity_score": 7,
+      "source": "Ministry of Defence, UPSC"
+    },
+    {
+      "id": "ca",
+      "name": "Chartered Accountant (CA)",
+      "family": "commerce-finance-business",
+      "one_liner": "Audit, tax, financial advisory — the most-cited 'safe' commerce career, with strong upside via Big 4 + industry CFO track.",
+      "stream": ["MEC", "CEC", "MPC"],
+      "pathway": {
+        "class_10": "Provisional CA Foundation registration allowed.",
+        "class_11_12": "Commerce stream easiest; MPC also fine. Accountancy + Economics + Business Studies.",
+        "exam_track": "CA Foundation (after XII) → Intermediate (8 mo) → 3 yr Articleship + Final",
+        "entry_role": "Fresh CA at Big 4 (₹8.5–12 LPA)",
+        "growth_path": "Senior Manager (₹20–35 LPA) → Partner (₹50 LPA – 1 Cr+) or industry CFO (₹50 LPA – 2 Cr+)"
+      },
+      "entrance_exams": ["ca-foundation"],
+      "top_colleges_or_firms": ["pwc-india", "deloitte-india", "ey-india", "kpmg-india", "sr-batliboi", "mzsk", "grant-thornton"],
+      "salary_inr": {
+        "fresher": "₹6–13 LPA (₹8.5–12 LPA at Big 4; rank holders ₹13–18 LPA)",
+        "five_year": "₹15–30 LPA",
+        "ten_year": "₹25–50 LPA",
+        "fifteen_year": "₹50 LPA – 1 Cr (partner / CFO of mid-size)"
+      },
+      "scholarships": ["icai-merit-cum-need", "icai-endowment", "jagananna-vidya-deevena"],
+      "ai_impact": {
+        "rating": 3,
+        "reasoning": "Routine bookkeeping and tax filing are being automated. Strategic advisory, complex tax planning, forensic accounting, audit judgment, CFO roles remain strongly human. CA + data analytics + Indian regtech (GST/TDS/Tally automation) = future leader.",
+        "at_risk_tasks": ["routine bookkeeping", "basic GST filing", "audit sampling"],
+        "durable_skills": ["client advisory", "audit judgment", "regulatory navigation", "tax strategy"]
+      },
+      "skills_to_build": ["Mental arithmetic", "Excel deep (pivot, VLOOKUP, macros)", "Read Mint / Business Line daily", "Basic Python", "Business writing"],
+      "plan_b": ["cma", "cs", "investment-banker", "ipm-mba"],
+      "myths": ["Must be in Commerce stream — false; MPC + CA is fine", "5% pass rate makes it impossible — misleading; ~10–15% per attempt, ~40% cumulative for serious aspirants", "CAs only do audit — false; ~40% in industry, banking, consulting, fintech, govt, own practice"],
+      "popularity_score": 9,
+      "source": "ICAI, Business Standard, Big 4 careers pages"
+    },
+    {
+      "id": "cs",
+      "name": "Company Secretary (CS)",
+      "family": "commerce-finance-business",
+      "one_liner": "Corporate governance, compliance, board secretariat — the 'lawyer-accountant' inside companies.",
+      "stream": ["any"],
+      "pathway": {"exam": "CSEET → CS Executive → CS Professional"},
+      "entrance_exams": ["cseet"],
+      "salary_inr": {"fresher": "₹4–8 LPA", "five_year": "₹8–18 LPA", "ten_year": "₹18–40 LPA"},
+      "popularity_score": 5,
+      "source": "ICSI"
+    },
+    {
+      "id": "cma",
+      "name": "Cost & Management Accountant (CMA)",
+      "family": "commerce-finance-business",
+      "one_liner": "Costing, internal audit, management accounting — heavy demand in manufacturing and operations.",
+      "stream": ["any"],
+      "pathway": {"exam": "CMA Foundation → Intermediate → Final"},
+      "entrance_exams": ["cma-foundation"],
+      "salary_inr": {"fresher": "₹4–10 LPA", "ten_year": "₹15–35 LPA"},
+      "popularity_score": 4,
+      "source": "ICMAI"
+    },
+    {
+      "id": "cfa",
+      "name": "Chartered Financial Analyst (CFA)",
+      "family": "commerce-finance-business",
+      "one_liner": "Global gold standard for investment management, equity research, portfolio management.",
+      "stream": ["any"],
+      "pathway": {"exam": "3 levels (Level 1 in college; charter after relevant work experience)"},
+      "entrance_exams": ["cfa-l1"],
+      "salary_inr": {"level_1": "₹3–6 LPA", "charterholder": "₹10–25 LPA+", "senior_pm_cio": "₹30 LPA – 1 Cr+"},
+      "popularity_score": 6,
+      "source": "CFA Institute"
+    },
+    {
+      "id": "investment-banker",
+      "name": "Investment Banker",
+      "family": "commerce-finance-business",
+      "one_liner": "Advises on M&A, IPOs, capital raises. The highest-paying entry-level finance role in India.",
+      "stream": ["any"],
+      "pathway": {
+        "undergraduate": "B.Com / BBA / Eco Hons / B.Tech (any) → IIM 5-yr IPM or 2-yr MBA → IB analyst at Goldman/Morgan Stanley",
+        "entry_role": "Analyst (₹20–40 LPA at bulge brackets)",
+        "growth_path": "Associate → VP → MD (₹2–10 Cr at MD)"
+      },
+      "entrance_exams": ["ipmat-indore", "ipmat-rohtak", "jipmat", "cat", "cfa-l1"],
+      "top_colleges": ["iim-ahmedabad", "iim-bangalore", "iim-calcutta", "isb", "iim-indore"],
+      "salary_inr": {"analyst": "₹20–40 LPA + bonus 20–80%", "associate": "₹40–70 LPA", "vp": "₹1–2.5 Cr", "md": "₹2–10 Cr"},
+      "ai_impact": {"rating": 3, "reasoning": "Pitch-deck production and modelling are AI-augmented. Client relationships, deal judgment, sourcing remain human."},
+      "popularity_score": 8,
+      "source": "Levels.fyi, Preplounge, Quora industry contributors"
+    },
+    {
+      "id": "actuary",
+      "name": "Actuary",
+      "family": "commerce-finance-business",
+      "one_liner": "Risk and probability expert — insurance, pensions, climate risk. India has fewer than 600 fellow actuaries.",
+      "stream": ["MPC", "MEC"],
+      "pathway": {"exam": "ACET (Actuarial Common Entrance Test) → 13 papers across CT, CA, ST, SA"},
+      "salary_inr": {"fresher": "₹6–10 LPA", "fellow": "₹25–50 LPA+"},
+      "popularity_score": 4,
+      "source": "Institute of Actuaries of India"
+    },
+    {
+      "id": "economist",
+      "name": "Economist",
+      "family": "liberal-arts-social-sciences",
+      "one_liner": "Researches markets, policy, behaviour. Roles in govt (RBI, NITI Aayog), academia, consulting, multilaterals.",
+      "stream": ["MEC", "CEC", "HEC", "any"],
+      "pathway": {"undergraduate": "BA Economics (Hons) at DU / Ashoka / JNU / Madras School of Economics", "postgraduate": "MA / PhD"},
+      "entrance_exams": ["cuet-ug", "set"],
+      "salary_inr": {"fresher": "₹5–12 LPA", "ten_year": "₹18–40 LPA"},
+      "popularity_score": 6,
+      "source": "RBI, NITI Aayog"
+    },
+    {
+      "id": "ipm-mba",
+      "name": "IIM IPM Manager",
+      "family": "commerce-finance-business",
+      "one_liner": "5-yr integrated BBA + MBA at IIM Indore / Rohtak / Jammu / Bodhgaya. The fastest route to an IIM MBA.",
+      "stream": ["any"],
+      "pathway": {"exam": "IPMAT Indore / Rohtak or JIPMAT"},
+      "entrance_exams": ["ipmat-indore", "ipmat-rohtak", "jipmat"],
+      "salary_inr": {"placement_avg": "₹25 LPA at IIM Indore IPM"},
+      "popularity_score": 8,
+      "source": "IIM Indore, IIM Rohtak"
+    },
+    {
+      "id": "ux-designer",
+      "name": "UX / Product Designer",
+      "family": "design-media-creative",
+      "one_liner": "Designs how apps and websites feel and work. India's fastest-growing design career.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "B.Des at NID / IDC IIT-B / Srishti / MIT-ID via NID DAT or UCEED", "growth_path": "Junior → Senior → Lead UX (₹8–60 LPA)"},
+      "entrance_exams": ["nid-dat", "uceed", "nift"],
+      "top_colleges": ["nid-ahmedabad", "iit-bombay-idc", "iit-delhi-design", "nid-vijayawada"],
+      "salary_inr": {"fresher": "₹6–12 LPA", "five_year": "₹15–30 LPA", "ten_year": "₹30–60 LPA"},
+      "ai_impact": {"rating": 2, "reasoning": "AI handles asset generation; design judgment, research, accessibility, motion remain human."},
+      "popularity_score": 8,
+      "source": "Naukri JobSpeak, Levels.fyi"
+    },
+    {
+      "id": "architect",
+      "name": "Architect",
+      "family": "design-media-creative",
+      "one_liner": "Designs buildings, masterplans, interiors. 5-yr B.Arch via NATA.",
+      "stream": ["MPC"],
+      "pathway": {"undergraduate": "B.Arch (5 yrs)"},
+      "entrance_exams": ["nata", "jee-main-paper-2"],
+      "top_colleges": ["sir-jj-mumbai", "spa-delhi", "iit-roorkee-architecture", "cept-ahmedabad"],
+      "salary_inr": {"fresher": "₹3–6 LPA", "ten_year": "₹12–30 LPA"},
+      "popularity_score": 5,
+      "source": "Council of Architecture"
+    },
+    {
+      "id": "fashion-designer",
+      "name": "Fashion / Textile Designer",
+      "family": "design-media-creative",
+      "one_liner": "Designs apparel, textiles, accessories. NIFT is the gateway.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "B.Des Fashion / Textile via NIFT entrance"},
+      "entrance_exams": ["nift", "nid-dat"],
+      "salary_inr": {"fresher": "₹3–8 LPA", "ten_year": "₹15–40 LPA"},
+      "popularity_score": 5,
+      "source": "NIFT, FDDI"
+    },
+    {
+      "id": "journalist",
+      "name": "Journalist / Media Professional",
+      "family": "design-media-creative",
+      "one_liner": "Reports, anchors, writes. Print, TV, digital, podcasts — strongest growth in regional language video.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "BA Journalism / Mass Comm at IIMC / ACJ Chennai / Symbiosis / Jamia"},
+      "entrance_exams": ["cuet-ug", "set"],
+      "salary_inr": {"fresher": "₹3–6 LPA", "ten_year": "₹12–30 LPA"},
+      "popularity_score": 5,
+      "source": "IIMC, ACJ"
+    },
+    {
+      "id": "animator",
+      "name": "Animator / VFX Artist",
+      "family": "design-media-creative",
+      "one_liner": "From RRR to Spider-Verse to Indian streaming originals — India is a global VFX hub.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "B.Des Animation / Diploma at MAAC / Arena / Whistling Woods"},
+      "salary_inr": {"fresher": "₹3–7 LPA", "ten_year": "₹15–40 LPA"},
+      "popularity_score": 5,
+      "source": "FICCI Frames"
+    },
+    {
+      "id": "psychologist",
+      "name": "Psychologist (Counselling / Educational / Organisational)",
+      "family": "liberal-arts-social-sciences",
+      "one_liner": "Counselling, organisational psych, educational psych — India's mental health awareness is exploding.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "BA/BSc Psychology + MA + (RCI license for clinical)"},
+      "entrance_exams": ["cuet-ug", "set"],
+      "salary_inr": {"fresher": "₹3–6 LPA", "ten_year": "₹10–25 LPA"},
+      "popularity_score": 6,
+      "source": "RCI, ICSSR"
+    },
+    {
+      "id": "research-scientist",
+      "name": "Research Scientist (BS-MS / PhD)",
+      "family": "science-research",
+      "one_liner": "Frontier research in physics, chemistry, biology, math. IISER, IISc, TIFR, NIPER, ISRO, DRDO.",
+      "stream": ["MPC", "BiPC", "MBiPC"],
+      "pathway": {"undergraduate": "BS-MS at IISER / BSc at IISc / B.Tech + MS+PhD"},
+      "entrance_exams": ["iiser-iat", "kvpy-successor", "isi-admission"],
+      "salary_inr": {"fresher": "₹6–12 LPA", "ten_year": "₹15–35 LPA"},
+      "ai_impact": {"rating": 1, "reasoning": "Frontier research is AI-augmented; original discovery is human-led."},
+      "popularity_score": 5,
+      "source": "DST, INSPIRE programme"
+    },
+    {
+      "id": "mathematician",
+      "name": "Mathematician / Statistician",
+      "family": "science-research",
+      "one_liner": "Pure math, applied math, statistics. ISI, CMI, IISc, TIFR.",
+      "stream": ["MPC"],
+      "pathway": {"undergraduate": "B.Stat / B.Math at ISI / CMI"},
+      "entrance_exams": ["isi-admission", "cmi-entrance", "iiser-iat"],
+      "salary_inr": {"academia_starting": "₹8–15 LPA", "industry_quant": "₹20 LPA – 1 Cr+"},
+      "popularity_score": 4,
+      "stipend_note": "ISI BStat/BMath has a ₹5,000/month stipend.",
+      "source": "ISI, CMI"
+    },
+    {
+      "id": "hotel-manager",
+      "name": "Hotel Manager / Hospitality",
+      "family": "vocational-trades-sports",
+      "one_liner": "Operations, F&B, front office, events. India's tourism is forecast to add 50 million jobs by 2030.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "B.Sc HHA via NCHM JEE at IHM Pusa / Mumbai / Bangalore"},
+      "entrance_exams": ["nchm-jee"],
+      "salary_inr": {"fresher": "₹3–7 LPA", "ten_year": "₹15–40 LPA"},
+      "popularity_score": 5,
+      "source": "NCHMCT, FICCI Tourism"
+    },
+    {
+      "id": "commercial-pilot",
+      "name": "Commercial Pilot",
+      "family": "vocational-trades-sports",
+      "one_liner": "Captain of a commercial airliner. Indian aviation needs 22,400+ pilots by FY 2030.",
+      "stream": ["MPC"],
+      "pathway": {"training": "DGCA Class 2 → Class 1 → 200 flying hours → CPL → Type Rating", "training_cost": "₹45–65 lakh"},
+      "entrance_exams": ["cpl-dgca"],
+      "salary_inr": {"first_officer": "₹1.5–3 LPM", "captain": "₹6–12 LPM", "senior_captain": "₹15+ LPM"},
+      "popularity_score": 5,
+      "ai_impact": {"rating": 2, "reasoning": "Cockpit automation deepens but pilot role persists; DGCA mandates 2 pilots per commercial flight."},
+      "source": "DGCA, CAPA India"
+    },
+    {
+      "id": "electrician",
+      "name": "Electrician (ITI / Apprenticeship)",
+      "family": "vocational-trades-sports",
+      "one_liner": "Skill-rich, fast to earn, low education cost — and globally in demand. ITI Electrician is one of the most-employable trades in India.",
+      "stream": ["any (after Class 10)"],
+      "pathway": {"training": "ITI Electrician (2 yrs) + apprenticeship", "growth_path": "Self-employment, Railways, BHEL, ONGC, overseas (₹50K–1.5L/month)"},
+      "entrance_exams": ["iti-admission"],
+      "salary_inr": {"starting": "₹12,000–28,000/month", "experienced": "₹50,000–1.5 LPM", "overseas": "₹2–4 LPM (Gulf/Singapore)"},
+      "popularity_score": 6,
+      "ai_impact": {"rating": 1, "reasoning": "Physical work that cannot be replaced by software."},
+      "source": "DGT 2026, India Skills Report 2026 ITI 45.95% employability"
+    },
+    {
+      "id": "agripreneur",
+      "name": "Agripreneur / Agri-Tech Founder",
+      "family": "vocational-trades-sports",
+      "one_liner": "Modern farming, agri-supply chain, FPOs, agri-fintech. India's agri-tech sector raised $2 bn in 2025.",
+      "stream": ["any"],
+      "pathway": {"undergraduate": "B.Sc Agriculture / B.Tech Agri-Engineering via ICAR AIEEA, optional MBA Agri"},
+      "entrance_exams": ["icar-aieea"],
+      "salary_inr": {"corporate_agri": "₹6–15 LPA", "founder_outcomes": "highly variable"},
+      "popularity_score": 4,
+      "source": "Agriculture Ministry, NABARD"
+    }
+  ]
+}
