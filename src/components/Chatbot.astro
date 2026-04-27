@@ -1,0 +1,199 @@
+---
+// Floating Beyond10 chatbot. Fully client-rendered. Talks to /api/chat.
+---
+<button
+  id="chatbot-toggle"
+  type="button"
+  aria-label="Open Beyond10 assistant"
+  class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-slate-900 text-white px-4 py-3 shadow-xl hover:bg-slate-700 transition-all hover:scale-105 active:scale-95"
+>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  <span class="text-sm font-semibold">Ask Beyond10</span>
+</button>
+
+<div
+  id="chatbot-panel"
+  role="dialog"
+  aria-label="Beyond10 chat assistant"
+  aria-modal="true"
+  class="fixed inset-x-0 bottom-0 sm:inset-auto sm:bottom-5 sm:right-5 z-50 hidden flex-col bg-white border border-stone-200 shadow-2xl rounded-t-2xl sm:rounded-2xl w-full sm:w-[400px] max-h-[80vh] sm:max-h-[600px]"
+>
+  <header class="flex items-center justify-between px-4 py-3 border-b border-stone-200 bg-slate-900 text-white sm:rounded-t-2xl">
+    <div>
+      <p class="font-semibold text-sm">Beyond10 Assistant</p>
+      <p class="text-xs text-slate-300">Careers, exams, scholarships, colleges</p>
+    </div>
+    <button id="chatbot-close" type="button" aria-label="Close" class="rounded-full hover:bg-slate-800 p-1.5">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </header>
+
+  <div id="chatbot-messages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-stone-50" aria-live="polite">
+    <div class="flex gap-2">
+      <div class="shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">B</div>
+      <div class="bg-white rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm text-slate-800 shadow-sm border border-stone-100 max-w-[85%]">
+        Hi! Ask me anything about careers, entrance exams, scholarships, or colleges in India after Class 10.
+        <div class="mt-2 flex flex-wrap gap-1.5">
+          <button class="suggest-chip text-[11px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100" data-q="What can I do after Class 10 if I'm in MEC?">After 10th — MEC?</button>
+          <button class="suggest-chip text-[11px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100" data-q="How do I become a CA without doing Commerce in 11-12?">CA from MPC?</button>
+          <button class="suggest-chip text-[11px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100" data-q="Top engineering colleges in Andhra Pradesh">Engg in AP</button>
+          <button class="suggest-chip text-[11px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100" data-q="What scholarships do I qualify for if my family income is below 2.5 lakh?">Scholarships?</button>
+          <button class="suggest-chip text-[11px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100" data-q="What's DUJAT and is it still relevant?">DUJAT?</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form id="chatbot-form" class="border-t border-stone-200 p-3 flex gap-2 bg-white sm:rounded-b-2xl">
+    <input
+      id="chatbot-input"
+      type="text"
+      autocomplete="off"
+      placeholder="Ask about a career, exam, college…"
+      class="flex-1 rounded-full border border-stone-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      maxlength="600"
+      required
+    />
+    <button
+      id="chatbot-send"
+      type="submit"
+      aria-label="Send"
+      class="rounded-full bg-slate-900 text-white px-4 py-2 text-sm font-semibold hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      Send
+    </button>
+  </form>
+  <p class="text-[10px] text-slate-400 px-4 pb-2">Powered by Claude. Verify important details on the source links cited.</p>
+</div>
+
+<script is:inline>
+  (function () {
+    const toggle = document.getElementById('chatbot-toggle');
+    const panel  = document.getElementById('chatbot-panel');
+    const closeBtn = document.getElementById('chatbot-close');
+    const form   = document.getElementById('chatbot-form');
+    const input  = document.getElementById('chatbot-input');
+    const msgs   = document.getElementById('chatbot-messages');
+    const sendBtn = document.getElementById('chatbot-send');
+
+    const history = []; // {role, content}
+
+    function open() {
+      panel.classList.remove('hidden');
+      panel.classList.add('flex');
+      setTimeout(() => input.focus(), 50);
+    }
+    function close() {
+      panel.classList.add('hidden');
+      panel.classList.remove('flex');
+    }
+    toggle.addEventListener('click', () => panel.classList.contains('hidden') ? open() : close());
+    closeBtn.addEventListener('click', close);
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function linkifyAndFormat(text) {
+      // Simple safe formatting: bold **x**, internal /paths/, line breaks.
+      let html = escapeHtml(text);
+      html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/(^|[\s(])(\/[a-z0-9\-/]+)/gi, (_m, p1, p2) =>
+        `${p1}<a href="${p2}" class="text-blue-600 underline">${p2}</a>`
+      );
+      html = html.replace(/\n/g, '<br>');
+      return html;
+    }
+
+    function appendUser(text) {
+      const el = document.createElement('div');
+      el.className = 'flex gap-2 justify-end';
+      el.innerHTML = `<div class="bg-slate-900 text-white rounded-2xl rounded-tr-sm px-3.5 py-2.5 text-sm max-w-[85%]">${escapeHtml(text)}</div>`;
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function appendBot(text, isError) {
+      const el = document.createElement('div');
+      el.className = 'flex gap-2';
+      const bg = isError ? 'bg-red-50 border-red-100 text-red-800' : 'bg-white border-stone-100 text-slate-800';
+      el.innerHTML = `<div class="shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">B</div>
+        <div class="${bg} rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm shadow-sm border max-w-[85%] leading-relaxed">${linkifyAndFormat(text)}</div>`;
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+      return el.querySelector('div:last-child');
+    }
+    function appendThinking() {
+      const el = document.createElement('div');
+      el.className = 'flex gap-2 thinking';
+      el.innerHTML = `<div class="shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">B</div>
+        <div class="bg-white rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm shadow-sm border border-stone-100 inline-flex gap-1">
+          <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay:0ms"></span>
+          <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay:150ms"></span>
+          <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay:300ms"></span>
+        </div>`;
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+      return el;
+    }
+
+    async function send(text) {
+      if (!text || sendBtn.disabled) return;
+      appendUser(text);
+      history.push({ role: 'user', content: text });
+      input.value = '';
+      sendBtn.disabled = true;
+      const thinking = appendThinking();
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history }),
+        });
+        thinking.remove();
+
+        if (res.status === 503) {
+          const j = await res.json();
+          appendBot(j.message || "Beyond10 assistant isn't configured yet.", true);
+          return;
+        }
+        if (!res.ok) {
+          appendBot("Sorry — the assistant hit an error. Please try again in a moment.", true);
+          return;
+        }
+
+        const j = await res.json();
+        const reply = (j.reply || '').trim();
+        if (reply) {
+          appendBot(reply, false);
+          history.push({ role: 'assistant', content: reply });
+        } else {
+          appendBot("(empty response)", true);
+        }
+      } catch (e) {
+        thinking.remove();
+        appendBot("Network error — check your connection and try again.", true);
+      } finally {
+        sendBtn.disabled = false;
+        input.focus();
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      send(text);
+    });
+
+    document.querySelectorAll('.suggest-chip').forEach((chip) => {
+      chip.addEventListener('click', () => send(chip.dataset.q));
+    });
+
+    // Keyboard: Esc closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.classList.contains('hidden')) close();
+    });
+  })();
+</script>

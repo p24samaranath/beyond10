@@ -1,0 +1,333 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { colleges, exams } from '../lib/data';
+
+// Build options server-side; render data table client-side
+const states = [...new Set(colleges.map((c) => c.state))].sort();
+const types = [...new Set(colleges.map((c) => c.type))].sort();
+const streamSet = [...new Set(colleges.flatMap((c) => (c as any).streams || []))].sort();
+
+const STREAM_LABELS: Record<string, string> = {
+  engineering: 'Engineering',
+  medical: 'Medical',
+  law: 'Law',
+  commerce: 'Commerce',
+  management: 'Management',
+  design: 'Design',
+  science: 'Science',
+  'liberal-arts': 'Liberal Arts',
+};
+
+const examNameById: Record<string, string> = Object.fromEntries(
+  exams.map((e) => [e.id, e.name])
+);
+
+// Pre-process rows for client-side filtering
+const rows = colleges.map((c: any) => ({
+  id: c.id,
+  name: c.name,
+  city: c.city,
+  state: c.state,
+  type: c.type,
+  streams: (c.streams || []) as string[],
+  fees: c.annual_tuition_inr ?? null,
+  placement: c.avg_placement_lpa ?? null,
+  exams: (c.entrance_exams || []).map((id: string) => examNameById[id] ?? id),
+  nirf: c.nirf_2025 || null,
+  ap: c.ap_specific ?? null,
+  notes: c.notes ?? null,
+  source: c.source ?? '',
+}));
+
+const rowsJson = JSON.stringify(rows);
+---
+<Base
+  title="Colleges by state — Beyond10"
+  description={`Excel-style filterable directory of ${colleges.length}+ top colleges across ${states.length} Indian states, every stream after Class 12.`}
+>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow={`${colleges.length} colleges · ${states.length} states · 8 streams`}
+      title="Top colleges, filterable like a spreadsheet"
+      description="Filter by state, stream, college type, fee bracket, and entrance exam. Sort any column. All data loaded client-side — no spinners between filters."
+    />
+
+    <!-- Toolbar -->
+    <div class="card p-4 mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <label class="block">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Search</span>
+        <input
+          id="f-search"
+          type="search"
+          placeholder="Name, city, anything…"
+          class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </label>
+      <label class="block">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">State</span>
+        <select id="f-state" class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
+          <option value="">All states ({states.length})</option>
+          {states.map((s) => <option value={s}>{s}</option>)}
+        </select>
+      </label>
+      <label class="block">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Stream</span>
+        <select id="f-stream" class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
+          <option value="">All streams</option>
+          {streamSet.map((s) => <option value={s}>{STREAM_LABELS[s] ?? s}</option>)}
+        </select>
+      </label>
+      <label class="block">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">College type</span>
+        <select id="f-type" class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
+          <option value="">All types</option>
+          {types.map((t) => <option value={t}>{t}</option>)}
+        </select>
+      </label>
+      <label class="block">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Max annual fee (₹)</span>
+        <select id="f-fee" class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
+          <option value="">Any fee</option>
+          <option value="50000">Under ₹50,000</option>
+          <option value="100000">Under ₹1 lakh</option>
+          <option value="250000">Under ₹2.5 lakh</option>
+          <option value="500000">Under ₹5 lakh</option>
+          <option value="1000000">Under ₹10 lakh</option>
+        </select>
+      </label>
+      <div class="flex items-end gap-2 sm:col-span-2 lg:col-span-3">
+        <span id="result-count" class="text-sm text-slate-700 font-medium">— results</span>
+        <div class="flex-1"></div>
+        <button id="reset-filters" type="button" class="btn-secondary text-xs px-3 py-1.5">
+          Reset filters
+        </button>
+        <button id="export-csv" type="button" class="btn-secondary text-xs px-3 py-1.5">
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick chip filters -->
+    <div class="mb-4 flex flex-wrap gap-2 text-xs">
+      <span class="text-slate-500 self-center mr-1">Quick:</span>
+      <button class="quick-chip pill" data-state="Andhra Pradesh">📍 In Andhra Pradesh</button>
+      <button class="quick-chip pill" data-stream="engineering">⚙ Engineering</button>
+      <button class="quick-chip pill" data-stream="medical">🩺 Medical</button>
+      <button class="quick-chip pill" data-stream="law">⚖ Law</button>
+      <button class="quick-chip pill" data-stream="commerce">📊 Commerce</button>
+      <button class="quick-chip pill" data-stream="design">🎨 Design</button>
+      <button class="quick-chip pill" data-stream="science">🔬 Science</button>
+      <button class="quick-chip pill" data-stream="management">💼 Management</button>
+      <button class="quick-chip pill" data-stream="liberal-arts">📚 Liberal Arts</button>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto rounded-2xl border border-stone-200 bg-white shadow-sm">
+      <table class="min-w-full text-sm">
+        <thead class="bg-stone-50 text-xs uppercase tracking-wider text-slate-600 select-none">
+          <tr>
+            <th class="px-3 py-3 text-left sortable cursor-pointer hover:text-slate-900" data-key="name">
+              College <span class="sort-arrow text-stone-300">↕</span>
+            </th>
+            <th class="px-3 py-3 text-left sortable cursor-pointer hover:text-slate-900" data-key="state">
+              State <span class="sort-arrow text-stone-300">↕</span>
+            </th>
+            <th class="px-3 py-3 text-left">Type</th>
+            <th class="px-3 py-3 text-left">Streams</th>
+            <th class="px-3 py-3 text-left">Entry exams</th>
+            <th class="px-3 py-3 text-right sortable cursor-pointer hover:text-slate-900" data-key="fees">
+              Fee/yr <span class="sort-arrow text-stone-300">↕</span>
+            </th>
+            <th class="px-3 py-3 text-right sortable cursor-pointer hover:text-slate-900" data-key="placement">
+              Placement (LPA) <span class="sort-arrow text-stone-300">↕</span>
+            </th>
+            <th class="px-3 py-3 text-right sortable cursor-pointer hover:text-slate-900" data-key="nirf">
+              NIRF '25 <span class="sort-arrow text-stone-300">↕</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="grid-body" class="divide-y divide-stone-100">
+          <!-- rows render here -->
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-4 text-xs text-slate-500">
+      Tip: click any column header with ↕ to sort. Filters compose; export the filtered set as CSV with one click.
+    </p>
+  </section>
+
+  <script type="application/json" id="rows-data" set:html={rowsJson}></script>
+
+  <script is:inline>
+    (function () {
+      const rows = JSON.parse(document.getElementById('rows-data').textContent);
+      const STREAM_LABELS = {engineering:'Engineering',medical:'Medical',law:'Law',commerce:'Commerce',management:'Management',design:'Design',science:'Science','liberal-arts':'Liberal Arts'};
+      const STREAM_COLORS = {engineering:'#2563eb',medical:'#dc2626',law:'#7c3aed',commerce:'#059669',design:'#ea580c','liberal-arts':'#0891b2',management:'#0d9488',science:'#9333ea'};
+
+      const state = { search:'', filterState:'', stream:'', type:'', maxFee:'', sortKey:'state', sortDir:'asc' };
+
+      const fSearch = document.getElementById('f-search');
+      const fState  = document.getElementById('f-state');
+      const fStream = document.getElementById('f-stream');
+      const fType   = document.getElementById('f-type');
+      const fFee    = document.getElementById('f-fee');
+      const body    = document.getElementById('grid-body');
+      const count   = document.getElementById('result-count');
+
+      function nirfRank(n) {
+        if (!n || typeof n !== 'object') return null;
+        const v = Object.values(n).find((x) => typeof x === 'number');
+        return typeof v === 'number' ? v : null;
+      }
+
+      function inrFormat(n) {
+        if (n == null) return '—';
+        if (n === 0) return 'Free';
+        if (n >= 100000) return '₹' + (n/100000).toFixed(n >= 1000000 ? 1 : 2) + ' L';
+        return '₹' + n.toLocaleString('en-IN');
+      }
+
+      function getValue(row, key) {
+        if (key === 'nirf') return nirfRank(row.nirf) ?? Number.MAX_SAFE_INTEGER;
+        if (key === 'fees') return row.fees ?? Number.MAX_SAFE_INTEGER;
+        if (key === 'placement') return -(row.placement ?? -1); // sort desc by default
+        return (row[key] ?? '').toString().toLowerCase();
+      }
+
+      function filtered() {
+        const q = state.search.trim().toLowerCase();
+        let out = rows.filter((r) => {
+          if (state.filterState && r.state !== state.filterState) return false;
+          if (state.stream && !r.streams.includes(state.stream)) return false;
+          if (state.type && r.type !== state.type) return false;
+          if (state.maxFee && (r.fees == null || r.fees > Number(state.maxFee))) return false;
+          if (q) {
+            const hay = (r.name + ' ' + r.city + ' ' + r.state + ' ' + r.type + ' ' + r.streams.join(' ') + ' ' + r.exams.join(' ') + ' ' + (r.notes||'') + ' ' + (r.ap||'')).toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        });
+        out.sort((a, b) => {
+          const av = getValue(a, state.sortKey);
+          const bv = getValue(b, state.sortKey);
+          let cmp = av < bv ? -1 : av > bv ? 1 : 0;
+          if (state.sortDir === 'desc') cmp *= -1;
+          return cmp;
+        });
+        return out;
+      }
+
+      function streamPill(s) {
+        const color = STREAM_COLORS[s] ?? '#475569';
+        return '<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-medium" style="background:' + color + '15;color:' + color + '">' + (STREAM_LABELS[s] ?? s) + '</span>';
+      }
+
+      function render() {
+        const data = filtered();
+        count.textContent = data.length + ' result' + (data.length === 1 ? '' : 's');
+        if (data.length === 0) {
+          body.innerHTML = '<tr><td colspan="8" class="px-3 py-12 text-center text-slate-500"><span class="text-2xl block mb-1">🔍</span>No colleges match these filters. Try resetting.</td></tr>';
+          return;
+        }
+        body.innerHTML = data.map((r) => {
+          const nirf = nirfRank(r.nirf);
+          const examChips = r.exams.slice(0, 3).map((e) => '<span class="inline-block bg-stone-100 px-1.5 py-0.5 rounded text-[10px] font-medium text-slate-700">' + e + '</span>').join(' ');
+          const more = r.exams.length > 3 ? ' <span class="text-[10px] text-slate-400">+' + (r.exams.length - 3) + '</span>' : '';
+          const apTag = r.ap ? '<span class="inline-block ml-1 text-[10px] bg-emerald-100 text-emerald-700 px-1 py-0.5 rounded font-semibold">AP</span>' : '';
+          return '<tr class="hover:bg-stone-50 transition-colors">' +
+            '<td class="px-3 py-2.5 font-medium text-slate-900 align-top">' + r.name + apTag +
+              '<div class="text-xs text-slate-500 font-normal mt-0.5">' + r.city + '</div></td>' +
+            '<td class="px-3 py-2.5 text-slate-700 align-top whitespace-nowrap">' + r.state + '</td>' +
+            '<td class="px-3 py-2.5 text-slate-600 text-xs align-top">' + r.type + '</td>' +
+            '<td class="px-3 py-2.5 align-top"><div class="flex flex-wrap gap-1">' + r.streams.map(streamPill).join('') + '</div></td>' +
+            '<td class="px-3 py-2.5 align-top"><div class="flex flex-wrap gap-1">' + (examChips || '<span class="text-stone-400 text-xs">—</span>') + more + '</div></td>' +
+            '<td class="px-3 py-2.5 text-right tabular-nums whitespace-nowrap align-top">' + inrFormat(r.fees) + '</td>' +
+            '<td class="px-3 py-2.5 text-right tabular-nums whitespace-nowrap align-top">' + (r.placement ? '₹' + r.placement + 'L' : '—') + '</td>' +
+            '<td class="px-3 py-2.5 text-right tabular-nums whitespace-nowrap align-top font-semibold ' + (nirf ? 'text-amber-700' : 'text-stone-400') + '">' + (nirf ? '#' + nirf : '—') + '</td>' +
+          '</tr>';
+        }).join('');
+      }
+
+      function syncSortArrows() {
+        document.querySelectorAll('.sortable').forEach((th) => {
+          const arrow = th.querySelector('.sort-arrow');
+          if (!arrow) return;
+          if (th.dataset.key === state.sortKey) {
+            arrow.textContent = state.sortDir === 'asc' ? '↑' : '↓';
+            arrow.classList.remove('text-stone-300');
+            arrow.classList.add('text-blue-600');
+          } else {
+            arrow.textContent = '↕';
+            arrow.classList.remove('text-blue-600');
+            arrow.classList.add('text-stone-300');
+          }
+        });
+      }
+
+      // Wire filters
+      fSearch.addEventListener('input', (e) => { state.search = e.target.value; render(); });
+      fState.addEventListener('change', (e) => { state.filterState = e.target.value; render(); });
+      fStream.addEventListener('change', (e) => { state.stream = e.target.value; render(); });
+      fType.addEventListener('change', (e) => { state.type = e.target.value; render(); });
+      fFee.addEventListener('change', (e) => { state.maxFee = e.target.value; render(); });
+
+      document.querySelectorAll('.sortable').forEach((th) => {
+        th.addEventListener('click', () => {
+          const key = th.dataset.key;
+          if (state.sortKey === key) state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+          else { state.sortKey = key; state.sortDir = 'asc'; }
+          syncSortArrows();
+          render();
+        });
+      });
+
+      document.querySelectorAll('.quick-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          if (chip.dataset.state) { state.filterState = chip.dataset.state; fState.value = chip.dataset.state; }
+          if (chip.dataset.stream) { state.stream = chip.dataset.stream; fStream.value = chip.dataset.stream; }
+          render();
+        });
+      });
+
+      document.getElementById('reset-filters').addEventListener('click', () => {
+        state.search = ''; state.filterState = ''; state.stream = ''; state.type = ''; state.maxFee = '';
+        state.sortKey = 'state'; state.sortDir = 'asc';
+        fSearch.value = ''; fState.value = ''; fStream.value = ''; fType.value = ''; fFee.value = '';
+        syncSortArrows(); render();
+      });
+
+      document.getElementById('export-csv').addEventListener('click', () => {
+        const data = filtered();
+        const headers = ['Name', 'City', 'State', 'Type', 'Streams', 'Entrance Exams', 'Annual Fee (INR)', 'Avg Placement (LPA)', 'NIRF 2025 Rank'];
+        const csv = [headers.join(',')].concat(
+          data.map((r) => [
+            JSON.stringify(r.name),
+            JSON.stringify(r.city),
+            JSON.stringify(r.state),
+            JSON.stringify(r.type),
+            JSON.stringify(r.streams.map((s) => STREAM_LABELS[s] ?? s).join('; ')),
+            JSON.stringify(r.exams.join('; ')),
+            r.fees ?? '',
+            r.placement ?? '',
+            nirfRank(r.nirf) ?? '',
+          ].join(','))
+        ).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'beyond10-colleges.csv'; a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      // Pre-filter from URL ?state=...&stream=...
+      const params = new URLSearchParams(location.search);
+      if (params.get('state')) { state.filterState = params.get('state'); fState.value = params.get('state'); }
+      if (params.get('stream')) { state.stream = params.get('stream'); fStream.value = params.get('stream'); }
+
+      syncSortArrows();
+      render();
+    })();
+  </script>
+</Base>

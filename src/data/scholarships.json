@@ -1,7 +1,50 @@
 {
-  "version": "1.0",
-  "updated": "2026-04-26",
+  "version": "1.1",
+  "updated": "2026-04-25",
   "scholarships": [
+    {
+      "id": "pm-vidyalakshmi",
+      "name": "PM-Vidyalakshmi Scheme",
+      "type": "national",
+      "category": "Collateral-free education loan + interest subvention",
+      "amount": "Up to ₹10 lakh loan with 75% credit guarantee on first ₹7.5 lakh; 3% interest subvention during moratorium for family income < ₹8 lakh",
+      "frequency": "Per academic year, throughout course",
+      "eligibility": {
+        "course": "Admission via merit/entrance to one of the top 860 Quality Higher Education Institutions (QHEIs) — includes all IITs, NITs, IIITs, IIMs, AIIMS, central universities and top private institutions",
+        "income_limit_inr_for_subvention": 800000,
+        "guarantor": "None required",
+        "collateral": "None required for loan up to ₹7.5 lakh"
+      },
+      "official_url": "https://www.vidyalakshmi.co.in",
+      "documents": ["Aadhaar", "Admission letter from QHEI", "Income proof", "Mark sheets"],
+      "typical_deadline": "Rolling — apply via Common Education Loan Application Form (CELAF) on PM-Vidyalakshmi portal",
+      "applies_to_careers": ["software-engineer", "ai-ml-engineer", "mbbs-doctor", "lawyer", "ipm-mba", "ca", "any QHEI UG/PG"],
+      "notes": "MAJOR 2024–26 scheme. Cabinet approval Nov 2024; portal live since Jan 2025. The 'no collateral, no guarantor' design specifically targets first-generation higher-ed students from middle-income families.",
+      "source": "PMO India press release (Nov 2024), MyScheme.gov.in, vidyalakshmi.co.in"
+    },
+    {
+      "id": "ap-tuition-fee-reimbursement-2025",
+      "name": "AP Tuition Fee Reimbursement (post-Jagananna)",
+      "type": "state",
+      "state": "Andhra Pradesh",
+      "category": "Post-Matric tuition reimbursement",
+      "amount": "Full tuition fee reimbursement for Inter, ITI, Polytechnic, Degree, PG, Professional courses",
+      "frequency": "Per semester / annual",
+      "eligibility": {
+        "categories": ["SC", "ST", "BC", "EBC", "Kapu", "Minority", "Differently-Abled"],
+        "income_limit_inr": 250000,
+        "land_limit": "Below 10 acres wet OR 25 acres dry OR 25 acres combined",
+        "asset_rules": "No income-tax-paying family member; no four-wheeler (auto/tractor allowed)",
+        "attendance": "Min 75%",
+        "domicile": "Andhra Pradesh"
+      },
+      "official_url": "https://jnanabhumi.ap.gov.in",
+      "documents": ["Aadhaar", "Income certificate", "Caste certificate", "SSC marks memo", "Bonafide", "Bank account"],
+      "typical_deadline": "Rolling, opens for each academic year",
+      "applies_to_careers": ["software-engineer", "civil-engineer", "ca", "lawyer", "mbbs-doctor"],
+      "notes": "Continues the post-matric fee reimbursement structure of the 2019–24 Jagananna Vidya Deevena. Verify the current name on the AP welfare portal — the scheme architecture is intact under the 2024 NDA-led state government.",
+      "source": "AP Welfare Dept, jnanabhumi.ap.gov.in (verify current branding for 2025-26 cycle)"
+    },
     {
       "id": "jagananna-vidya-deevena",
       "name": "Jagananna Vidya Deevena (JVD)",
@@ -333,6 +376,73 @@
       "amount": "Up to full tuition + maintenance",
       "official_url": "https://www.dayanandeducation.org",
       "source": "SDEF"
+    },
+    {
+      "id": "central-sector-merit-2026",
+      "name": "Central Sector Scheme of Scholarships for College and University Students",
+      "type": "national",
+      "category": "Merit-cum-means UG/PG",
+      "amount": "₹12,000/year UG; ₹20,000/year PG; over 4 years",
+      "frequency": "Annual",
+      "eligibility": {
+        "income_limit_inr": 800000,
+        "marks_min_pct": "Top 20% in Class XII state board (cut-off published by Ministry)",
+        "course": "Pursuing regular degree from a recognised college / university (NOT correspondence/distance)"
+      },
+      "official_url": "https://scholarships.gov.in",
+      "typical_deadline": "Renewal/fresh October–November (for 2026-27 cycle)",
+      "applies_to_careers": ["any UG career"],
+      "source": "Ministry of Education, NSP Central Sector"
+    },
+    {
+      "id": "iit-bombay-aa-fellowship",
+      "name": "IIT Bombay AA Fellowships",
+      "type": "institutional",
+      "category": "Need-based UG fellowship at IIT Bombay",
+      "amount": "Tuition + hostel + meals + books — effectively full ride for selected need-based students",
+      "eligibility": {"course": "B.Tech / Dual Degree at IIT Bombay", "category": "Need-based, family income criteria"},
+      "official_url": "https://www.iitb.ac.in/en/financial-assistance",
+      "source": "IIT Bombay Alumni Association"
+    },
+    {
+      "id": "lila-poonawalla",
+      "name": "Lila Poonawalla Foundation Scholarship",
+      "type": "csr",
+      "category": "Girls in STEM",
+      "amount": "Full tuition + mentorship for engineering / science girls in Maharashtra (expanding nationally)",
+      "eligibility": {"gender": "Female", "income_limit_inr": 800000, "stream": "Engineering / Science (UG)"},
+      "official_url": "https://www.lilapoonawallafoundation.com",
+      "source": "Lila Poonawalla Foundation"
+    },
+    {
+      "id": "ms-research-fellowship-2026",
+      "name": "Microsoft Research India PhD Fellowship",
+      "type": "csr",
+      "category": "PhD fellowship in CS / AI",
+      "amount": "₹4.2 lakh/year + travel grant",
+      "eligibility": {"course": "PhD in CS / Engineering at recognised Indian institution", "research_area": "AI / ML / Systems / HCI"},
+      "official_url": "https://www.microsoft.com/en-us/research/academic-program/phd-fellowship",
+      "source": "Microsoft Research India"
+    },
+    {
+      "id": "pratiksha-trust-fellowship",
+      "name": "Pratiksha Trust AI Fellowships at IISc",
+      "type": "institutional",
+      "category": "AI/ML PhD fellowship",
+      "amount": "Up to ₹15 lakh/year",
+      "eligibility": {"course": "PhD in AI/ML at IISc Bangalore"},
+      "official_url": "https://iisc.ac.in",
+      "source": "IISc Pratiksha Trust"
+    },
+    {
+      "id": "ngs-2026-deadlines",
+      "name": "NSP 2026-27 Cycle Note",
+      "type": "aggregator",
+      "category": "Application cycle reminder",
+      "amount": "N/A — aggregator note",
+      "official_url": "https://scholarships.gov.in",
+      "notes": "NSP 2026-27 fresh + renewal application cycle typically opens July 2026; closes October–November 2026. One-Time Registration (OTR) using Aadhaar required (14-digit number). Status check via Mobile App + scholarships.gov.in.",
+      "source": "Ministry of Education, NSP"
     }
   ]
 }
