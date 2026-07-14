@@ -21,7 +21,7 @@ const apColleges = colleges.filter((c) => c.state === 'Andhra Pradesh');
     <Section
       eyebrow={`${colleges.length} colleges · NIRF 2025`}
       title="Top colleges across India"
-      description="Engineering, medical, law, management, design, science, and liberal arts. AP-located colleges are highlighted because they qualify for Jagananna Vidya Deevena fee reimbursement."
+      description="Engineering, medical, law, management, design, science, and liberal arts. AP-located colleges are highlighted because they qualify for the Post Matric Scholarship (RTF) tuition fee reimbursement."
     />
 
     <!-- AP highlight -->
@@ -29,7 +29,7 @@ const apColleges = colleges.filter((c) => c.state === 'Andhra Pradesh');
       <section class="mb-10 rounded-2xl bg-gradient-to-br from-emerald-50 to-blue-50 border border-emerald-100 p-6">
         <div class="flex items-baseline justify-between gap-3 mb-4">
           <h2 class="text-lg font-semibold text-emerald-900">In Andhra Pradesh ({apColleges.length})</h2>
-          <span class="text-xs text-emerald-700">JVD-eligible</span>
+          <span class="text-xs text-emerald-700">RTF-eligible</span>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {apColleges.map((c) => (

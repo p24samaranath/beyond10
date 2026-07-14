@@ -756,6 +756,161 @@
       "salary_inr": {"corporate_agri": "₹6–15 LPA", "founder_outcomes": "highly variable"},
       "popularity_score": 4,
       "source": "Agriculture Ministry, NABARD"
+    },
+    {
+      "id": "state-civil-services",
+      "name": "State Civil Services Officer",
+      "family": "law-public-policy",
+      "one_liner": "Serves in state administration, municipal corporations, revenue department, and police forces.",
+      "description": "Administers local government, manages land revenue, maintains law & order, and executes state policies. High authority and social prestige.",
+      "stream": ["any"],
+      "pathway": {
+        "class_10": "Any stream. Build habit of reading newspapers daily.",
+        "class_11_12": "Any stream (Arts/MEC/MPC/BiPC). Focus on general awareness.",
+        "undergraduate": "Bachelor's degree in any discipline (3-4 yrs) from any recognized university.",
+        "entry_role": "Deputy Collector / DSP / Tahsildar / Block Development Officer (₹56,100 starting basic pay + allowances)",
+        "growth_path": "Sub-Divisional Magistrate (SDM) → Joint Collector → IAS promotion in 8–15 years"
+      },
+      "entrance_exams": ["state-pcs"],
+      "salary_inr": {
+        "starting": "₹70,000–95,000/month (Gross starting pay depends on state)",
+        "mid_career": "₹1.2–1.8 LPM (with state accommodations + transport)",
+        "senior": "₹2.2–2.5 LPM (Chief Secretary / IAS rank equivalent)"
+      },
+      "ai_impact": {
+        "rating": 1,
+        "reasoning": "Requires local state-level accountability, public interface, administrative discretion, and field execution. Fundamentally immune to software automation.",
+        "durable_skills": ["public administration", "crisis management", "local empathy", "leadership", "policy implementation"],
+        "at_risk_tasks": ["routine file tracking", "drafting basic circulars", "standard data aggregation"]
+      },
+      "skills_to_build": ["General knowledge (History, Geography, Polity)", "State language fluency", "Writing skills", "Analytical reasoning"],
+      "plan_b": ["civil-services", "policy-analyst", "lawyer"],
+      "popularity_score": 9,
+      "source": "State PSC guidelines (UPPSC, TNPSC, APPSC, MPSC)"
+    },
+    {
+      "id": "ssc-cgl-officer",
+      "name": "Government Section Officer / Inspector",
+      "family": "commerce-finance-business",
+      "one_liner": "Handles administrative, audit, and inspectorial tasks across central ministries, GST, and Income Tax.",
+      "description": "Inspects financial compliance, drafts section briefs, executes customs operations, and conducts audits. Stable, structured desk-work and field inspectorial career.",
+      "stream": ["any"],
+      "pathway": {
+        "class_10": "Any stream. Practice numerical aptitude and logical reasoning.",
+        "class_11_12": "Any stream. Build mental arithmetic capabilities.",
+        "undergraduate": "Bachelor's degree in any discipline (Commerce/Science/Arts).",
+        "entry_role": "Inspector of Income Tax / GST Inspector / Assistant Section Officer (₹44,900 starting basic pay)",
+        "growth_path": "Superintendent → Assistant Commissioner → Joint Commissioner (takes 15–20 years)"
+      },
+      "entrance_exams": ["ssc-cgl"],
+      "salary_inr": {
+        "starting": "₹60,000–75,000/month (Group-B gazetted/non-gazetted depends on city classification)",
+        "mid_career": "₹1.1–1.5 LPM",
+        "senior": "₹1.8–2.2 LPM"
+      },
+      "ai_impact": {
+        "rating": 2,
+        "reasoning": "While auditing software accelerates audit trails, legal inspections, physical customs checks, tax raids, and statutory reports require human authority and accountability.",
+        "durable_skills": ["taxation laws", "investigative auditing", "regulatory compliance", "decision writing"],
+        "at_risk_tasks": ["filing sorting", "data transcription", "preliminary computation checking"]
+      },
+      "skills_to_build": ["Quantitative aptitude", "Reasoning & logic", "General awareness", "English vocabulary & grammar"],
+      "plan_b": ["bank-po", "cma", "ca"],
+      "popularity_score": 9,
+      "source": "Staff Selection Commission (SSC) notifications"
+    },
+    {
+      "id": "bank-po",
+      "name": "Public Sector Bank Officer",
+      "family": "commerce-finance-business",
+      "one_liner": "Manages customer accounts, processes loans, oversees branches, and executes banking operations.",
+      "description": "Handles customer service, inspects credit risks, sanctions agricultural/retail loans, and drives branch targets. High stability and structured progression in state-owned banks.",
+      "stream": ["any"],
+      "pathway": {
+        "class_10": "Any stream. Work on speed maths.",
+        "class_11_12": "Any stream. Commerce/MEC is helpful for finance basics.",
+        "undergraduate": "Bachelor's degree in any stream.",
+        "entry_role": "Probationary Officer (PO) / Assistant Manager (Scale-1) (₹36,000 basic pay + allowances)",
+        "growth_path": "Manager (Scale-2) → Senior Manager → AGM → GM → Chairman"
+      },
+      "entrance_exams": ["ibps-sbi-po"],
+      "salary_inr": {
+        "starting": "₹57,000–65,000/month (SBI PO is slightly higher than IBPS PO)",
+        "mid_career": "₹1.0–1.3 LPM",
+        "senior": "₹1.6–2.2 LPM"
+      },
+      "ai_impact": {
+        "rating": 2,
+        "reasoning": "Loan underwriting models are highly automated by AI. However, local credit inspections, relationship banking, solving disputed accounts, and physical branch operations remain human-led.",
+        "durable_skills": ["credit analysis", "customer relationship", "risk mitigation", "regulatory knowledge"],
+        "at_risk_tasks": ["routine passbook entries", "verifying KYC documents", "standard interest calculations"]
+      },
+      "skills_to_build": ["Data interpretation", "Banking terminology", "Mental math", "Communication"],
+      "plan_b": ["ssc-cgl-officer", "investment-banker", "ca"],
+      "popularity_score": 8,
+      "source": "SBI, IBPS exam circulars"
+    },
+    {
+      "id": "rrb-railway-officer",
+      "name": "Railway Section Officer / Supervisor",
+      "family": "vocational-trades-sports",
+      "one_liner": "Coordinates passenger traffic, manages stations, controls logistics, and oversees railway commercial assets.",
+      "description": "Coordinates station operations, maintains commercial tickets records, manages safety protocols, and supervises ground crew. Massive scale and high job security in Indian Railways.",
+      "stream": ["any"],
+      "pathway": {
+        "class_10": "Any stream. Participate in science/analytical projects.",
+        "class_11_12": "Any stream. Build physical fitness and logical reasoning.",
+        "undergraduate": "Bachelor's degree in any discipline.",
+        "entry_role": "Station Master / Commercial Apprentice / Goods Guard (₹35,400 basic pay)",
+        "growth_path": "Station Superintendent → Assistant Operations Manager → Divisional Operations Manager"
+      },
+      "entrance_exams": ["rrb-ntpc"],
+      "salary_inr": {
+        "starting": "₹48,000–58,000/month (plus travel allowances and residential quarters)",
+        "mid_career": "₹90,000–1.2 LPM",
+        "senior": "₹1.5–1.9 LPM"
+      },
+      "ai_impact": {
+        "rating": 1,
+        "reasoning": "Railway switching systems are digitalized, but physical crowd safety, track inspections, emergency coordination, and physical station operations cannot be automated.",
+        "durable_skills": ["logistical planning", "crew management", "emergency response", "safety standards"],
+        "at_risk_tasks": ["ticket sales audits", "manual ledger entries", "scheduling standard shifts"]
+      },
+      "skills_to_build": ["General science", "Logistics logic", "Public coordination", "Physical fitness"],
+      "plan_b": ["electrician", "ssc-cgl-officer"],
+      "popularity_score": 8,
+      "source": "Railway Recruitment Boards (RRB) updates"
+    },
+    {
+      "id": "govt-school-teacher",
+      "name": "Government School Teacher",
+      "family": "liberal-arts-social-sciences",
+      "one_liner": "Teaches students in state government schools, designs curriculum, and facilitates holistic student development.",
+      "description": "Plans lessons, manages class interactions, evaluates learning outcomes, and conducts co-curricular programs. Safe, structured teaching role with strong state pensions and job security.",
+      "stream": ["any"],
+      "pathway": {
+        "class_10": "Any stream. Build communication skills.",
+        "class_11_12": "Any stream (Arts/Science/Commerce).",
+        "undergraduate": "B.A./B.Sc/B.Com (3 yrs) + B.Ed (2 yrs) or integrated 4-yr B.El.Ed/B.A.B.Ed.",
+        "entry_role": "Primary School Teacher (PRT) / Trained Graduate Teacher (TGT) (₹35,400 to ₹44,900 basic pay)",
+        "growth_path": "Post Graduate Teacher (PGT) → Vice Principal → Principal → District Education Officer (DEO)"
+      },
+      "entrance_exams": ["tet-dsc"],
+      "salary_inr": {
+        "starting": "₹48,000–62,000/month (depends on grade and state scale)",
+        "mid_career": "₹85,000–1.1 LPM",
+        "senior": "₹1.3–1.6 LPM"
+      },
+      "ai_impact": {
+        "rating": 2,
+        "reasoning": "Educational content and quiz generation are AI-augmented. However, student mentoring, classroom behavioral management, grading emotional nuances, and local community outreach are human tasks.",
+        "durable_skills": ["pedagogy", "child psychology", "patience & empathy", "classroom management"],
+        "at_risk_tasks": ["making quiz questions", "grading multiple-choice exams", "translating lesson plans"]
+      },
+      "skills_to_build": ["Subject expertise", "Public speaking", "Interactive teaching methods", "Patience"],
+      "plan_b": ["psychologist", "policy-analyst"],
+      "popularity_score": 8,
+      "source": "NCTE, state teacher recruitment alerts"
     }
   ]
 }

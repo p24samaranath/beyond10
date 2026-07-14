@@ -19,7 +19,7 @@ const grouped = groups.map((g) => ({
 ---
 <Base
   title="Scholarships — Beyond10"
-  description={`${scholarships.length} scholarships in India 2026: AP Jagananna, NMMS, INSPIRE, Reliance, Tata, Aditya Birla, AICTE Pragati, ICAI, AIIMS waivers and more.`}
+  description={`${scholarships.length} scholarships in India: AP Post-Matric, NMMS, INSPIRE, Reliance, Tata, Aditya Birla, AICTE Pragati, ICAI, AIIMS waivers and more.`}
 >
   <section class="container-page py-12 sm:py-16">
     <Section
@@ -57,20 +57,22 @@ const grouped = groups.map((g) => ({
   </section>
 
   <script>
-    const buttons = document.querySelectorAll<HTMLButtonElement>('#sch-filter .filter-btn');
-    const sections = document.querySelectorAll<HTMLElement>('[data-group]');
+    document.addEventListener('astro:page-load', () => {
+      const buttons = document.querySelectorAll<HTMLButtonElement>('#sch-filter .filter-btn');
+      const sections = document.querySelectorAll<HTMLElement>('[data-group]');
 
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.type ?? 'all';
-        buttons.forEach((b) => {
-          const active = b === btn;
-          b.classList.toggle('bg-slate-900', active);
-          b.classList.toggle('text-white', active);
-          b.setAttribute('aria-pressed', active ? 'true' : 'false');
-        });
-        sections.forEach((sec) => {
-          sec.style.display = target === 'all' || sec.dataset.group === target ? '' : 'none';
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.type ?? 'all';
+          buttons.forEach((b) => {
+            const active = b === btn;
+            b.classList.toggle('bg-slate-900', active);
+            b.classList.toggle('text-white', active);
+            b.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+          sections.forEach((sec) => {
+            sec.style.display = target === 'all' || sec.dataset.group === target ? '' : 'none';
+          });
         });
       });
     });

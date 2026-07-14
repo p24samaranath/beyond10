@@ -68,36 +68,37 @@
   <p class="text-[10px] text-slate-400 px-4 pb-2">Powered by Claude. Verify important details on the source links cited.</p>
 </div>
 
-<script is:inline>
-  (function () {
+<script>
+  document.addEventListener('astro:page-load', () => {
     const toggle = document.getElementById('chatbot-toggle');
     const panel  = document.getElementById('chatbot-panel');
     const closeBtn = document.getElementById('chatbot-close');
-    const form   = document.getElementById('chatbot-form');
-    const input  = document.getElementById('chatbot-input');
+    const form   = document.getElementById('chatbot-form') as HTMLFormElement | null;
+    const input  = document.getElementById('chatbot-input') as HTMLInputElement | null;
     const msgs   = document.getElementById('chatbot-messages');
-    const sendBtn = document.getElementById('chatbot-send');
+    const sendBtn = document.getElementById('chatbot-send') as HTMLButtonElement | null;
 
-    const history = []; // {role, content}
+    if (!toggle || !panel || !closeBtn || !form || !input || !msgs || !sendBtn) return;
+
+    const history: {role: 'user' | 'assistant', content: string}[] = [];
 
     function open() {
-      panel.classList.remove('hidden');
-      panel.classList.add('flex');
-      setTimeout(() => input.focus(), 50);
+      panel!.classList.remove('hidden');
+      panel!.classList.add('flex');
+      setTimeout(() => input!.focus(), 50);
     }
     function close() {
-      panel.classList.add('hidden');
-      panel.classList.remove('flex');
+      panel!.classList.add('hidden');
+      panel!.classList.remove('flex');
     }
     toggle.addEventListener('click', () => panel.classList.contains('hidden') ? open() : close());
     closeBtn.addEventListener('click', close);
 
-    function escapeHtml(s) {
-      return s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function escapeHtml(s: string) {
+      return s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c] || c));
     }
 
-    function linkifyAndFormat(text) {
-      // Simple safe formatting: bold **x**, internal /paths/, line breaks.
+    function linkifyAndFormat(text: string) {
       let html = escapeHtml(text);
       html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
       html = html.replace(/(^|[\s(])(\/[a-z0-9\-/]+)/gi, (_m, p1, p2) =>
@@ -107,23 +108,25 @@
       return html;
     }
 
-    function appendUser(text) {
+    function appendUser(text: string) {
       const el = document.createElement('div');
       el.className = 'flex gap-2 justify-end';
       el.innerHTML = `<div class="bg-slate-900 text-white rounded-2xl rounded-tr-sm px-3.5 py-2.5 text-sm max-w-[85%]">${escapeHtml(text)}</div>`;
-      msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
+      msgs!.appendChild(el);
+      msgs!.scrollTop = msgs!.scrollHeight;
     }
-    function appendBot(text, isError) {
+
+    function appendBot(text: string, isError: boolean) {
       const el = document.createElement('div');
       el.className = 'flex gap-2';
       const bg = isError ? 'bg-red-50 border-red-100 text-red-800' : 'bg-white border-stone-100 text-slate-800';
       el.innerHTML = `<div class="shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center">B</div>
         <div class="${bg} rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-sm shadow-sm border max-w-[85%] leading-relaxed">${linkifyAndFormat(text)}</div>`;
-      msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
+      msgs!.appendChild(el);
+      msgs!.scrollTop = msgs!.scrollHeight;
       return el.querySelector('div:last-child');
     }
+
     function appendThinking() {
       const el = document.createElement('div');
       el.className = 'flex gap-2 thinking';
@@ -133,17 +136,17 @@
           <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay:150ms"></span>
           <span class="w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce" style="animation-delay:300ms"></span>
         </div>`;
-      msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
+      msgs!.appendChild(el);
+      msgs!.scrollTop = msgs!.scrollHeight;
       return el;
     }
 
-    async function send(text) {
-      if (!text || sendBtn.disabled) return;
+    async function send(text: string) {
+      if (!text || sendBtn!.disabled) return;
       appendUser(text);
       history.push({ role: 'user', content: text });
-      input.value = '';
-      sendBtn.disabled = true;
+      input!.value = '';
+      sendBtn!.disabled = true;
       const thinking = appendThinking();
 
       try {
@@ -176,24 +179,26 @@
         thinking.remove();
         appendBot("Network error — check your connection and try again.", true);
       } finally {
-        sendBtn.disabled = false;
-        input.focus();
+        sendBtn!.disabled = false;
+        input!.focus();
       }
     }
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const text = input.value.trim();
+      const text = input!.value.trim();
       send(text);
     });
 
     document.querySelectorAll('.suggest-chip').forEach((chip) => {
-      chip.addEventListener('click', () => send(chip.dataset.q));
+      chip.addEventListener('click', () => {
+        const q = (chip as HTMLElement).dataset.q;
+        if (q) send(q);
+      });
     });
 
-    // Keyboard: Esc closes
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !panel.classList.contains('hidden')) close();
     });
-  })();
+  });
 </script>

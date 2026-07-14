@@ -1,0 +1,395 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+
+const jobs10 = [
+  {
+    title: "Multi-Tasking Staff (MTS) & Havaldar",
+    sector: "Government",
+    salary: "₹22,000 – ₹28,000/month (Gross)",
+    exam: "SSC MTS Exam",
+    channel: "Staff Selection Commission (SSC)",
+    age: "18 – 25 or 27 Years (Age relaxation: 3 yrs OBC, 5 yrs SC/ST)",
+    selection: "Single computer exam: Session 1 (Maths & Logic, qualifying, no negative marks) + Session 2 (GK & English, determines final merit list). Havaldar posts require a Physical Walking Test.",
+    syllabus: "Numerical Ability, Logical Reasoning, General Knowledge, English Comprehension",
+    perks: "Basic Pay (₹18,000), Dearness Allowance (DA), House Rent (HRA), CGHS Medical cover, NPS Pension contributions",
+    portal: "https://ssc.gov.in",
+    desc: "Entry-level administrative support, file tracking, and counter assistance in Central Government ministries. Havaldar posts are security-inspectorial roles within Customs & GST departments."
+  },
+  {
+    title: "Indian Railways Group D Staff (Helper/Pointsman)",
+    sector: "Government",
+    salary: "₹24,000 – ₹32,000/month (Gross)",
+    exam: "RRB Group D Exam",
+    channel: "Railway Recruitment Board (RRB)",
+    age: "18 – 33 Years (Age relaxation applies for reserved categories)",
+    selection: "Computer Based Test (CBT) + Physical Test (Run 1000m in 4 min 15 sec + carry 35kg load for 100m for males) + Document Verification & Medical Exam.",
+    syllabus: "10th standard Physics/Chemistry/Biology, Mathematics, Reasoning, Current Affairs",
+    perks: "Basic Pay (₹18,000), DA, HRA, Transport Allowance, Free Railway Passes for family, Railway Hospital care",
+    portal: "https://indianrailways.gov.in",
+    desc: "Essential track maintenance, train signaling control (Pointsman), and technical assistant duties in locomotive, signal, and electrical sheds."
+  },
+  {
+    title: "Gramin Dak Sevak (GDS) - Post Office",
+    sector: "Government",
+    salary: "₹12,000 – ₹18,000/month (Consolidated)",
+    exam: "Direct Merit (No Exam)",
+    channel: "India Post Department",
+    age: "18 – 40 Years",
+    selection: "100% based on Class 10 Board Marks (GPA). No written test or interview. Must know local language and how to ride a bicycle/motorcycle.",
+    syllabus: "No syllabus. Selected directly from matriculation marks list.",
+    perks: "Time Related Continuity Allowance (TRCA), limited welfare allowances. Suitable for candidates looking to study for other exams part-time.",
+    portal: "https://indiapostgdsonline.gov.in",
+    desc: "Handles local mail delivery, postage stamp sales, and mobile counter services in rural branch post offices."
+  },
+  {
+    title: "Indian Navy Matric Recruit (MR)",
+    sector: "Government",
+    salary: "₹30,000 – ₹40,000/month (Agniveer Scale)",
+    exam: "Navy MR Written Exam",
+    channel: "Indian Navy recruitment",
+    age: "17.5 – 21 Years",
+    selection: "Computer-Based Exam (Science, Maths, GK) + Physical Fitness Test (Run 1.6km in 6.5 mins + 20 squats + 12 push-ups) + Medical Standards (Height: Min 157cm).",
+    syllabus: "Science (Force, Energy, Work), Mathematics (Algebra, Geometry, Trigonometry), General Awareness (Geography, History, Sports)",
+    perks: "Free food & accommodation, life insurance cover, 30 days annual leave, 25% permanent absorption path, Seva Nidhi Package (₹10+ Lakh after 4 yrs)",
+    portal: "https://joinindiannavy.gov.in",
+    desc: "Recruited as Chefs (preparing menu), Stewards (serving food and housekeeping), or Hygienists (maintaining cleanliness) on naval bases and warships."
+  },
+  {
+    title: "ITI Skilled Trades Technician (Electrician/Fitter)",
+    sector: "Private / PSU",
+    salary: "₹15,000 – ₹28,000/month (Starting)",
+    exam: "ITI Admission / National Apprentice",
+    channel: "State DGET / Industrial Corporates",
+    age: "14 – 40 Years",
+    selection: "Marks-based ITI admission followed by trade certificate exam. Direct interviews for apprentice placement.",
+    syllabus: "Trade Theory (Electrical/Mechanical safety, wiring, machines), Workshop Calculation & Science, Engineering Drawing",
+    perks: "Free safety gear, structured overtime bonuses, high demand in public sector units (BHEL, ONGC, SAIL) and Gulf countries",
+    portal: "https://ncvtmis.gov.in",
+    desc: "Handles industrial wiring, machine maintenance, tool assembly, and workshop support. Highly resilient to automation and offers strong paths to self-employment."
+  },
+  {
+    title: "Logistics Delivery & Fleet Associate",
+    sector: "Private",
+    salary: "₹15,000 – ₹26,000/month (Flexible)",
+    exam: "Direct Document Onboarding",
+    channel: "E-Commerce / Delivery Aggregators",
+    age: "18 – 45 Years",
+    selection: "Simple document check (Aadhaar, PAN, Driving License, Bank Details) + basic app onboarding test.",
+    syllabus: "No exam. Requires reading basic English address details on smartphone applications.",
+    perks: "Flexible working hours, weekly payouts, fuel incentives, accident insurance, and mobile bill reimbursement",
+    portal: "Direct corporate onboarding apps",
+    desc: "Executes food, grocery, or parcel deliveries. Income scales directly with delivery volume and working hours."
+  }
+];
+
+const jobs12 = [
+  {
+    title: "Data Entry Operator (DEO) / Lower Division Clerk",
+    sector: "Government",
+    salary: "₹28,000 – ₹42,000/month (Gross)",
+    exam: "SSC CHSL Exam",
+    channel: "Staff Selection Commission (SSC)",
+    age: "18 – 27 Years (Age relaxation applies)",
+    selection: "Tier I CBT Exam (Qualifying) + Tier II CBT Exam (Mathematical, Reasoning, English, General Awareness) + Mandatory Typing Test (Min 35 words per minute in English).",
+    syllabus: "Quantitative Aptitude, English Language, Logical Reasoning, General Awareness, Computer Basics",
+    perks: "Basic Pay (₹19,900 - ₹29,200), DA, HRA, Transport Allowance, CGHS medical cover, LTC travel allowance, NPS contributions",
+    portal: "https://ssc.gov.in",
+    desc: "Handles clerical tasks, draft letters, logs transaction records, and administers data entry registers in Central Government offices."
+  },
+  {
+    title: "Defense Agniveer (Army, Navy, Airforce)",
+    sector: "Government",
+    salary: "₹30,000 – ₹40,000/month (Seva Nidhi package)",
+    exam: "Agniveer Written + Physical Endurance",
+    channel: "Indian Armed Forces (Army/Navy/Air Force)",
+    age: "17.5 – 21 Years",
+    selection: "Common Entrance Exam (CEE) + Physical Fitness Test (Run 1.6km, pull-ups, zig-zag balance) + Physical Measurement Test (Height/Weight varies by region) + Medical.",
+    syllabus: "General Science, Mathematics, General Knowledge, Basic Computer and English (for technical wings)",
+    perks: "30 days leave/yr, free medical & rations, Seva Nidhi Package (₹10.04 Lakh tax-free plus accrued interest after 4 years), 25% permanent enlistment pathway",
+    portal: "https://joinindianarmy.nic.in",
+    desc: "Combative, technical support, and logistical operational entry points across the Indian Army, Navy, and Air Force."
+  },
+  {
+    title: "Military Commissioned Officer (NDA)",
+    sector: "Government",
+    salary: "₹56,100 starting basic pay (Lieutenant)",
+    exam: "UPSC NDA & NA Exam",
+    channel: "UPSC + Services Selection Board (SSB)",
+    age: "16.5 – 19.5 Years",
+    selection: "Written Exam (Maths & General Ability Test) + 5-day SSB interview (intelligence & personality assessment) + Medical Standards + Merit list.",
+    syllabus: "Mathematics (Trigonometry, Calculus, Probability), English, Physics, Chemistry, General Science, History, Geography, Current Events",
+    perks: "Full military officer privileges, free accommodation, military hospital care, free travel warrants, post-retirement pension, canteen facility",
+    portal: "https://upsc.gov.in",
+    desc: "Prestigious entry point leading to commission as an Officer in Army, Navy, or Air Force. Includes a 4-year fully sponsored degree at NDA Khadakwasla."
+  },
+  {
+    title: "Railway Assistant Loco Pilot (ALP)",
+    sector: "Government",
+    salary: "₹35,000 – ₹48,000/month (Gross starting)",
+    exam: "RRB ALP Exam",
+    channel: "Railway Recruitment Board (RRB)",
+    age: "18 – 30 Years",
+    selection: "First Stage CBT + Second Stage CBT + Computer-Based Aptitude Test (CBAT/Psycho Test) + Document Verification + Medical (Must pass strict Class A-1 Eye standard).",
+    syllabus: "Mathematics, General Intelligence & Reasoning, Basic Science & Engineering, General Awareness",
+    perks: "Basic Pay (₹19,900), DA, HRA, Mileage/Running Allowance (scales with distance driven), Free Railway Passes, Hospital care",
+    portal: "https://indianrailways.gov.in",
+    desc: "Co-pilots passenger and goods trains, observes track signals, assists in engine diagnostic checks, and maintains loco logs. Requires Class 12 with Physics/Maths or ITI."
+  },
+  {
+    title: "BPO Customer Support / Sales Executive",
+    sector: "Private",
+    salary: "₹18,000 – ₹32,000/month (Starting)",
+    exam: "Communication & Grammar Interview",
+    channel: "Global Tech Services / BPO Giants",
+    age: "18 – 50 Years",
+    selection: "Screening round (spoken English fluency) + online typing test (minimum 30 WPM) + operations manager round.",
+    syllabus: "No written exam. Evaluated on accent neutrality, vocabulary, active listening, and keyboard skills.",
+    perks: "Free corporate transport (cab facility for night shifts), health insurance cover, performance incentive bonuses, clear corporate promotion path",
+    portal: "Direct corporate careers portals",
+    desc: "Assists global customers with technical issues, product details, or sales services via voice call, email, or chat. Spoken English fluency commands the highest starting package."
+  },
+  {
+    title: "Hospitality & Retail Store Manager Trainee",
+    sector: "Private",
+    salary: "₹14,000 – ₹22,000/month",
+    exam: "Personality Assessment Interview",
+    channel: "Retail & QSR Brands (Starbucks, McD, Retail chains)",
+    age: "18 – 35 Years",
+    selection: "Group discussion + personal interview assessing grooming, communication, and basic mathematics.",
+    syllabus: "No written exam. Assessed on hospitality soft skills and personality alignment.",
+    perks: "Free meals/uniforms, employee discounts, PF/ESI benefits, structured rapid promotion tracks to Store Manager within 3–4 years",
+    portal: "Walk-in interviews / corporate career sites",
+    desc: "Handles front-counter sales, customer greeting, inventory logistics, and bill settlement. Excellent starting point for learning operational management."
+  }
+];
+
+const pageTitle = "Jobs After 10th & 12th in India — Beyond10";
+const pageDescription = "Explore age limits, selection processes, exams, salaries, syllabus, perks, and official application portals for jobs after Class 10 and 12.";
+---
+<Base title={pageTitle} description={pageDescription}>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow="EARLY CAREER DISCOVERY"
+      title="Jobs After Class 10 & 12"
+      description="Compare age limits, selection criteria, exam syllabus, salary structures, and official application portals for early career opportunities."
+    />
+
+    <!-- Tab switcher -->
+    <div class="flex justify-center mb-8">
+      <div id="jobs-tabs" class="inline-flex rounded-xl bg-stone-100 p-1 border border-stone-200" role="tablist">
+        <button
+          type="button"
+          class="tab-btn px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900 text-white shadow-sm transition-all"
+          data-tab="10"
+          role="tab"
+          aria-selected="true"
+        >
+          After Class 10
+        </button>
+        <button
+          type="button"
+          class="tab-btn px-4 py-2 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all"
+          data-tab="12"
+          role="tab"
+          aria-selected="false"
+        >
+          After Class 12
+        </button>
+        <button
+          type="button"
+          class="tab-btn px-4 py-2 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all"
+          data-tab="skills"
+          role="tab"
+          aria-selected="false"
+        >
+          Essential Upgrades
+        </button>
+      </div>
+    </div>
+
+    <!-- Section after 10 -->
+    <div id="panel-10" class="tab-panel space-y-6">
+      <div class="grid gap-6 lg:grid-cols-2">
+        {jobs10.map((j) => (
+          <div class="card p-6 sm:p-8 flex flex-col justify-between border-slate-200">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${j.sector === 'Government' ? 'bg-amber-50 text-amber-700 border-amber-100' : 'bg-blue-50 text-blue-700 border-blue-100'}`}>
+                  {j.sector}
+                </span>
+                <span class="text-sm font-bold text-slate-900">{j.salary}</span>
+              </div>
+
+              <h3 class="text-lg font-bold text-slate-950 mb-2">{j.title}</h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-5">{j.desc}</p>
+
+              <!-- Detailed Candidate Spec Sheet -->
+              <div class="grid gap-3 sm:grid-cols-2 text-xs border-t border-b border-stone-100 py-4 mb-5">
+                <div>
+                  <span class="font-bold text-slate-500 block uppercase text-[10px] tracking-wider mb-0.5">🎂 Age Limits</span>
+                  <span class="text-slate-800 font-semibold">{j.age}</span>
+                </div>
+                <div>
+                  <span class="font-bold text-slate-500 block uppercase text-[10px] tracking-wider mb-0.5">🎯 Selection Stage</span>
+                  <span class="text-slate-800 font-semibold">{j.selection}</span>
+                </div>
+                <div class="sm:col-span-2">
+                  <span class="font-bold text-slate-500 block uppercase text-[10px] tracking-wider mb-0.5">📚 Exam Syllabus Topics</span>
+                  <span class="text-slate-800 font-semibold">{j.syllabus}</span>
+                </div>
+                <div class="sm:col-span-2">
+                  <span class="font-bold text-slate-500 block uppercase text-[10px] tracking-wider mb-0.5">🎁 Allowances & Perks</span>
+                  <span class="text-slate-800 font-semibold">{j.perks}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Details -->
+            <div class="flex flex-wrap items-center justify-between gap-3 text-xs pt-2">
+              <div>
+                <span class="text-slate-400 block text-[9px] uppercase tracking-wider">Recruiting Body</span>
+                <span class="text-slate-700 font-bold">{j.channel}</span>
+              </div>
+              <div>
+                {j.portal.startsWith('http') ? (
+                  <a
+                    href={j.portal}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-primary px-3 py-1.5 text-[11px]"
+                  >
+                    Apply Portal ↗
+                  </a>
+                ) : (
+                  <span class="text-stone-400 font-semibold text-[11px] bg-stone-50 border border-stone-200 px-2.5 py-1 rounded-full">
+                    {j.portal}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Section after 12 -->
+    <div id="panel-12" class="tab-panel hidden space-y-6">
+      <div class="grid gap-6 lg:grid-cols-2">
+        {jobs12.map((j) => (
+          <div class="card p-6 sm:p-8 flex flex-col justify-between border-slate-200">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class={`text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border ${j.sector === 'Government' ? 'bg-amber-50 text-amber-700 border-amber-100' : 'bg-blue-50 text-blue-700 border-blue-100'}`}>
+                  {j.sector}
+                </span>
+                <span class="text-sm font-bold text-slate-900">{j.salary}</span>
+              </div>
+
+              <h3 class="text-lg font-bold text-slate-950 mb-2">{j.title}</h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-5">{j.desc}</p>
+
+              <!-- Detailed Candidate Spec Sheet -->
+              <div class="grid gap-3 sm:grid-cols-2 text-xs border-t border-b border-stone-100 py-4 mb-5">
+                <div>
+                  <span class="font-bold text-slate-500 block uppercase text-[10px] tracking-wider mb-0.5">🎂 Age Limits</span>
+                  <span class="text-slate-800 font-semibold">{j.age}</span>
+                </div>
+                <div>
+                  <span class="font-bold text-slate-500 block uppercase text-[10px] tracking-wider mb-0.5">🎯 Selection Stage</span>
+                  <span class="text-slate-800 font-semibold">{j.selection}</span>
+                </div>
+                <div class="sm:col-span-2">
+                  <span class="font-bold text-slate-500 block uppercase text-[10px] tracking-wider mb-0.5">📚 Exam Syllabus Topics</span>
+                  <span class="text-slate-800 font-semibold">{j.syllabus}</span>
+                </div>
+                <div class="sm:col-span-2">
+                  <span class="font-bold text-slate-500 block uppercase text-[10px] tracking-wider mb-0.5">🎁 Allowances & Perks</span>
+                  <span class="text-slate-800 font-semibold">{j.perks}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Details -->
+            <div class="flex flex-wrap items-center justify-between gap-3 text-xs pt-2">
+              <div>
+                <span class="text-slate-400 block text-[9px] uppercase tracking-wider">Recruiting Body</span>
+                <span class="text-slate-700 font-bold">{j.channel}</span>
+              </div>
+              <div>
+                {j.portal.startsWith('http') ? (
+                  <a
+                    href={j.portal}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-primary px-3 py-1.5 text-[11px]"
+                  >
+                    Apply Portal ↗
+                  </a>
+                ) : (
+                  <span class="text-stone-400 font-semibold text-[11px] bg-stone-50 border border-stone-200 px-2.5 py-1 rounded-full">
+                    {j.portal}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Upgrades section -->
+    <div id="panel-skills" class="tab-panel hidden card p-8 max-w-3xl mx-auto space-y-6 border-slate-200">
+      <h2 class="text-xl font-bold text-slate-900 border-b border-stone-100 pb-3">How to Escape the Low-Paying Early Career Trap</h2>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        Starting work early provides financial independence, but it can turn into a dead-end without skill upgrades. Leverage these three foundational skill stacks while working:
+      </p>
+
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+          <span class="text-2xl block mb-2">⌨️</span>
+          <h3 class="text-sm font-bold text-slate-800 mb-1">Typing Speed</h3>
+          <p class="text-xs text-slate-500 leading-relaxed font-semibold">Target 35+ Words Per Minute (WPM) to qualify for state/central government data entry positions.</p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+          <span class="text-2xl block mb-2">📊</span>
+          <h3 class="text-sm font-bold text-slate-800 mb-1">Excel & SQL</h3>
+          <p class="text-xs text-slate-500 leading-relaxed font-semibold">Learn pivot tables, basic formatting, and queries. Unlocks premium back-office desk assistant jobs.</p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+          <span class="text-2xl block mb-2">🗣️</span>
+          <h3 class="text-sm font-bold text-slate-800 mb-1">Spoken English</h3>
+          <p class="text-xs text-slate-500 leading-relaxed font-semibold">Essential to qualify for high-paying international call centers and customer success teams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script for tab toggling -->
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const buttons = document.querySelectorAll<HTMLButtonElement>('#jobs-tabs .tab-btn');
+      const panels = document.querySelectorAll<HTMLElement>('.tab-panel');
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const tab = btn.dataset.tab;
+          if (!tab) return;
+
+          buttons.forEach((b) => {
+            const selected = b === btn;
+            b.setAttribute('aria-selected', selected ? 'true' : 'false');
+            b.classList.toggle('bg-slate-900', selected);
+            b.classList.toggle('text-white', selected);
+            b.classList.toggle('shadow-sm', selected);
+            b.classList.toggle('text-slate-600', !selected);
+          });
+
+          panels.forEach((p) => {
+            p.classList.toggle('hidden', p.id !== `panel-${tab}`);
+          });
+        });
+      });
+    });
+  </script>
+</Base>

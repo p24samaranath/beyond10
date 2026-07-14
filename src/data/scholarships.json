@@ -23,8 +23,8 @@
       "source": "PMO India press release (Nov 2024), MyScheme.gov.in, vidyalakshmi.co.in"
     },
     {
-      "id": "ap-tuition-fee-reimbursement-2025",
-      "name": "AP Tuition Fee Reimbursement (post-Jagananna)",
+      "id": "ap-post-matric-scholarship-rtf",
+      "name": "Post Matric Scholarship RTF (formerly Jagananna Vidya Deevena)",
       "type": "state",
       "state": "Andhra Pradesh",
       "category": "Post-Matric tuition reimbursement",
@@ -41,87 +41,56 @@
       "official_url": "https://jnanabhumi.ap.gov.in",
       "documents": ["Aadhaar", "Income certificate", "Caste certificate", "SSC marks memo", "Bonafide", "Bank account"],
       "typical_deadline": "Rolling, opens for each academic year",
-      "applies_to_careers": ["software-engineer", "civil-engineer", "ca", "lawyer", "mbbs-doctor"],
-      "notes": "Continues the post-matric fee reimbursement structure of the 2019–24 Jagananna Vidya Deevena. Verify the current name on the AP welfare portal — the scheme architecture is intact under the 2024 NDA-led state government.",
-      "source": "AP Welfare Dept, jnanabhumi.ap.gov.in (verify current branding for 2025-26 cycle)"
-    },
-    {
-      "id": "jagananna-vidya-deevena",
-      "name": "Jagananna Vidya Deevena (JVD)",
-      "type": "state",
-      "state": "Andhra Pradesh",
-      "category": "Post-Matric tuition reimbursement",
-      "amount": "Full tuition fee reimbursement (Inter, ITI, Polytechnic, Degree, PG, Professional courses)",
-      "frequency": "Annual",
-      "eligibility": {
-        "categories": ["SC", "ST", "BC", "EBC", "Kapu", "Minority", "Differently-Abled"],
-        "income_limit_inr": 250000,
-        "land_limit": "Below 10 acres wet OR 25 acres dry OR 25 acres combined",
-        "asset_rules": "No income-tax-paying family member; no four-wheeler (auto/tractor allowed)",
-        "attendance": "Min 75%",
-        "domicile": "Andhra Pradesh"
-      },
-      "official_url": "https://jnanabhumi.ap.gov.in",
-      "documents": ["Aadhaar", "Income certificate", "Caste certificate", "SSC marks memo", "Bonafide", "Bank account (mother's preferred)"],
-      "typical_deadline": "Rolling, opens for each academic year",
       "applies_to_careers": ["software-engineer", "civil-engineer", "mechanical-engineer", "ca", "lawyer", "mbbs-doctor", "nurse"],
+      "notes": "Officially renamed from Jagananna Vidya Deevena (JVD) to Post Matric Scholarship (Reimbursement of Tuition Fee - RTF) in June 2024. Pays 100% of college tuition fees directly to the colleges.",
       "source": "AP Welfare Dept, jnanabhumi.ap.gov.in"
     },
     {
-      "id": "jagananna-vasathi-deevena",
-      "name": "Jagananna Vasathi Deevena",
+      "id": "ap-post-matric-scholarship-mtf",
+      "name": "Post Matric Scholarship MTF (formerly Jagananna Vasathi Deevena)",
       "type": "state",
       "state": "Andhra Pradesh",
       "category": "Food + hostel stipend",
       "amount": "ITI ₹10,000/yr | Polytechnic ₹15,000/yr | Other higher education ₹20,000/yr",
       "frequency": "Annual",
-      "eligibility": {"same_as": "jagananna-vidya-deevena"},
-      "official_url": "https://jnanabhumi.ap.gov.in",
-      "credited_to": "Mother's bank account",
-      "source": "AP Welfare Dept"
-    },
-    {
-      "id": "jagananna-videshi-vidya-deevena",
-      "name": "Jagananna Videshi Vidya Deevena",
-      "type": "state",
-      "state": "Andhra Pradesh",
-      "category": "Overseas study scholarship",
-      "amount": "Tuition + living for QS top-200 university programmes",
-      "frequency": "Annual",
       "eligibility": {
-        "categories": ["SC", "ST", "BC", "EBC", "Kapu"],
-        "income_limit_inr": 800000,
-        "admission": "Confirmed admission to QS top-200 university",
-        "domicile": "Andhra Pradesh"
+        "same_as": "ap-post-matric-scholarship-rtf"
       },
       "official_url": "https://jnanabhumi.ap.gov.in",
+      "credited_to": "Mother's bank account",
+      "notes": "Officially renamed from Jagananna Vasathi Deevena to Post Matric Scholarship (Maintenance Charges – MTF) in June 2024. Provides financial support to meet hostel and mess charges.",
       "source": "AP Welfare Dept"
     },
     {
       "id": "ambedkar-overseas-vidya-nidhi",
-      "name": "Ambedkar Overseas Vidya Nidhi",
+      "name": "Ambedkar Overseas Vidya Nidhi (AOVN) (formerly Jagananna Videshi Vidya Deevena)",
       "type": "state",
       "state": "Andhra Pradesh",
       "category": "Overseas study scholarship",
-      "amount": "Tuition + travel + living",
+      "amount": "Tuition fee up to ₹1.25 Crore or full tuition fee, plus travel & living expenses for QS Top 200/500 foreign universities",
+      "frequency": "Annual",
       "eligibility": {
-        "categories": ["SC", "ST", "BC", "EBC", "Kapu"],
+        "categories": ["SC", "ST", "BC", "EBC", "Kapu", "Minorities"],
+        "income_limit_inr": 800000,
+        "admission": "Confirmed admission in QS Top 200/500 university",
+        "domicile": "Andhra Pradesh",
         "marks_min_pct": 60,
-        "attendance_min_pct": 75,
-        "english_test": "Required (IELTS/TOEFL)"
+        "english_test": "Required (IELTS/TOEFL/GRE/GMAT)"
       },
-      "official_url": "https://apsocialwelfare.ap.gov.in",
-      "source": "AP Social Welfare Dept"
+      "official_url": "https://jnanabhumi.ap.gov.in",
+      "notes": "Renamed from Jagananna Videshi Vidya Deevena back to Ambedkar Overseas Vidya Nidhi (AOVN) by the AP government in June 2024. Provides financial support to students from marginalized communities to pursue PG/PhD studies abroad.",
+      "source": "AP Welfare Dept, jnanabhumi.ap.gov.in"
     },
     {
       "id": "ntr-vidyonnathi",
-      "name": "NTR Vidyonnathi",
+      "name": "NTR Vidyonnathi (formerly YSR Vidyonnathi)",
       "type": "state",
       "state": "Andhra Pradesh",
       "category": "STEM overseas scholarship for BC students",
       "amount": "Coverage to study STEM at universities in UK/USA/Canada/Australia/Germany etc.",
       "eligibility": {"categories": ["BC"], "stream": "STEM"},
       "official_url": "https://apbcwelfare.ap.gov.in",
+      "notes": "Renamed from YSR Vidyonnathi to NTR Vidyonnathi in June 2024 by the NDA-led state government.",
       "source": "AP Backward Classes Welfare Dept"
     },
     {

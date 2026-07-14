@@ -6,8 +6,9 @@ const isActive = (href: string) =>
 const navItems = [
   { href: '/careers', label: 'Careers' },
   { href: '/exams', label: 'Exams' },
-  { href: '/top-paying', label: 'Top-paying' },
-  { href: '/streams', label: 'After 10th' },
+  { href: '/ai-impact', label: 'AI Impact' },
+  { href: '/jobs-after-10-12', label: 'Early Jobs' },
+  { href: '/streams', label: 'Streams' },
   { href: '/scholarships', label: 'Scholarships' },
   { href: '/colleges-by-state', label: 'Colleges' },
 ];
@@ -71,10 +72,12 @@ const navItems = [
 </header>
 
 <script>
-  const toggle = document.getElementById('menu-toggle');
-  const nav = document.getElementById('mobile-nav');
-  toggle?.addEventListener('click', () => {
-    const open = nav?.classList.toggle('hidden') === false;
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  document.addEventListener('astro:page-load', () => {
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    toggle?.addEventListener('click', () => {
+      const open = nav?.classList.toggle('hidden') === false;
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
   });
 </script>

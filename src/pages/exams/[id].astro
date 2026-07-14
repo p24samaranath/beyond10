@@ -15,7 +15,7 @@ const collegeObjs = (exam.top_colleges_unlocked ?? []).map(collegeById).filter(B
 const dates = exam.next_dates_2026 as Record<string, string> | undefined;
 const reg = exam.registration_window_2026;
 ---
-<Base title={`${exam.name} 2026 — Beyond10`} description={exam.full_name ?? ''}>
+<Base title={`${exam.name} Guide — Beyond10`} description={exam.full_name ?? ''}>
   <article class="container-page py-12 sm:py-16" data-family={exam.family}>
     <nav class="text-xs text-slate-500 mb-4">
       <a href="/exams" class="hover:text-slate-700">All exams</a>
@@ -47,7 +47,7 @@ const reg = exam.registration_window_2026;
         <!-- Dates -->
         {dates && (
           <section>
-            <h2 class="text-xl font-semibold text-slate-900 mb-4">2026 dates</h2>
+            <h2 class="text-xl font-semibold text-slate-900 mb-4">Exam Timeline & Dates</h2>
             <div class="grid sm:grid-cols-2 gap-3">
               {Object.entries(dates).map(([k, v]) => (
                 <div class="card p-4">

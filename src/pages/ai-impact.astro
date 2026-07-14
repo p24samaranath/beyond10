@@ -1,0 +1,294 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import { careers } from '../lib/data';
+
+// Compute counts for top summary metrics
+const totalCareers = careers.length;
+const unshakeableCount = careers.filter((c: any) => (c.ai_impact?.rating ?? 2) === 1).length;
+const augmentedCount = careers.filter((c: any) => (c.ai_impact?.rating ?? 2) === 2).length;
+const transformedCount = careers.filter((c: any) => (c.ai_impact?.rating ?? 2) >= 3).length;
+
+// Static helpers to provide high-fidelity AI impact fallbacks for careers missing extensive fields
+const FALLBACKS: Record<string, { latest: string, why: string, skills: string[] }> = {
+  'engineering-tech': {
+    latest: 'AI-generated code boilerplate, automated security vulnerability scanning, and instant API documentation.',
+    why: 'System design choices, debugging unique production failures, client business translation, and safety accountability require human engineering.',
+    skills: ['System Design', 'Code review judgment', 'Architectural scaling', 'Cybersecurity threat hunting']
+  },
+  'medical-healthcare': {
+    latest: 'AI diagnostic scans (X-ray/MRI reading), electronic health records transcription, and drug discovery acceleration.',
+    why: 'Tactile physical procedures, patient bedside empathy, statutory licensing, and holistic clinical responsibility.',
+    skills: ['Holistic empathy', 'Tactile dexterity', 'Surgical precision', 'Critical emergency care']
+  },
+  'law-public-policy': {
+    latest: 'Instant case-law summaries, automated contract drafting, and regulatory compliance monitoring.',
+    why: 'Trial litigation advocacy, courtroom strategy, complex arbitration, statutory accountability, and public trust.',
+    skills: ['Litigation advocacy', 'Arbitration negotiation', 'Policy synthesis', 'Public administration']
+  },
+  'commerce-finance-business': {
+    latest: 'Automated ledger auditing, draft tax calculations, algorithmic trade modeling, and instant pitch-deck metrics.',
+    why: 'Regulatory audit sign-off, strategic investment advising, corporate relationships, and statutory accountability.',
+    skills: ['Strategic advisory', 'Forensic auditing', 'Relationship management', 'Risk oversight']
+  },
+  'design-media-creative': {
+    latest: 'Generative image/vector asset creation, automated copy drafts, and predictive design trend analysis.',
+    why: 'Human brand alignment, deep UX research empathy, client relationships, and emotional storytelling intent.',
+    skills: ['User research', 'Brand narrative', 'Creative synthesis', 'Spatial planning']
+  },
+  'liberal-arts-social-sciences': {
+    latest: 'Educational lesson plans generation, standardized grading models, and draft historical translation essays.',
+    why: 'Child pedagogy, classroom emotional safety, patient therapeutic relationships, and structural cultural interpretation.',
+    skills: ['Pedagogical empathy', 'Therapeutic trust', 'Cultural synthesis', 'Classroom management']
+  },
+  'vocational-trades-sports': {
+    latest: 'Predictive logistics scheduling, flight simulator training systems, and CAD electrical routing outlines.',
+    why: 'Tactile dexterity in non-standard physical spaces (Moravec\'s Paradox), safety compliance, and physical execution.',
+    skills: ['Tactile troubleshooting', 'Physical stamina', 'Safety coordination', 'Hand-eye coordination']
+  },
+  'science-research': {
+    latest: 'Automated data parsing, mathematical modeling, and hypothesis matching across scientific papers.',
+    why: 'Original concept discovery, novel experimental validation, and mathematical proof synthesis.',
+    skills: ['Original hypothesis generation', 'Novel experimental design', 'Pure mathematical proofs', 'Academic review']
+  }
+};
+
+const processedCareers = careers.map((c: any) => {
+  const rating = c.ai_impact?.rating ?? 2;
+  const familyId = c.family;
+  const fb = FALLBACKS[familyId] || {
+    latest: 'Automated documentation, administrative summaries, and basic report formatting.',
+    why: 'Strategic decision-making, direct stakeholder interaction, and professional accountability.',
+    skills: ['Strategic judgment', 'Communication', 'Integrity']
+  };
+
+  const latest = c.ai_impact?.reasoning || fb.latest;
+  const why = c.ai_impact?.reasoning ? `This role requires human interaction, accountability, and complex judgment which AI cannot match.` : fb.why;
+  const skills = c.ai_impact?.durable_skills || fb.skills;
+
+  return {
+    id: c.id,
+    name: c.name,
+    oneLiner: c.one_liner,
+    family: c.family,
+    rating,
+    streams: c.stream || [],
+    latest,
+    why,
+    skills
+  };
+});
+
+const pageTitle = "AI Career Impact Dashboard — Beyond10";
+const pageDescription = "Explore how Artificial Intelligence transforms 44+ careers in India. Discover durable skills to learn, latest AI developments, and AI-resistant paths.";
+---
+<Base title={pageTitle} description={pageDescription}>
+  <section class="container-page py-12 sm:py-16">
+    <Section
+      eyebrow="AI READINESS & SUSCEPTIBILITY"
+      title="How AI is Transforming Indian Careers"
+      description="Which roles will stand strong, which will be augmented, and what skills you should build to stay resilient in the era of artificial intelligence."
+    />
+
+    <!-- Summary Metrics -->
+    <div class="grid gap-4 sm:grid-cols-4 mb-8">
+      <div class="card p-5 bg-gradient-to-br from-slate-50 to-stone-50 border-slate-200">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-1">Total Careers Evaluated</span>
+        <span class="text-3xl font-bold text-slate-900 tabular-nums">{totalCareers}</span>
+      </div>
+      <div class="card p-5 bg-emerald-50/30 border-emerald-100/50">
+        <span class="text-xs font-semibold uppercase tracking-wider text-emerald-700 block mb-1">🛡️ Unshakeable (Low Risk)</span>
+        <span class="text-3xl font-bold text-emerald-700 tabular-nums">{unshakeableCount}</span>
+        <span class="text-[10px] text-emerald-600 block mt-1">Requires physical/legal responsibility</span>
+      </div>
+      <div class="card p-5 bg-blue-50/30 border-blue-100/50">
+        <span class="text-xs font-semibold uppercase tracking-wider text-blue-700 block mb-1">⚙️ Augmented (Moderate Risk)</span>
+        <span class="text-3xl font-bold text-blue-700 tabular-nums">{augmentedCount}</span>
+        <span class="text-[10px] text-blue-600 block mt-1">AI assists; human handles judgment</span>
+      </div>
+      <div class="card p-5 bg-orange-50/30 border-orange-100/50">
+        <span class="text-xs font-semibold uppercase tracking-wider text-orange-700 block mb-1">⚡ Transformed (High Risk)</span>
+        <span class="text-3xl font-bold text-orange-700 tabular-nums">{transformedCount}</span>
+        <span class="text-[10px] text-orange-600 block mt-1">High cognitive routine automation</span>
+      </div>
+    </div>
+
+    <!-- Filters Toolbar -->
+    <div class="card p-4 mb-6 grid gap-3 sm:grid-cols-3">
+      <label class="block">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Search Career</span>
+        <input
+          id="ai-search"
+          type="search"
+          placeholder="Search SDE, CA, Doctor..."
+          class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </label>
+      <label class="block">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Academic Stream</span>
+        <select id="ai-stream" class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
+          <option value="">All Streams</option>
+          <option value="MPC">MPC (Maths, Physics, Chem)</option>
+          <option value="BiPC">BiPC (Biology, Physics, Chem)</option>
+          <option value="CEC">CEC (Civics, Econ, Commerce)</option>
+          <option value="MEC">MEC (Maths, Econ, Commerce)</option>
+          <option value="any">Any / Humanities / Vocational</option>
+        </select>
+      </label>
+      <label class="block">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">AI Risk Rating</span>
+        <select id="ai-risk" class="mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 text-sm">
+          <option value="">All Risk Ratings</option>
+          <option value="1">🛡️ Rating 1 - Highly Resistant</option>
+          <option value="2">⚙️ Rating 2 - Standard Co-Pilot</option>
+          <option value="3-4">⚡ Rating 3-4 - Significantly Transformed</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Career Cards Grid -->
+    <div id="ai-cards-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {processedCareers.map((c) => {
+        let riskLabel = "Augmented";
+        let riskColor = "bg-blue-600";
+        let riskBg = "bg-blue-50 text-blue-800 border-blue-100";
+        if (c.rating === 1) {
+          riskLabel = "Unshakeable";
+          riskColor = "bg-emerald-600";
+          riskBg = "bg-emerald-50 text-emerald-800 border-emerald-100";
+        } else if (c.rating >= 3) {
+          riskLabel = "Transformed";
+          riskColor = "bg-orange-600";
+          riskBg = "bg-orange-50 text-orange-800 border-orange-100";
+        }
+
+        return (
+          <div
+            class="card card-hover p-6 flex flex-col justify-between ai-career-card"
+            data-name={c.name.toLowerCase()}
+            data-streams={JSON.stringify(c.streams.map((s: string) => s.toLowerCase()))}
+            data-rating={c.rating}
+          >
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class={`text-[10px] font-semibold uppercase tracking-wide border px-2 py-0.5 rounded ${riskBg}`}>
+                  {riskLabel}
+                </span>
+                <span class="text-xs text-slate-400">Risk Score: {c.rating}/5</span>
+              </div>
+
+              <h2 class="text-lg font-bold text-slate-900 mb-1">{c.name}</h2>
+              <p class="text-xs text-slate-500 mb-4">{c.oneLiner}</p>
+
+              <!-- Progress Bar -->
+              <div class="mb-4">
+                <div class="flex justify-between text-[10px] font-semibold text-slate-400 mb-1">
+                  <span>AI Automation Risk</span>
+                  <span>{c.rating * 20}%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class={`h-full ${riskColor}`} style={`width: ${c.rating * 20}%`}></div>
+                </div>
+              </div>
+
+              <!-- AI Impact Details -->
+              <div class="space-y-3 text-xs mb-6">
+                <div>
+                  <span class="font-bold text-slate-700 block mb-0.5">Latest AI Development in Job Scope:</span>
+                  <p class="text-slate-600 leading-relaxed">{c.latest}</p>
+                </div>
+                <div>
+                  <span class="font-bold text-slate-700 block mb-0.5">AI Resistance (How & Why):</span>
+                  <p class="text-slate-600 leading-relaxed">{c.why}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Durable Skills -->
+            <div class="border-t border-stone-100 pt-4 mt-auto">
+              <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 block mb-2">Durable Skills to Learn:</span>
+              <div class="flex flex-wrap gap-1">
+                {c.skills.map((skill: string) => (
+                  <span class="bg-stone-50 border border-stone-200 text-stone-700 text-[10px] px-2 py-0.5 rounded font-medium">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Empty State -->
+    <div id="ai-empty" class="hidden text-center py-16">
+      <span class="text-4xl block mb-2">🔍</span>
+      <h3 class="text-lg font-bold text-slate-800">No careers match your filters</h3>
+      <p class="text-sm text-slate-500 mt-1">Try resetting the search or selection terms.</p>
+    </div>
+  </section>
+
+  <!-- Client-side filter script -->
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const search = document.getElementById('ai-search') as HTMLInputElement | null;
+      const stream = document.getElementById('ai-stream') as HTMLSelectElement | null;
+      const risk = document.getElementById('ai-risk') as HTMLSelectElement | null;
+      const cards = document.querySelectorAll<HTMLElement>('.ai-career-card');
+      const grid = document.getElementById('ai-cards-grid');
+      const empty = document.getElementById('ai-empty');
+
+      function filter() {
+        let visibleCount = 0;
+        const q = search?.value.toLowerCase().trim() || '';
+        const targetStream = stream?.value.toLowerCase() || '';
+        const targetRisk = risk?.value || '';
+
+        cards.forEach((card) => {
+          const name = card.dataset.name || '';
+          const rating = card.dataset.rating || '';
+          const cardStreams: string[] = JSON.parse(card.dataset.streams || '[]');
+
+          let show = true;
+
+          // Search Filter
+          if (q && !name.includes(q)) show = false;
+
+          // Stream Filter
+          if (show && targetStream) {
+            // Match exactly or matching 'any' stream in card
+            if (!cardStreams.includes(targetStream) && !cardStreams.includes('any')) show = false;
+          }
+
+          // Risk Rating Filter
+          if (show && targetRisk) {
+            if (targetRisk === '1' && rating !== '1') show = false;
+            if (targetRisk === '2' && rating !== '2') show = false;
+            if (targetRisk === '3-4' && rating !== '3' && rating !== '4' && rating !== '5') show = false;
+          }
+
+          if (show) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        if (visibleCount === 0) {
+          grid?.classList.add('hidden');
+          empty?.classList.remove('hidden');
+        } else {
+          grid?.classList.remove('hidden');
+          empty?.classList.add('hidden');
+        }
+      }
+
+      search?.addEventListener('input', filter);
+      stream?.addEventListener('change', filter);
+      risk?.addEventListener('change', filter);
+
+      filter();
+    });
+  </script>
+</Base>
